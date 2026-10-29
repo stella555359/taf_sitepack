@@ -1,0 +1,32 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package cp_vemc_request;
+
+message DeployableUnitsList
+{
+    uint32 poolId = 1;
+    enum PoolType
+    {
+        L3_IF = 0;
+    }
+    PoolType poolType = 2;
+    uint32 nodeAddress = 3;
+    uint32 ipVersion = 4;
+    string ipAddress = 5 [ (ipaddress_param) = true ];
+}
+
+message CpVemcDataDistributionRequest
+{
+    uint32 transactionId = 1;
+    uint32 cpnbPoolId = 11;
+    enum PoolType
+    {
+        L3_NB = 0;
+    }
+    PoolType cpnbPoolType = 12;
+    uint32 cpnbNodeAddress = 13;
+    uint32 cpnbIpVersion = 14;
+    string cpnbIpAddress = 15 [ (ipaddress_param) = true ];
+    repeated DeployableUnitsList deployableUnitsLists = 61;
+}

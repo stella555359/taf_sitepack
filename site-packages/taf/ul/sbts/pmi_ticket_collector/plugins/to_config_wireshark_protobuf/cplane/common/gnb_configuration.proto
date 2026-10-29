@@ -1,0 +1,15 @@
+syntax = "proto3";
+import "common/bwp_profile_list.proto";
+package common_messages;
+
+message GNBConfiguration
+{
+    oneof optional_bwpProfileList
+    {
+        BwpProfileList bwpProfileList = 1;
+    }
+    oneof optional_activateMultiplededicatedBWPs
+    {
+        bool activateMultiplededicatedBWPs = 2;
+    }
+}

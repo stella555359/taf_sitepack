@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+enum ReportAmount
+{
+    infinity = 0;
+    r1 = 1;
+    r2 = 2;
+    r4 = 3;
+    r8 = 4;
+    r16 = 5;
+    r32 = 6;
+    r64 = 7;
+}

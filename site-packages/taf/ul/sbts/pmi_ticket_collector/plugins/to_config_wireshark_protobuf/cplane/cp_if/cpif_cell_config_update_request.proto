@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package cp_if_interface;
+
+message CpIfCellConfigUpdateReq
+{
+    message NrCellsList
+    {
+        repeated uint64 nrCellIdentity = 1;
+    }
+
+    uint32 transactionId = 1;
+
+    NrCellsList cellsToActivateList = 2;
+
+    NrCellsList cellsToDeactivateList = 3;
+}

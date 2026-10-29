@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/UeContextInformation.proto";
+
+package cell_request;
+
+message CpCellCaCapabilityCheckReq
+{
+    uint32 transactionId = 1;
+
+    uint32 cuUeId = 2 [ (cucpueid_param) = true ];
+
+    uint64 nrCellIdentity = 3;
+
+    ue_context_information.UeContextInformation ueContextInformation = 4;
+}

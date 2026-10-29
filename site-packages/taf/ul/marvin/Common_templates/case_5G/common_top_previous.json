@@ -1,0 +1,12 @@
+{
+    "name": "Common TOP counters compared to previous test",
+    "tags": [],
+    "domain": "Top-Counter",
+    "algorithm": "obelix-analyzer",
+    "trigger": "test_case_collection_ended",
+    "rule": {
+        "alpha": 0.025, 
+        "drop_first_and_last": "False",
+        "analysis_type": "previous"
+    }
+}

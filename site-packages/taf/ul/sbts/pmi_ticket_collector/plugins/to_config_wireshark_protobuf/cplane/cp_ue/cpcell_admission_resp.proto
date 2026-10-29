@@ -1,0 +1,122 @@
+syntax = "proto3";
+import "common_types/admission_result.proto";
+import "common_types/ueCaCapabilityCheck_result.proto";
+import "common/serving_cell_to_be_activated.proto";
+import "common/cp_cell_pdu_session_admitted_resources.proto";
+import "common/cp_cell_pdu_session_not_admitted_resources.proto";
+import "common_types/PcmdServiceParameters.proto";
+import "options/protobuf_options.proto";
+
+package cp_ue_request;
+
+message CpCellAdmissionResp
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    message CandidateSpCellList
+    {
+        repeated uint64 candidateSpCell = 1;
+    }
+    common_type.AdmissionResult result = 2;
+    oneof optional_spCellId
+    {
+        uint64 spCellId = 3;
+    }
+    oneof optional_firstActiveCellId
+    {
+        uint64 firstActiveCellId = 4;
+    }
+    oneof optional_candidateSpCellList
+    {
+        CandidateSpCellList candidateSpCellList = 5;
+    }
+
+    message SelectedBandCombinationInfoSN
+    {
+        int32 bandCombinationIndex = 1;
+        int32 featureSetEntryIndex = 2;
+    }
+
+    oneof optional_selectedBandCombinationInfoSN
+    {
+        SelectedBandCombinationInfoSN selectedBandCombinationInfoSN = 6;
+    }
+
+    message AllowedBandCombinationIncludeBandNrInfo
+    {
+        uint32 bandCombinationIndex = 1;
+        repeated uint32 featureSetEntryIndex = 2;
+        uint32 pCellBandNr = 3;
+    }
+
+    message AllowedBandCombinationIncludeBandNrInfoList
+    {
+        repeated AllowedBandCombinationIncludeBandNrInfo allowedBandCombinationIncludeBandNrInfo = 1;
+    }
+
+    oneof optional_allowedBandCombinationIncludeBandNrInfoList
+    {
+        AllowedBandCombinationIncludeBandNrInfoList allowedBandCombinationIncludeBandNrInfoList = 19;
+    }
+
+    message NgArfcn
+    {
+        uint32 ngArfcn = 1;
+    }
+    message Fdd
+    {
+        NgArfcn ulFrequency = 1;
+        NgArfcn dlFrequency = 2;
+    }
+    message Tdd
+    {
+        NgArfcn frequency = 1;
+    }
+    oneof NrFrequencyInfo
+    {
+        Fdd fdd = 7;
+        Tdd tdd = 8;
+    }
+    oneof optional_gnbDuId
+    {
+        uint64 gnbDuId = 9;
+    }
+    repeated common_messages.ServingCellToBeActivated sCellsToBeActivated = 10;
+    repeated common_messages.PduSessionAdmittedResources pduSessionResourceToBeSetupList = 11;
+
+    message PduSessionResourceToBeRemovedList
+    {
+        repeated common_messages.PduSessionNotAdmittedResources pduSessionNotAdmittedResources = 1;
+    }
+    oneof optional_pduSessionResourceToBeRemovedList
+    {
+        PduSessionResourceToBeRemovedList pduSessionResourceToBeRemovedList = 20;
+    }
+
+    common_type.PcmdServiceParameters pcmdServiceParameters = 12;
+
+    oneof optional_chosenPlmnId
+    {
+        bytes chosenPlmnId = 13 [ (sensitive_param) = true ];
+    }
+
+    uint32 transactionId = 14;
+
+    enum CellFailCause
+    {
+        DynamicUnavailability = 0;
+        Other = 1;
+    }
+    message CellFailedAdmissionControl
+    {
+        uint64 nrCellIdentity = 1;
+        CellFailCause cellFailCause = 2;
+    }
+    repeated CellFailedAdmissionControl cellsFailedAdmissionControl = 15;
+
+    oneof optional_selectedBand
+    {
+        uint32 selectedBand = 17;
+    }
+
+    common_type.UeCaCapabilityCheckResult ueCaCapabilityCheckResult = 16;
+}

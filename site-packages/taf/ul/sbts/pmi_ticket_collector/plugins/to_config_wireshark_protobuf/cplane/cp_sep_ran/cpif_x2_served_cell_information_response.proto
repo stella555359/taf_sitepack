@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package cp_sep_ran_message;
+
+message CpIfX2ServedCellInformationResponse
+{
+    uint32 transactionId = 1;
+    repeated bytes encodedEndcX2SetupResponses = 2;
+}

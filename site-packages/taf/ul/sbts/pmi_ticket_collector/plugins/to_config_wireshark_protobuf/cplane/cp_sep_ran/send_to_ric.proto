@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "ric_policy_update_ack.proto";
+import "ric_policy_delete_ack.proto";
+
+package cp_sep_ran_message;
+
+message SendToRic
+{
+    oneof message
+    {
+        sep_ran_message.RicPolicyUpdateAck ricpolicyupdateack = 1;
+        sep_ran_message.RicPolicyDeleteAck ricpolicydeleteack = 2;
+    }
+}

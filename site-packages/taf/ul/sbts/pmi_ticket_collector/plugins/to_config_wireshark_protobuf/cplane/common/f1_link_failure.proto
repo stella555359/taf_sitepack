@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package common_messages;
+
+message F1LinkFailure
+{
+    uint64 gnbDuId = 1;
+}

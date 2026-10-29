@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package cp_x2ap_interface;
+
+message CpIfCpUeScaleInIndication
+{
+    enum ScaleInIndStatus
+    {
+        scaleInActive = 0;
+        scaleInCancel = 1;
+    }
+    ScaleInIndStatus scaleInIndStatus = 1;
+    repeated uint32 scaleInPoolIds = 2;
+}

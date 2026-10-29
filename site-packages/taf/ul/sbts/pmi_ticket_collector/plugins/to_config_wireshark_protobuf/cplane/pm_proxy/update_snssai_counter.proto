@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+import "pm_proxy/snssai.proto";
+
+package pm_agent_proxy_request;
+
+message UpdateSnssaiCounter
+{
+    uint32 counter_id = 1;
+    uint32 nrbts_id = 2;
+    common_type.Plmn plmn_id = 3;
+    SNSSAI snssai = 4;
+    uint32 value = 5;
+}

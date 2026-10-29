@@ -1,0 +1,9 @@
+syntax = "proto3";
+package cp_ue_request;
+
+message CpUeLoadMeasSetupReq
+{
+    uint32 poolId = 1;
+    uint32 minLoadThr = 2;
+    uint32 loadStep = 3;
+}

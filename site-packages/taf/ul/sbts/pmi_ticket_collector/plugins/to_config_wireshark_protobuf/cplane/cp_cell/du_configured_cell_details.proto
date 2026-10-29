@@ -1,0 +1,22 @@
+syntax = "proto3";
+import "common/nrcgi.proto";
+
+package cpcl_db_model;
+
+message DuConfiguredCellDetail
+{
+    common_messages.NRCGI nrcgi = 1;
+    oneof optional_fiveGsTac
+    {
+        uint32 fiveGsTac = 2;
+    }
+    oneof optional_configEpsTac
+    {
+        uint32 configEpsTac = 3;
+    }
+}
+
+message DuConfiguredCellDetails
+{
+    repeated DuConfiguredCellDetail duCellDetail = 1;
+}

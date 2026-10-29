@@ -1,0 +1,20 @@
+syntax = "proto3";
+import "cp_sep_ran/mirrored_x2_message.proto";
+import "cp_sep_ran/send_to_ric.proto";
+import "cp_sep_ran/cpif_x2_served_cell_information_response.proto";
+import "cp_if/cpif_data_distribution_request.proto";
+import "cp_if/cpif_trsw_configuration_request.proto";
+
+package cp_sep_ran_message;
+
+message SepRanServiceMessage
+{
+    oneof message
+    {
+        MirroredX2Msg mirroredX2Msg = 1;
+        SendToRic sendtoric = 2;
+        CpIfX2ServedCellInformationResponse x2servedCellInformationResponse = 3;
+        cp_if_interface.CpIfTransportSoftwareConfigurationRequest cpIfTrswConfigurationRequest = 4;
+        cp_if_interface.CpIfDataDistributionRequest cpIfDataDistributionRequest = 5;
+    }
+}

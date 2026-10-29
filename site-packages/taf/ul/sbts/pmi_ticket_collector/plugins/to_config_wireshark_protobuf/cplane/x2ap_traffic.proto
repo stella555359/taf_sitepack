@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package sep_ran_message;
+
+message X2APTraffic
+{
+    enum Direction
+    {
+        incoming = 0;
+        outgoing = 1;
+    }
+    uint32 transactionId = 1;
+    bytes x2payload = 2;
+    Direction direction = 3;
+}

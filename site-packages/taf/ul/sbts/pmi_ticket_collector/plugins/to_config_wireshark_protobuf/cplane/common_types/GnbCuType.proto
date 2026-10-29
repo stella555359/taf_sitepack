@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+enum GnbCuType
+{
+    standalone = 0;
+    nonStandaloneEnDc = 1;
+    standaloneWithEnDc = 2;
+    nonStandaloneNrDcSn = 3;
+    nonStandaloneEnDcAndNrDcSn = 4;
+    standaloneWithNrDcSn = 5;
+    standaloneWithEnDcAndNrDcSn = 6;
+}

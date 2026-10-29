@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+
+package common_type;
+
+message PlmnIdentities
+{
+    repeated common_type.Plmn plmnIdentity = 1;
+}

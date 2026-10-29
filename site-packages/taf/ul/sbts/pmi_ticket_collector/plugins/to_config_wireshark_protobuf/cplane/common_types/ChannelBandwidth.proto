@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+enum ChannelBandwidth
+{
+    mhz5 = 0;
+    mhz10 = 1;
+    mhz15 = 2;
+    mhz20 = 3;
+    mhz30 = 4;
+    mhz40 = 5;
+    mhz50 = 6;
+    mhz60 = 7;
+    mhz70 = 8;
+    mhz80 = 9;
+    mhz90 = 10;
+    mhz100 = 11;
+}

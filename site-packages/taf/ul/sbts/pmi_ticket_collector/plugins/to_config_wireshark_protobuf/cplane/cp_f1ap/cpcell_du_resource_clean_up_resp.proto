@@ -1,0 +1,11 @@
+syntax = "proto3";
+import "common_types/common_status.proto";
+
+package cp_f1ap_interface;
+
+message CpCellDuResourceCleanUpResp
+{
+    uint32 transactionId = 1;
+    uint64 gnbDuId = 2;
+    Status status = 3;
+}

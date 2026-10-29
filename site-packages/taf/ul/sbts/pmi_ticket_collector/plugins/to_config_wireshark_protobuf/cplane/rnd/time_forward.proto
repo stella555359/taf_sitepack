@@ -1,0 +1,7 @@
+syntax = "proto3";
+package rnd_command;
+
+message TimeForward
+{
+    uint64 milliseconds = 1;
+}

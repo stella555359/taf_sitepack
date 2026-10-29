@@ -1,0 +1,13 @@
+syntax = "proto3";
+import "common_types/global_gnb_id.proto";
+
+package cp_ue_request;
+message CpIfReceiveFromGnb
+{
+    oneof optional_gnbUeXnapId
+    {
+        uint32 gnbUeXnapId = 1;
+    }
+    common_messages.GlobalGnbId globalGnbId = 2;
+    bytes encodedXnMessage = 3;
+}

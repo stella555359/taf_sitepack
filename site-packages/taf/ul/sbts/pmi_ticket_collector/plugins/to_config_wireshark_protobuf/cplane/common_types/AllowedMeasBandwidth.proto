@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+enum AllowedMeasBandwidth
+{
+    mbw6 = 0;
+    mbw15 = 1;
+    mbw25 = 2;
+    mbw50 = 3;
+    mbw75 = 4;
+    mbw100 = 5;
+}

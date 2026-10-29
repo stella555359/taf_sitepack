@@ -1,0 +1,28 @@
+syntax = "proto3";
+import "common_types/f1_cause.proto";
+import "options/protobuf_options.proto";
+
+package common_messages;
+
+message CpIfF1PartialResetRequest
+{
+    message UeId
+    {
+        uint32 gnbCuUeF1APId = 1 [ (cucpueid_param) = true ];
+        oneof optional_gnbDuUeF1APId
+        {
+            uint32 gnbDuUeF1APId = 2;
+        }
+    }
+
+    message GnbDusUeIdToMap
+    {
+        uint64 gnbDuId = 1;
+        repeated UeId ueIdList = 2 [ (cucpueid_list_param) = true ];
+    }
+
+    uint32 transactionID = 1;
+    repeated GnbDusUeIdToMap gnbDusUeIdToMapList = 2;
+
+    cp_f1ap_interface.F1Cause cause = 3;
+}

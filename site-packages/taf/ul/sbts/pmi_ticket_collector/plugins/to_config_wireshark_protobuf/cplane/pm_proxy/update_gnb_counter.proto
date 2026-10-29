@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+
+package pm_agent_proxy_request;
+
+message UpdateGnbCounter
+{
+    uint32 counter_id = 1;
+    common_type.Plmn plmn_id = 2;
+    uint32 nrbts_id = 3;
+    uint32 value = 4;
+}

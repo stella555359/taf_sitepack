@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+package cp_ue_request;
+
+message CpCellResourceReleaseListResp
+{
+    repeated uint32 ueIds = 1 [ (cucpueid_list_param) = true ];
+    uint32 transactionId = 2;
+}

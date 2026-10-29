@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package common_messages;
+
+message CpIfReceiveFromDu
+{
+    oneof optional_ueIdCu
+    {
+        uint32 ueIdCu = 1 [ (cucpueid_param) = true ];
+    }
+    uint64 gnbDuId = 2;
+    bytes payload = 3;
+    oneof optional_procedureCode
+    {
+        uint32 procedureCode = 4;
+    }
+}

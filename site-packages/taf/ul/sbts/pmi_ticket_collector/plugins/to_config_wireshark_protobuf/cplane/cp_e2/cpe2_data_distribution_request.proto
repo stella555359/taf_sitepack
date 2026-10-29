@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "options/protobuf_options.proto";
+
+package cp_e2_interface;
+
+message CpE2DataDistributionRequest
+{
+    uint32 transactionId = 1;
+    uint32 cpnbPoolId = 2;
+    uint32 cpnbNodeAddress = 3;
+    uint32 cpnbIpVersion = 4;
+    string cpnbIpAddress = 5 [ (ipaddress_param) = true ];
+    uint32 cpifPoolId = 6;
+    uint32 cpifNodeAddress = 7;
+    uint32 cpifIpVersion = 8;
+    string cpifIpAddress = 9 [ (ipaddress_param) = true ];
+}

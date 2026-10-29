@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package common_type;
+
+message NrMoPrMaNsaItem
+{
+    oneof optional_spid
+    {
+        uint32 spid = 1;
+    }
+    oneof optional_spidLast
+    {
+        uint32 spidLast = 2;
+    }
+    uint32 mobilityProfilePriority = 3;
+    repeated string nrPlmnDNList = 4;
+    string nrMoPrNsaDN = 5;
+}
+
+message NrMoPrMaNsa
+{
+    uint32 nrMoPrMaNsaId = 1;
+    common_type.NrMoPrMaNsaItem nrMoPrMaNsaItem = 2;
+}

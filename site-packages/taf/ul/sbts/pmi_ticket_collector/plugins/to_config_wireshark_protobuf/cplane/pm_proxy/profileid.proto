@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package pm_agent_proxy_request;
+
+message ProfileId
+{
+    uint32 value = 1;
+}

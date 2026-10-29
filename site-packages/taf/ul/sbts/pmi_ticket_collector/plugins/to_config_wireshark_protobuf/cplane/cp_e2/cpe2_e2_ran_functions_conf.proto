@@ -1,0 +1,23 @@
+syntax = "proto3";
+import "common_types/e2_ran_function_state.proto";
+
+package cp_e2_interface;
+
+message CpE2E2RanFunctionsConf
+{
+    message RanFunction
+    {
+        enum ShortName
+        {
+            unused = 0;
+            oRanE2SMRC_Imlb = 1;
+            oRanE2SMRC_Ca = 2;
+        }
+        uint32 id = 1;
+        ShortName shortName = 2;
+        common_type.E2RanFunctionState state = 3;
+    }
+    bool actE2IMLB = 1;
+    bool actE2CA = 2;
+    repeated RanFunction ranFunctionList = 3;
+}

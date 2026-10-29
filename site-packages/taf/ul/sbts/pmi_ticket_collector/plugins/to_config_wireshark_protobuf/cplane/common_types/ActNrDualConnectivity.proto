@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+enum ActNrDualConnectivity
+{
+    nrDcDisabled = 0;
+    nrDcIntraGnbIntraDuFr1Fr2 = 1;
+    nrDcInterGnbFr1Fr2 = 2;
+}

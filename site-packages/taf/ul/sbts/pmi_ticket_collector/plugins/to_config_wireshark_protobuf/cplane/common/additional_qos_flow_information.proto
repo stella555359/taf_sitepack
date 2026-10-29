@@ -1,0 +1,8 @@
+syntax = "proto3";
+package common_messages;
+
+enum AdditionalQoSFlowInformation
+{
+    NONE = 0;
+    MORE_LIKELY = 1;
+}

@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package nidd_db_model;
+
+message NetworkPlanVersion
+{
+    uint32 networkPlanVersion = 1;
+}

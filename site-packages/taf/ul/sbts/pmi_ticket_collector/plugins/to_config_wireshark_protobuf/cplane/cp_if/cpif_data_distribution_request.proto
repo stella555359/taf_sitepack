@@ -1,0 +1,49 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package cp_if_interface;
+
+message CpIfDataDistributionRequest
+{
+    message DeployableUnit
+    {
+        uint32 poolId = 1;
+        bool poolLocked = 2;
+        uint32 nodeAddress = 3;
+        uint32 ipVersion = 4;
+        string ipAddress = 5 [ (ipaddress_param) = true ];
+        uint32 ueIdStart = 6 [ (ue_id_special_case_param) = true ];
+        uint32 ueIdEnd = 7 [ (ue_id_special_case_param) = true ];
+    }
+
+    uint32 transactionId = 1;
+    uint32 cpnbPoolId = 11;
+    uint32 cpnbNodeAddress = 12;
+    uint32 cpnbIpVersion = 13;
+    string cpnbIpAddress = 14 [ (ipaddress_param) = true ];
+    uint32 cpcellPoolId = 21;
+    uint32 cpcellNodeAddress = 23;
+    uint32 cpcellIpVersion = 24;
+    string cpcellIpAddress = 25 [ (ipaddress_param) = true ];
+    oneof optional_trswNodeAddress
+    {
+        uint32 trswNodeAddress = 26;
+    }
+    repeated DeployableUnit deployableUnitsList = 101;
+    oneof optional_cpe2PoolId
+    {
+        uint32 cpe2PoolId = 27;
+    }
+    oneof optional_cpe2NodeAddress
+    {
+        uint32 cpe2NodeAddress = 28;
+    }
+    oneof optional_cpe2IpVersion
+    {
+        uint32 cpe2IpVersion = 29;
+    }
+    oneof optional_cpe2IpAddress
+    {
+        string cpe2IpAddress = 30 [ (ipaddress_param) = true ];
+    }
+}

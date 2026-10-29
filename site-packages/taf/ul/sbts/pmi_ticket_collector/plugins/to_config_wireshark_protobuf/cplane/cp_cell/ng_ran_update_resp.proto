@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import "common_types/common_status.proto";
+
+package cell_request;
+
+message CpIfNgRanUpdateResp
+{
+    uint32 transactionId = 1;
+    uint64 gnbDuId = 2;
+    Status status = 3;
+}

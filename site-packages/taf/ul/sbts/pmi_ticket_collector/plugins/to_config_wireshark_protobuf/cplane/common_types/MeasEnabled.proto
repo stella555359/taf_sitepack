@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+enum MeasEnabled
+{
+    none = 0;
+    rsrp = 1;
+    rsrq = 2;
+    rsrpAndRsrq = 3;
+    rsrpCombined = 4;
+    rsrqCombined = 5;
+}

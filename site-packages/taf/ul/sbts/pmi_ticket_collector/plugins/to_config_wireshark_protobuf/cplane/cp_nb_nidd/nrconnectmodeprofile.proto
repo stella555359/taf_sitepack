@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package nidd_db_model;
+
+message NrConnectModeProfile
+{
+    uint32 nrConnectModeProfileId = 1;
+    repeated uint32 freqBandIndicatorNR = 2;
+};

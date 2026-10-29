@@ -1,0 +1,19 @@
+syntax = "proto3";
+import "common_types/global_gnb_id.proto";
+import "common/cell_load_result_item.proto";
+
+package cell_request;
+
+message CpCellResourceStatusUpdateInd
+{
+    message CellLoadResult
+    {
+        repeated common_messages.CellLoadResultItem cellLoadResultList = 1;
+    }
+    uint32 transactionId = 1;
+    common_messages.GlobalGnbId globalNgRanNodeId = 2;
+    oneof optional_cellLoadResult
+    {
+        CellLoadResult cellLoadResult = 3;
+    }
+}

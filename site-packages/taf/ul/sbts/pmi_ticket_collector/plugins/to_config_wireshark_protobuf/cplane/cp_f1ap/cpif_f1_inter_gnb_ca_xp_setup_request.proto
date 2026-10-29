@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "common/neid.proto";
+package cp_f1ap_interface;
+
+message CpIfF1IgNBCAXpSetupRequest
+{
+    common_messages.NEID neid = 1;
+}

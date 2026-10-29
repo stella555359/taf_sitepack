@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "common_types/global_enb_id.proto";
+import "common_types/served_eutra_cell_info.proto";
+
+package cp_ue_request;
+message CpUeRecvNSAInitialAccessMsg
+{
+    common_messages.GlobalEnbId globalEnbId = 1;
+    bytes encodedX2Message = 2;
+    oneof optional_servedEutraCellInfo
+    {
+        common_type.ServedEutraCellInfo servedEutraCellInfo = 3;
+    }
+    oneof optional_sgNbUeX2APId
+    {
+        uint32 sgNbUeX2APId = 4;
+    }
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package cp_x2ap_interface;
+
+message CpNbX2LinkInfoUpdateAck
+{
+    uint32 transactionId = 1;
+    enum Status
+    {
+        ok = 0;
+        notOk = 1;
+    }
+    Status status = 2;
+}

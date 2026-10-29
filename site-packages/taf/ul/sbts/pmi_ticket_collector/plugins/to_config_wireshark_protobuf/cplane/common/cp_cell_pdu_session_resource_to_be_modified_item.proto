@@ -1,0 +1,43 @@
+syntax = "proto3";
+package common_messages;
+
+import "common/additional_qos_flow_information.proto";
+import "common/snssai.proto";
+import "common_types/allocationAndRetentionPriority.proto";
+
+message PduSessionResourceToBeModifiedItem
+{
+    message Nondynamic5QI
+    {
+        uint32 nonDynamic5QIDescriptor = 1;
+    }
+
+    message QoSFlowLevelQoSParameters
+    {
+        Nondynamic5QI qosCharacteristics = 1;
+        AdditionalQoSFlowInformation additionalQoSFlowInformation = 2;
+        common_type.AllocationAndRetentionPriority allocationAndRetentionPriority = 3;
+        bool isGbr = 4;
+    }
+
+    message QosFlowToAddItem
+    {
+        uint32 qosFlowIdentifier = 1;
+        QoSFlowLevelQoSParameters qosFlowLevelQoSParameters = 2;
+    }
+    message QosFlowToModifyItem
+    {
+        uint32 qosFlowIdentifier = 1;
+        QoSFlowLevelQoSParameters qosFlowLevelQoSParameters = 2;
+    }
+
+    uint32 pduSessionId = 1;
+    repeated QosFlowToAddItem qosFlowToAddList = 2;
+    repeated QosFlowToModifyItem qosFlowToModifyList = 3;
+    repeated uint32 qosFlowToDeleteList = 4;
+    oneof optional_snssai
+    {
+        common_messages.SNSSAI snssai = 5;
+    }
+    bool isEmergencySession = 6;
+}

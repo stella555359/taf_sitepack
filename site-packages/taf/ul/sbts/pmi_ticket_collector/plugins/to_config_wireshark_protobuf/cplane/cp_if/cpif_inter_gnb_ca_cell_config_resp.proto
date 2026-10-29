@@ -1,0 +1,15 @@
+syntax = "proto3";
+import "common_types/global_gnb_id.proto";
+import "common/cell_to_report_list.proto";
+
+package cp_if_interface;
+
+message CpCellInterGnbCaCellConfigResp
+{
+    uint32 transactionId = 1;
+    common_messages.GlobalGnbId globalNgRanNodeId = 2;
+    oneof optional_cellToReportList
+    {
+        common_messages.CellToReportList cellToReportList = 3;
+    }
+}

@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package sep_ran_message;
+
+message StartAck
+{
+    uint32 transactionId = 1;
+}

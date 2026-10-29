@@ -1,0 +1,78 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+import "options/protobuf_options.proto";
+
+package cell_request;
+
+message CpCellResourceReleaseReq
+{
+    message NsaCuUeId
+    {
+        uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    }
+
+    message SaCuUeId
+    {
+        uint32 cuUeId = 1;
+    }
+
+    message NRCGI
+    {
+        common_type.Plmn plmnIdentity = 1;
+        uint64 nrCellIdentifier = 2;
+    }
+
+    enum Cause
+    {
+        noRadioResourcesAvailableInDu = 0;
+        sCellChangeFailure = 1;
+    }
+
+    message Optional_Cause
+    {
+        Cause cause = 1;
+    }
+
+    oneof cuUeId
+    {
+        NsaCuUeId nsaCuUeId = 1;
+        SaCuUeId saCuUeId = 2;
+    }
+
+    message Optional_PsCellId
+    {
+        NRCGI psCellId = 1;
+    }
+
+    message Optional_TracedNoACNrCellId
+    {
+        uint64 tracedNoACNrCellId = 1;
+    }
+
+    message SCellToBeReleaseItem
+    {
+        uint64 nrCellId = 1;
+    }
+
+    message SCellToBeReleaseList
+    {
+        repeated SCellToBeReleaseItem sCellToBeReleaseItem = 1;
+    }
+
+    message SCellToBeRestoreItem
+    {
+        uint64 nrCellId = 1;
+    }
+
+    message SCellToBeRestoreList
+    {
+        repeated SCellToBeRestoreItem sCellToBeRestoreItem = 1;
+    }
+
+    Optional_PsCellId optional_PsCellId = 3;
+    uint32 transactionId = 6;
+    Optional_Cause optional_Cause = 7;
+    SCellToBeReleaseList sCellToBeReleaseList = 8;
+    SCellToBeRestoreList sCellToBeRestoreList = 9;
+    Optional_TracedNoACNrCellId optional_TracedNoACNrCellId = 10;
+}

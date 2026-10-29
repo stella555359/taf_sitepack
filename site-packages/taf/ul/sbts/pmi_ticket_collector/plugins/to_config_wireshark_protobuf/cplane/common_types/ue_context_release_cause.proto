@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+enum UeContextReleaseCause
+{
+    duInitiatedF1Reset = 0;
+    f1SctpRecovery = 1;
+    amfInitiatedNgReset = 2;
+    x2LinkFailure = 3;
+    notEnoughUserPlaneProcessingResources = 4;
+    enbInitiatedX2Reset = 5;
+    enbInitiatedX2PartialReset = 6;
+    enbInitiatedRepeatedX2Request = 7;
+    gnbX2LinkLock = 8;
+    cellDeletionInitiatedX2PartialReset = 9;
+    cpIfReset = 10;
+    haRecovery = 11;
+    cellDeletionInitiatedF1PartialReset = 12;
+}

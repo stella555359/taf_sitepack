@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/message_result.proto";
+
+package cp_ue_request;
+message SecurityActivationResp
+{
+    uint32 ueIdCu = 1 [ (cucpueid_param) = true ];
+    MessageResult messageResult = 2;
+}

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+import "common_types/common_status.proto";
+package cell_request;
+
+message CpIfCellConfigUpdateResp
+{
+    message CellItem
+    {
+        uint64 nrCellIdentity = 1;
+        Status status = 2;
+    }
+
+    uint32 transactionId = 1;
+
+    repeated CellItem cellsToActivateList = 2;
+
+    repeated CellItem cellsToDeactivateList = 3;
+}

@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+
+package cp_if_internal_message;
+
+message AmfConfigurationReq
+{
+    uint32 transactionId = 1;
+
+    message Tai
+    {
+        common_type.Plmn plmnIdentity = 1;
+        bytes tac = 2;
+    }
+
+    Tai tai = 2;
+}

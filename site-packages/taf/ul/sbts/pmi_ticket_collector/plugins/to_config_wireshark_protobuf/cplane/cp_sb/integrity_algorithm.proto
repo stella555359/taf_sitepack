@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+enum IntegrityAlgorithm
+{
+    NIA0 = 0;
+    NIA1_128 = 1;
+    NIA2_128 = 2;
+    NIA3_128 = 3;
+}

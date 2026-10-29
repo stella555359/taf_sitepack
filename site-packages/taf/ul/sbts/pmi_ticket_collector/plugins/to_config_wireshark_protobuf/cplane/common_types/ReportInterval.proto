@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+enum ReportInterval
+{
+    ms120 = 0;
+    ms240 = 1;
+    ms480 = 2;
+    ms640 = 3;
+    ms1024 = 4;
+    ms2048 = 5;
+    ms5120 = 6;
+    ms10240 = 7;
+    ms20480 = 8;
+    ms40960 = 9;
+    min1 = 10;
+    min6 = 11;
+    min12 = 12;
+    min30 = 13;
+}

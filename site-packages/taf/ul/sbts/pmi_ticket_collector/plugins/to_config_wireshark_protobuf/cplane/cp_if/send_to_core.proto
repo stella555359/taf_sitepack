@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/guami.proto";
+
+package cp_if_interface;
+
+message SendToCore
+{
+    oneof optional_servedAmfId
+    {
+        uint32 servedAmfId = 1;
+    }
+    oneof optional_guami
+    {
+        common_type.GUAMI guami = 2;
+    }
+    oneof optional_ranUeNgapId
+    {
+        uint32 ranUeNgapId = 3 [ (cucpueid_param) = true ];
+    }
+    oneof optional_amfUeNgapId
+    {
+        uint64 amfUeNgapId = 4;
+    }
+    bytes encodedNgMessage = 5;
+}

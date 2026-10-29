@@ -1,0 +1,13 @@
+syntax = "proto3";
+package cp_nb_message;
+import "cp_nb/cp_nb_get_resource_usage_req.proto";
+import "cp_nb/cp_nb_get_resource_usage_resp.proto";
+
+message AaShellMessage
+{
+    oneof aashellMessage
+    {
+        CpNbGetResourceUsageReq cpNbGetResourceUsageReq = 1;
+        CpNbGetResourceUsageResp cpNbGetResourceUsageResp = 2;
+    }
+}

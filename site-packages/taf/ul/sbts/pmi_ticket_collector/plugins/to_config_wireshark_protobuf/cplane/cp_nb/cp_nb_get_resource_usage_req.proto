@@ -1,0 +1,8 @@
+syntax = "proto3";
+package cp_nb_message;
+import "common_types/ResourceUsageReqType.proto";
+
+message CpNbGetResourceUsageReq
+{
+    common_type.ResourceUsageReqType requestType = 1;
+}

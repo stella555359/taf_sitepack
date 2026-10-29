@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+enum Result
+{
+    successful = 0;
+    unsuccessful = 1;
+}

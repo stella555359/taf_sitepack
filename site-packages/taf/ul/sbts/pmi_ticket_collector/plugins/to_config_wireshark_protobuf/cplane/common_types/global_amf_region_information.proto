@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package common_type;
+
+message GlobalAmfRegionInformation
+{
+    bytes plmnIdentity = 1 [ (sensitive_param) = true ];
+    uint32 amfRegionId = 2 [ (sensitive_param) = true ];
+}

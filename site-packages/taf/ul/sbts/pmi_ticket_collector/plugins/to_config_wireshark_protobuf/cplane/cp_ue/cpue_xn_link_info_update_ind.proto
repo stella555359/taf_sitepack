@@ -1,0 +1,43 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+import "common_types/global_amf_region_information.proto";
+
+package cp_ue_request;
+
+enum XnLinkInfoUpdateOperation
+{
+    set = 0;
+    remove = 1;
+}
+
+message GlobalAmfRegionInformationList
+{
+    repeated common_type.GlobalAmfRegionInformation amfRegionInformation = 1;
+}
+
+message CpUeXnLinkInfoUpdateInd
+{
+    uint32 gnbAdjGnbMocInstanceId = 1;
+    oneof optional_gNodeBId
+    {
+        uint32 gNodeBId = 2;
+    }
+    oneof optional_gNbIdLength
+    {
+        uint32 gNbIdLength = 3;
+    }
+    oneof optional_gnbPlmn
+    {
+        common_type.Plmn gnbPlmn = 4;
+    }
+
+    oneof optional_amfRegionInformation
+    {
+        GlobalAmfRegionInformationList amfRegionInformation = 5;
+    };
+    oneof optional_xnLinkAvailable
+    {
+        bool xnLinkAvailable = 6;
+    };
+    XnLinkInfoUpdateOperation operationType = 7;
+}

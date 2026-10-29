@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package cp_if_interface;
+
+message CpIfCuLinksLockReq
+{
+    enum LinkType
+    {
+        x2Link = 0;
+        f1Link = 1;
+        e1Link = 2;
+        all = 3;
+    }
+    uint32 transactionId = 1;
+    LinkType linkType = 2;
+}

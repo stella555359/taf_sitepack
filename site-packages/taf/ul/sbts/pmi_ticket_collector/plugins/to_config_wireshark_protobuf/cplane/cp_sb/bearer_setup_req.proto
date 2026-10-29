@@ -1,0 +1,27 @@
+syntax = "proto3";
+import "cp_sb/security_parameters.proto";
+import "common_types/ReorderingTimer.proto";
+import "options/protobuf_options.proto";
+
+package cp_sb_request;
+message BearerSetupReq
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    uint32 srbIdentity = 2;
+    uint32 bearerIndex = 3;
+
+    bool securityConfigIndication = 4;
+    SecurityParameters securityParameters = 5;
+
+    message PDCPParameters
+    {
+        ReorderingTimer tReorderingTimer = 1;
+    }
+    PDCPParameters pdcpParameters = 6;
+    uint32 nrBtsId = 7;
+
+    oneof optional_plmnId
+    {
+        bytes plmnId = 8 [ (sensitive_param) = true ];
+    }
+}

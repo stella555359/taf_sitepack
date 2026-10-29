@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+enum IdleMMSteeringAlgo
+{
+    nonCaAware = 0;
+    CaAware = 1;
+}

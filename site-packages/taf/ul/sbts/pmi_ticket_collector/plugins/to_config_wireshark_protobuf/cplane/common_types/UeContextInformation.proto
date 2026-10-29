@@ -1,0 +1,442 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package ue_context_information;
+
+message Bounds
+{
+    uint32 lowBound = 1;
+    uint32 upBound = 2;
+}
+
+enum CaBandWidthClassNR
+{
+    a = 0;
+    b = 1;
+    c = 2;
+    d = 3;
+    e = 4;
+    f = 5;
+    g = 6;
+    h = 7;
+    i = 8;
+    j = 9;
+    k = 10;
+    l = 11;
+    m = 12;
+    n = 13;
+    o = 14;
+    p = 15;
+    q = 16;
+}
+
+message BandParametersNR
+{
+    uint32 bandNR = 1;
+    oneof optional_CaBandWidthClassDlNR
+    {
+        CaBandWidthClassNR caBandWidthClassDlNR = 2;
+    }
+    oneof optional_CaBandWidthClassUlNR
+    {
+        CaBandWidthClassNR caBandWidthClassUlNR = 3;
+    }
+}
+
+message BandParameters
+{
+    BandParametersNR nr = 1;
+}
+
+message CaParametersNr
+{
+    bool diffNumerologyWithinPucchGroupSmallerScsSupported = 1;
+}
+
+message BandCombinationList
+{
+    repeated BandParameters bandParametersList = 1;
+    uint32 featureSetCombinationId = 2;
+    oneof optional_caParametersNr
+    {
+        CaParametersNr caParametersNr = 3;
+    }
+    oneof optional_supportedBandwidthCombinationSet
+    {
+        uint32 supportedBandwidthCombinationSet = 4;
+    }
+}
+
+message CaParametersNrV1560
+{
+    bool diffNumerologyWithinPucchGroupLargerScsSupported = 1;
+}
+
+message CaParametersNRDC
+{
+    oneof optional_featureSetCombinationIdDC
+    {
+        uint32 featureSetCombinationIdDC = 1;
+    }
+}
+
+message BandCombinationV1560
+{
+    oneof optional_caParametersNrV1560
+    {
+        CaParametersNrV1560 caParametersNrV1560 = 1;
+    }
+
+    oneof optional_caParametersNRDC
+    {
+        CaParametersNRDC caParametersNRDC = 2;
+    }
+}
+
+enum FreqSeparationClass
+{
+    mhz800 = 0;
+    mhz1200 = 1;
+    mhz1400 = 2;
+    mhz400v1650 = 3;
+    mhz600v1650 = 4;
+}
+
+message FeatureSetDownlink
+{
+    repeated uint32 featureSetListPerDownlinkCC = 1;
+    oneof optional_IntraBandFreqSeparationDL
+    {
+        FreqSeparationClass intraBandFreqSeparationDL = 2;
+    }
+}
+
+enum FreqSeparationClassDLv1620
+{
+    dlV1620Mhz1000 = 0;
+    dlV1620Mhz1600 = 1;
+    dlV1620Mhz1800 = 2;
+    dlV1620Mhz2000 = 3;
+    dlV1620Mhz2200 = 4;
+    dlV1620Mhz2400 = 5;
+}
+
+enum FreqSeparationClassDLOnlyR16
+{
+    dlOnlyR16Mhz200 = 0;
+    dlOnlyR16Mhz400 = 1;
+    dlOnlyR16Mhz600 = 2;
+    dlOnlyR16Mhz800 = 3;
+    dlOnlyR16Mhz1000 = 4;
+    dlOnlyR16Mhz1200 = 5;
+}
+
+message FeatureSetDownlinkV1610
+{
+    oneof optional_IntraBandFreqSeparationDLv1620
+    {
+        FreqSeparationClassDLv1620 intraBandFreqSeparationDLv1620 = 1;
+    }
+    oneof optional_IntraBandFreqSeparationDLOnlyR16
+    {
+        FreqSeparationClassDLOnlyR16 intraBandFreqSeparationDLOnlyR16 = 2;
+    }
+}
+
+enum FreqSeparationClassULv1620
+{
+    ulV1620Mhz1000 = 0;
+}
+
+message FeatureSetUplinkV1610
+{
+    oneof optional_IntraBandFreqSeparationULv1620
+    {
+        FreqSeparationClassULv1620 intraBandFreqSeparationULv1620 = 1;
+    }
+}
+
+enum SubcarrierSpacing
+{
+    kHz15 = 0;
+    kHz30 = 1;
+    kHz60 = 2;
+    kHz120 = 3;
+    kHz240 = 4;
+    spare3 = 5;
+    spare2 = 6;
+    spare1 = 7;
+}
+
+enum Fr1
+{
+    fr1Mhz5 = 0;
+    fr1Mhz10 = 1;
+    fr1Mhz15 = 2;
+    fr1Mhz20 = 3;
+    fr1Mhz25 = 4;
+    fr1Mhz30 = 5;
+    fr1Mhz40 = 6;
+    fr1Mhz50 = 7;
+    fr1Mhz60 = 8;
+    fr1Mhz80 = 9;
+    fr1Mhz90 = 10;
+    fr1Mhz100 = 11;
+}
+
+enum Fr2
+{
+    fr2Mhz50 = 0;
+    fr2Mhz100 = 1;
+    fr2Mhz200 = 2;
+    fr2Mhz400 = 3;
+}
+
+enum ChannelBW_90mhz
+{
+    supported_ChannelBW_90mhz = 0;
+}
+
+message FeatureSetDownlinkPerCC
+{
+    SubcarrierSpacing supportedSubcarrierSpacingDL = 1;
+    oneof supportedBandwidthDL
+    {
+        Fr1 fr1 = 2;
+        Fr2 fr2 = 3;
+    }
+    oneof optional_ChannelBW_90mhz
+    {
+        ChannelBW_90mhz channelBW_90mhz = 4;
+    }
+}
+
+message FeatureSetUplink
+{
+    repeated uint32 featureSetListPerUplinkCC = 1;
+    oneof optional_IntraBandFreqSeparationUL
+    {
+        FreqSeparationClass intraBandFreqSeparationUL = 2;
+    }
+}
+
+message FeatureSetUplinkPerCC
+{
+    SubcarrierSpacing supportedSubcarrierSpacingUL = 1;
+    oneof supportedBandwidthUL
+    {
+        Fr1 fr1 = 2;
+        Fr2 fr2 = 3;
+    }
+    oneof optional_ChannelBW_90mhz
+    {
+        ChannelBW_90mhz channelBW_90mhz = 4;
+    }
+}
+
+message FeatureSets
+{
+    repeated FeatureSetDownlink featureSetsDownlink = 1;
+    repeated FeatureSetDownlinkPerCC featureSetsDownlinkPerCC = 2;
+    repeated FeatureSetUplink featureSetsUplink = 3;
+    repeated FeatureSetUplinkPerCC featureSetsUplinkPerCC = 4;
+    repeated FeatureSetDownlinkV1610 featureSetsDownlinkV1610 = 5;
+    repeated FeatureSetUplinkV1610 featureSetsUplinkV1610 = 6;
+}
+
+message FeatureSetNR
+{
+    uint32 downlinkSetNR = 1;
+    uint32 uplinkSetNR = 2;
+}
+
+message FeatureSet
+{
+    FeatureSetNR nr = 1;
+}
+
+message FeatureSetsPerBand
+{
+    repeated FeatureSet featureSet = 1;
+}
+
+message FeatureSetCombination
+{
+    repeated FeatureSetsPerBand featureSetsPerBand = 1;
+}
+
+message FeatureSetCombinations
+{
+    repeated FeatureSetCombination featureSetCombination = 1;
+}
+
+message AllowedBandCombinationInfo
+{
+    uint32 bandCombinationIndex = 1;
+    repeated uint32 featureSetEntryIndexList = 2;
+}
+
+enum RateMatchingLteCRS
+{
+    supported = 0;
+    notsupported = 1;
+}
+
+message Fr1Scs
+{
+    oneof optional_scs15kHz
+    {
+        uint32 scs15kHz = 1;
+    }
+    oneof optional_scs30kHz
+    {
+        uint32 scs30kHz = 2;
+    }
+    oneof optional_scs60kHz
+    {
+        uint32 scs60kHz = 3;
+    }
+}
+
+message Fr2Scs
+{
+    oneof optional_scs60kHz
+    {
+        uint32 scs60kHz = 1;
+    }
+    oneof optional_scs120kHz
+    {
+        uint32 scs120kHz = 2;
+    }
+}
+
+message ChannelBWsDL
+{
+    oneof frScs
+    {
+        Fr1Scs fr1Scs = 1;
+        Fr2Scs fr2Scs = 2;
+    }
+}
+
+message ChannelBWsUL
+{
+    oneof frScs
+    {
+        Fr1Scs fr1Scs = 1;
+        Fr2Scs fr2Scs = 2;
+    }
+}
+
+message ChannelBWsDLv1590
+{
+    oneof frScs
+    {
+        Fr1Scs fr1Scs = 1;
+        Fr2Scs fr2Scs = 2;
+    }
+}
+
+message ChannelBWsULv1590
+{
+    oneof frScs
+    {
+        Fr1Scs fr1Scs = 1;
+        Fr2Scs fr2Scs = 2;
+    }
+}
+
+message BandNR
+{
+    uint32 bandNR = 1;
+    oneof optional_RateMatchingLteCRS
+    {
+        RateMatchingLteCRS rateMatchingLteCRS = 2;
+    }
+    oneof optional_ChannelBWsDL
+    {
+        ChannelBWsDL channelBWsDL = 3;
+    }
+    oneof optional_ChannelBWsUL
+    {
+        ChannelBWsUL channelBWsUL = 4;
+    }
+    oneof optional_ChannelBWsDLv1590
+    {
+        ChannelBWsDLv1590 channelBWsDLv1590 = 5;
+    }
+    oneof optional_ChannelBWsULv1590
+    {
+        ChannelBWsULv1590 channelBWsULv1590 = 6;
+    }
+    oneof optional_AsymmetricBandwidthCombinationSet
+    {
+        uint32 asymmetricBandwidthCombinationSet = 7;
+    }
+}
+
+message SupportedBandListNR
+{
+    repeated BandNR bandNR = 1;
+}
+
+enum ExtendedBandN77R16
+{
+    Supported = 0;
+}
+
+enum Fr1fddFr1TddCaSpCellOnFr1fdd
+{
+    fr1fddFr1TddCaSpCellOnFr1fdd_supported = 0;
+}
+
+message CarrierAggregationVariant
+{
+    oneof optional_Fr1fddFr1TddCaSpCellOnFr1fdd
+    {
+        Fr1fddFr1TddCaSpCellOnFr1fdd fr1fddFr1TddCaSpCellOnFr1fdd = 1;
+    }
+}
+
+message SNSSAIItem
+{
+    uint32 sst = 1 [ (sensitive_param) = true ];
+    oneof optional_Sd
+    {
+        uint32 sd = 2 [ (sensitive_param) = true ];
+    }
+}
+
+message SNSSAIList
+{
+    repeated SNSSAIItem sNSSAI = 1;
+}
+
+message FiveQIList
+{
+    repeated uint32 fiveQI = 1;
+}
+
+message UeContextInformation
+{
+    oneof optional_Bounds
+    {
+        Bounds bounds = 1;
+    }
+    repeated BandCombinationList bandList = 2;
+    repeated AllowedBandCombinationInfo allowedBandCombinationInfoList = 3;
+    FeatureSetCombinations featureSetCombinations = 4;
+    FeatureSets featureSets = 5;
+    SupportedBandListNR supportedBandListNR = 6;
+    repeated BandCombinationV1560 bandCombinationListV1560 = 7;
+    oneof optional_ExtendedBandN77R16
+    {
+        ExtendedBandN77R16 extendedBandN77R16 = 8;
+    }
+    oneof optional_SpCellPlacement
+    {
+        CarrierAggregationVariant spCellPlacement = 9;
+    }
+    SNSSAIList snssaiList = 10;
+    FiveQIList fiveQIList = 11;
+}

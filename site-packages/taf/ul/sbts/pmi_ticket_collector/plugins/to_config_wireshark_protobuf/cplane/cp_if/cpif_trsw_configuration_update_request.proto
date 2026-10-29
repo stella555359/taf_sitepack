@@ -1,0 +1,50 @@
+syntax = "proto3";
+import "common_types/cplaneIpAddress.proto";
+
+package cp_if_interface;
+
+message CpIfX2IpAddressList
+{
+    repeated common_type.CplaneIpAddress cpIfX2IpAddressList = 1;
+}
+message CpIfUplaneX2IpAddressList
+{
+    repeated common_type.CplaneIpAddress cpIfUplaneX2IpAddressList = 2;
+}
+message CpIfUplaneXnIpAddressList
+{
+    repeated common_type.CplaneIpAddress cpIfUplaneXnIpAddressList = 3;
+}
+
+message CpIfXnIpAddressList
+{
+    repeated common_type.CplaneIpAddress cpIfXnIpAddressList = 4;
+}
+message CpIfNgIpAddressList
+{
+    repeated common_type.CplaneIpAddress cpIfNgIpAddressList = 5;
+}
+message CpIfTransportSoftwareConfigurationUpdateRequest
+{
+    uint32 transactionId = 1;
+    oneof optional_cpIfX2IpAddressList
+    {
+        CpIfX2IpAddressList cpIfX2IpAddressList = 2;
+    }
+    oneof optional_cpIfUplaneX2IpAddressList
+    {
+        CpIfUplaneX2IpAddressList cpIfUplaneX2IpAddressList = 3;
+    }
+    oneof optional_cpIfUplaneXnIpAddressList
+    {
+        CpIfUplaneXnIpAddressList cpIfUplaneXnIpAddressList = 4;
+    }
+    oneof optional_cpIfXnIpAddressList
+    {
+        CpIfXnIpAddressList cpIfXnIpAddressList = 6;
+    }
+    oneof optional_cpIfNgIpAddressList
+    {
+        CpIfNgIpAddressList cpIfNgIpAddressList = 7;
+    }
+}

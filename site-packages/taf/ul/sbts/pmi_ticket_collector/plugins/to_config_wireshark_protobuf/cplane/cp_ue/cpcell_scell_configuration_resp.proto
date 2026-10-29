@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "common_types/scell_configuration_resp_result.proto";
+import "common/serving_cell_to_be_activated.proto";
+import "common/selected_band_combination_info.proto";
+import "options/protobuf_options.proto";
+
+package cp_ue_request;
+
+message CpCellSCellConfigurationResp
+{
+    uint32 transactionId = 1;
+    common_type.SCellConfigurationRespResult result = 2;
+    uint32 cuUeId = 3 [ (cucpueid_param) = true ];
+    repeated common_messages.ServingCellToBeActivated sCellsToBeActivated = 4;
+    repeated common_messages.SelectedBandCombinationInfo selectedBandCombinationInfoList = 5;
+}

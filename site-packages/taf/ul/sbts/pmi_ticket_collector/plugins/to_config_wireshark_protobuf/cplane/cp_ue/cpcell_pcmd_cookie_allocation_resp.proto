@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/PcmdServiceParameters.proto";
+package cp_ue_request;
+
+message CpCellPcmdCookieAllocationResp
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    uint64 nrCellIdentifier = 2;
+    uint32 transactionId = 3;
+    common_type.PcmdServiceParameters pcmdServiceParameters = 4;
+}

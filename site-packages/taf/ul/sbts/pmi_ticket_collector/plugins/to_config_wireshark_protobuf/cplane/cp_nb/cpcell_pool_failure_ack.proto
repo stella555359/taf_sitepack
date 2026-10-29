@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package cp_nb_message;
+
+message CpCellPoolFailureAck
+{
+    uint32 transactionId = 1;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "cp_vemc/cpvemc_nidd_delivery_request.proto";
+import "cp_vemc/cpvemc_data_distribution_request.proto";
+
+package cp_vemc_request;
+
+message CpVemcRequest
+{
+    oneof request
+    {
+        CpVemcNiddDeliveryRequest cpVemcNiddDeliveryRequest = 1;
+        CpVemcDataDistributionRequest cpVemcDataDistributionRequest = 2;
+    }
+}

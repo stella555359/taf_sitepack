@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+enum IfhoSsbSmtcPeriodicity
+{
+    ifhoSsbSmtcPeriodicitySF5 = 0;
+    ifhoSsbSmtcPeriodicitySF10 = 1;
+    ifhoSsbSmtcPeriodicitySF20 = 2;
+    ifhoSsbSmtcPeriodicitySF40 = 3;
+    ifhoSsbSmtcPeriodicitySF80 = 4;
+    ifhoSsbSmtcPeriodicitySF160 = 5;
+}

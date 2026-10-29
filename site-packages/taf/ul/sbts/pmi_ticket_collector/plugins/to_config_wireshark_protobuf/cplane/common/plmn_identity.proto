@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package common_messages;
+
+message PlmnIdentity
+{
+    bytes value = 1 [ (sensitive_param) = true ];
+}

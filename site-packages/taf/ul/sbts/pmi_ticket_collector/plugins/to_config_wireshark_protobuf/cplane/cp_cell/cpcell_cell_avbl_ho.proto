@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+import "common/snssai.proto";
+import "common_types/global_gnb_id.proto";
+import "common_types/global_enb_id.proto";
+import "common/plmn_identity.proto";
+import "common_types/sensitive_option.proto";
+import "common/nrcgi.proto";
+
+package cell_request;
+
+message CpCellCellAvblHo
+{
+    enum Status
+    {
+        available = 0;
+        unavailable = 1;
+    }
+    message SliceSupportList
+    {
+        repeated common_messages.SNSSAI sliceSupportList = 1;
+    }
+    message BroadcastPlmnsItem
+    {
+        common_messages.PlmnIdentity plmnIdentity = 1;
+        SliceSupportList sliceSupportList = 2;
+    }
+    message BroadcastPLMNList
+    {
+        repeated BroadcastPlmnsItem broadcastPlmnsList = 1;
+    }
+    message TaiSupportItem
+    {
+        bytes tac = 1;
+        BroadcastPLMNList broadcastPLMNList = 2;
+    }
+    message TAISupportList
+    {
+        repeated TaiSupportItem tAISupportList = 1;
+    }
+    message GlobalNgRanNodeId
+    {
+        oneof globalNgRanNodeId
+        {
+            common_messages.GlobalEnbId globalEnbId = 1;
+            common_messages.GlobalGnbId globalGnbId = 2;
+        }
+    }
+    message NrGnbCapabilities
+    {
+        oneof optional_nrGnbStatus
+        {
+            Status nrGnbStatus = 1;
+        }
+        oneof optional_globalNgRanNodeId
+        {
+            GlobalNgRanNodeId globalNgRanNodeId = 2;
+        }
+        oneof optional_tAISupportList
+        {
+            TAISupportList tAISupportList = 3;
+        };
+    }
+    message BroadcastPLMNs
+    {
+        repeated bytes plmnIdentities = 1 [ (sensitive_param) = true ];
+    }
+    message BroadcastPlmnIdInfoItem
+    {
+        repeated bytes pLMNIdentityList = 1 [ (sensitive_param) = true ];
+        bytes fiveGsTac = 2;
+        uint64 nrCellIdentity = 3;
+    }
+    message BroadcastPlmnIdInfoList
+    {
+        repeated BroadcastPlmnIdInfoItem broadcastPlmnIdInfoItem = 1;
+    }
+    message NrCellInfoItem
+    {
+        common_messages.NRCGI nrCGI = 1;
+        oneof optional_tac
+        {
+            bytes tac = 2;
+        }
+        oneof optional_broadcastPLMNs
+        {
+            BroadcastPLMNs broadcastPLMNs = 3;
+        }
+        Status status = 4;
+        oneof optional_broadcastPlmnIdInfoList
+        {
+            BroadcastPlmnIdInfoList broadcastPlmnIdInfoList = 5;
+        }
+    }
+    message NrCellInfoList
+    {
+        repeated NrCellInfoItem nrCellInfoItem = 1;
+    }
+    message Optional_PsCellId
+    {
+        uint64 psCellId = 1;
+    }
+
+    Optional_PsCellId optional_PsCellId = 1;
+    oneof optional_nrGnbCapabilities
+    {
+        NrGnbCapabilities nrGnbCapabilities = 2;
+    };
+    oneof optional_nrCellInfoList
+    {
+        NrCellInfoList nrCellInfoList = 3;
+    }
+}

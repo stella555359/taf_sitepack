@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+enum IfhoSsbScs
+{
+    ifhoSsbScs15KHz = 0;
+    ifhoSsbScs30KHz = 1;
+    ifhoSsbScs120KHz = 2;
+    ifhoSsbScs240KHz = 3;
+}

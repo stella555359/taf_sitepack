@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "common/nrcgi.proto";
+package common_messages;
+
+message CellLoadResultItem
+{
+    common_messages.NRCGI nrCGI = 1;
+    uint32 numberOfActiveUEs = 2;
+}

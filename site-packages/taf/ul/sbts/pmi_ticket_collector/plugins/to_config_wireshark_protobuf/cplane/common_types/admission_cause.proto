@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+enum AdmissionCause
+{
+    notApplicable = 0;
+    asnDecodeError = 1;
+    bandCombinationCheckFailed = 2;
+    plmnCheckFailed = 3;
+    noFreeCapacity = 4;
+    sliceNotSupport = 5;
+    radioResourcesNotAvailabled = 6;
+    lteCrsRateMatchingNotCapable = 7;
+    cellBarred = 8;
+    notSupported5QI = 9;
+}

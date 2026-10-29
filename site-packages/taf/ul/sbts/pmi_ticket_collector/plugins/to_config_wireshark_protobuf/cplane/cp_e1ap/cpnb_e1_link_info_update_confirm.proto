@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package cp_e1ap_interface;
+
+message CpNbE1LinkInfoUpdateConfirm
+{
+    uint32 gNBCuUpId = 1;
+    enum Status
+    {
+        ok = 0;
+        notOk = 1;
+    }
+    Status status = 2;
+}

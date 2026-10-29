@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "cp_sb/security_parameters.proto";
+import "options/protobuf_options.proto";
+
+package cp_sb_request;
+message SecurityConfReq
+{
+    uint32 ueIdCu = 1 [ (cucpueid_param) = true ];
+    uint32 srbIdentity = 2;
+    uint32 bearerIndex = 3;
+    SecurityParameters securityParameters = 4;
+    bool reestablishPdcp = 5;
+
+    oneof optional_plmnId
+    {
+        bytes plmnId = 6 [ (sensitive_param) = true ];
+    }
+}

@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+import "common_types/served_cell_information.proto";
+import "common_types/gnb_du_system_information.proto";
+
+package common_messages;
+
+message F1ServedCellInfo
+{
+    common_type.ServedCellInformation servedCells = 1;
+    oneof optional_gnbDuSystemInformation
+    {
+        common_type.GnbDuSystemInformation gnbDuSystemInformation = 2;
+    }
+}

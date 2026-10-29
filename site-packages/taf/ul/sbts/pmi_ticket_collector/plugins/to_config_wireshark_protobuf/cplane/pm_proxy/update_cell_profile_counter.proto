@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+import "pm_proxy/profileid.proto";
+
+package pm_agent_proxy_request;
+
+message UpdateCellProfileCounter
+{
+    uint32 counter_id = 1;
+    common_type.Plmn plmn_id = 2;
+    int64 cell_id = 3;
+    ProfileId profile_id = 4;
+    uint64 value = 5;
+}

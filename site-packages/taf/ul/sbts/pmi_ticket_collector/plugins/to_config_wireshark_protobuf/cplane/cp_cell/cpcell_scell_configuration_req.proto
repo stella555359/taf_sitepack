@@ -1,0 +1,35 @@
+syntax = "proto3";
+import "common_types/UeContextInformation.proto";
+import "common_types/sCellCandidates_type.proto";
+import "common/sCellSwapInfo.proto";
+import "options/protobuf_options.proto";
+
+package cell_request;
+
+message CpCellSCellConfigurationReq
+{
+    uint32 transactionId = 1;
+    uint32 cuUeId = 2 [ (cucpueid_param) = true ];
+    uint64 nrCellId = 3;
+    enum SCellConfigurationReqReason
+    {
+        sCellAdditionBlind = 0;
+        sCellAdditionA1Based = 1;
+        sCellChangeA1Based = 2;
+        sCellSwapSa = 3;
+    }
+    SCellConfigurationReqReason reason = 4;
+    oneof optional_ueContextInformation
+    {
+        ue_context_information.UeContextInformation ueContextInformation = 5;
+    }
+    SCellCandidatesType sCellCandidatesType = 6;
+    oneof optional_crnti
+    {
+        uint32 crnti = 7;
+    }
+    oneof optional_sCellSwapInfo
+    {
+        common_messages.sCellSwapInfo scellSwapInfo = 8;
+    }
+}

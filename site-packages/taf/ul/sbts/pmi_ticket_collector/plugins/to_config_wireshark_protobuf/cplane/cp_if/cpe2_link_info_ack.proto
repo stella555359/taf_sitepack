@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "common_types/common_status.proto";
+
+package cp_if_interface;
+
+message CpE2LinkInfoAck
+{
+    uint32 transactionId = 1;
+    Status status = 2;
+}

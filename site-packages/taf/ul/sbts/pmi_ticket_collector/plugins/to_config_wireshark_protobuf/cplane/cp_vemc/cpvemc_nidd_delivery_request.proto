@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package cp_vemc_request;
+
+message CpVemcNiddDeliveryRequest
+{
+    uint32 transactionId = 1;
+    oneof optional_manualScalingEnabled
+    {
+        bool manualScalingEnabled = 2;
+    }
+    oneof optional_maxNumCPUEInstances
+    {
+        uint32 maxNumCPUEInstances = 3;
+    }
+    oneof optional_minNumCPUEInstances
+    {
+        uint32 minNumCPUEInstances = 4;
+    }
+}

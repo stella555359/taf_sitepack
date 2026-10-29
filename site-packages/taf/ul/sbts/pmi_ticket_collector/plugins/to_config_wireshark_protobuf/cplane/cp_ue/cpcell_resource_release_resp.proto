@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+package cp_ue_request;
+
+message CpCellResourceReleaseResp
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    uint32 transactionId = 2;
+    uint32 poolId = 3;
+}

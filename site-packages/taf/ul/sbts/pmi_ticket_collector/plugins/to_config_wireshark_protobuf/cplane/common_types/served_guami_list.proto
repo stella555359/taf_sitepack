@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "common_types/guami.proto";
+
+package common_type;
+
+message ServedGuami
+{
+    common_type.GUAMI guami = 1;
+    oneof optional_backupAMFName
+    {
+        string backupAMFName = 2;
+    }
+}
+
+message ServedGuamiList
+{
+    repeated ServedGuami servedGuami = 1;
+}

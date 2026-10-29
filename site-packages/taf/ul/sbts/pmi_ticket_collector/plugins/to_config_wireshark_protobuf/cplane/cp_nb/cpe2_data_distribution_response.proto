@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "cp_nb/cp_nb_status.proto";
+
+package cp_nb_message;
+
+message CpE2DataDistributionResponse
+{
+    uint32 transactionId = 1;
+    Status status = 2;
+}

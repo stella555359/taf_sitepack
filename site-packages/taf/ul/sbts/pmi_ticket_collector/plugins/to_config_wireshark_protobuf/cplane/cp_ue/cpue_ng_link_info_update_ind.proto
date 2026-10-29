@@ -1,0 +1,108 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/guami.proto";
+import "common_types/GuamiStatus.proto";
+
+package cp_ue_request;
+
+message CpUeNgLinkInfoUpdateInd
+{
+    enum LinkStatus
+    {
+        unavailable = 0;
+        available = 1;
+    }
+
+    message ServedGuami
+    {
+        common_type.GUAMI guami = 1;
+        oneof optional_backupAMFName
+        {
+            string backupAMFName = 2;
+        }
+
+        GuamiStatus guamiStatus = 3;
+
+        oneof optional_hasTimerApproach
+        {
+            bool hasTimerApproach = 4;
+        }
+    }
+
+    message ServedGuamiList
+    {
+        repeated ServedGuami servedGuami = 1;
+    }
+
+    message SNSSAI
+    {
+        uint32 sst = 1 [ (sensitive_param) = true ];
+        oneof optional_Sd
+        {
+            uint32 sd = 2 [ (sensitive_param) = true ];
+        }
+    }
+
+    message SliceSupportList
+    {
+        repeated SNSSAI sliceSupportItem = 1;
+    }
+
+    message PlmnSupportItem
+    {
+        bytes plmnIdentity = 1 [ (sensitive_param) = true ];
+        SliceSupportList sliceSupportList = 2;
+    }
+
+    message PlmnSupportList
+    {
+        repeated PlmnSupportItem plmnSupportList = 1;
+    }
+
+    message AmfAddUpdate
+    {
+        uint32 servedAmfId = 1;
+        oneof optional_amfIpAddress
+        {
+            string amfIpAddress = 2 [ (ipaddress_param) = true ];
+        }
+        oneof optional_aMFName
+        {
+            string amfName = 3;
+        }
+        oneof optional_ngLinkStatus
+        {
+            LinkStatus ngLinkStatus = 4;
+        }
+        oneof optional_defaultAMF
+        {
+            bool defaultAMF = 5;
+        }
+        oneof optional_relativeAMFCapacity
+        {
+            uint32 relativeAMFCapacity = 6;
+        }
+        oneof optional_servedGuamiList
+        {
+            ServedGuamiList servedGuamiList = 7;
+        }
+        oneof optional_plmnSupportList
+        {
+            PlmnSupportList plmnSupportList = 8;
+        }
+    }
+
+    message AmfDelete
+    {
+        uint32 servedAmfId = 1;
+    }
+
+    oneof optional_amfAddUpdate
+    {
+        AmfAddUpdate amfAddUpdate = 1;
+    }
+    oneof optional_amfDelete
+    {
+        AmfDelete amfDelete = 2;
+    }
+}

@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package cp_e1ap_interface;
+
+message E1ResetResp
+{
+}

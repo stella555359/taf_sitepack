@@ -1,0 +1,8 @@
+syntax = "proto3";
+package cell_request;
+import "common_types/ResourceUsageReqType.proto";
+
+message CpCellGetResourceUsageReq
+{
+    common_type.ResourceUsageReqType requestType = 1;
+}

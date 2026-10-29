@@ -1,0 +1,39 @@
+syntax = "proto3";
+import "common_types/admission_cause.proto";
+package common_messages;
+
+message PduSessionAdmittedResources
+{
+    message Nondynamic5QI
+    {
+        uint32 nonDynamic5QIDescriptor = 1;
+    }
+
+    message QoSFlowLevelQoSParameters
+    {
+        Nondynamic5QI qosCharacteristics = 1;
+    }
+
+    message QoSFlowSetupItem
+    {
+        uint32 qosFlowIdentifier = 1;
+        QoSFlowLevelQoSParameters qosFlowLevelQoSParameters = 2;
+    }
+
+    message DRBtoQoSMapping
+    {
+        uint32 drbId = 1;
+        bool defaultDrb = 2;
+        repeated QoSFlowSetupItem qosFlowSetupList = 3;
+    }
+
+    message QoSFlowFailItem
+    {
+        uint32 qosFlowIdentifier = 1;
+        AdmissionCause cause = 2;
+    }
+
+    uint32 pduSessionId = 1;
+    repeated DRBtoQoSMapping drbToQosMappingsList = 2;
+    repeated QoSFlowFailItem qosFlowFailList = 3;
+}

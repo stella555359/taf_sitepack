@@ -1,0 +1,15 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/ue_context_release_cause.proto";
+import "common_types/ue_context_reset_type.proto";
+
+package cp_ue_request;
+
+message CpUeUeReleaseBulkReq
+{
+    uint32 transactionId = 1;
+    uint64 gnbDuId = 2;
+    UeContextReleaseCause Cause = 3;
+    repeated uint32 gnbCuUeF1APIds = 4 [ (cucpueid_list_param) = true ];
+    repeated UeContextResetType resetTypes = 5;
+}

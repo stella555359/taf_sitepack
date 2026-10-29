@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "common_types/ncgi.proto";
+
+package cell_request;
+
+message CpCellCookieDeallocInd
+{
+    uint32 cookie = 1;
+    common_type.NCGI ncgi = 2;
+}

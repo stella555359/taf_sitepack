@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "common/nrcgi.proto";
+package common_messages;
+
+message sCellSwapInfo
+{
+    common_messages.NRCGI currentSCell = 1;
+    common_messages.NRCGI candidateSCell = 2;
+}

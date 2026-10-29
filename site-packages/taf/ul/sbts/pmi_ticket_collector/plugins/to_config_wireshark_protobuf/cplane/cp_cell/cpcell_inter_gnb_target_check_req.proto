@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "common/cp_cell_pdu_session_resource_inter_gnb_handover.proto";
+import "common_types/Plmn.proto";
+import "common/nrcgi.proto";
+import "options/protobuf_options.proto";
+
+package cell_request;
+
+message CpCellInterGnbTargetCheckReq
+{
+    message PduSessionList
+    {
+        repeated common_messages.PduSessionResourcesToBeSetupItemInterGnbHo pduSessionItem = 1;
+    }
+
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    uint64 sourceCellId = 2;
+    repeated common_messages.NRCGI cellList = 3;
+    common_type.Plmn selectedPlmn = 4;
+
+    oneof optional_pduSessionList
+    {
+        PduSessionList pduSessionList = 5;
+    }
+    uint32 transactionId = 6;
+}

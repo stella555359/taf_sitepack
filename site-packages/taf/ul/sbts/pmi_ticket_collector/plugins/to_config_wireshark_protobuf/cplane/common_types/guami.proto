@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package common_type;
+
+message GUAMI
+{
+    bytes plmnIdentity = 1 [ (sensitive_param) = true ];
+    uint32 amfRegionId = 2 [ (sensitive_param) = true ];
+    uint32 amfSetId = 3 [ (sensitive_param) = true ];
+    uint32 amfPointer = 4 [ (sensitive_param) = true ];
+}

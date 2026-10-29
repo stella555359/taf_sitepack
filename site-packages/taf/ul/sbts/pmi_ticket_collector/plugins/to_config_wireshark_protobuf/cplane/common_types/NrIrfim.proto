@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+message NrIrfim
+{
+    uint32 nrIrfimId = 1;
+    uint32 dlCarrierFreq = 2;
+    message OptionalInteger
+    {
+        uint32 value = 1;
+    }
+    OptionalInteger cellReselectionPriority = 3;
+
+    enum CellReselectionSubPriority
+    {
+        oDot2 = 0;
+        oDot4 = 1;
+        oDot6 = 2;
+        oDot8 = 3;
+    }
+
+    message OptionalCellReselectionSubPriority
+    {
+        CellReselectionSubPriority value = 1;
+    }
+    OptionalCellReselectionSubPriority cellReselectionSubPriority = 4;
+
+    message OptionalNrMultibandInfo
+    {
+        uint32 value = 1;
+    }
+    repeated OptionalNrMultibandInfo nrMultibandInfoList = 5;
+    OptionalInteger idleMMNrCellResWeight = 6;
+}

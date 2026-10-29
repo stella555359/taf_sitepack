@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package cp_sep_ran_message;
+
+message MirroredX2Msg
+{
+    enum Direction
+    {
+        incoming = 0;
+        outgoing = 1;
+    }
+    bytes x2Payload = 1;
+    Direction direction = 2;
+}

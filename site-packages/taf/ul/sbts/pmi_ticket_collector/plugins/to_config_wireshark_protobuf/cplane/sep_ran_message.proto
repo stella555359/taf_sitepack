@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+import "cell_served_info_request.proto";
+import "cell_served_info_response.proto";
+import "start.proto";
+import "start_ack.proto";
+import "stop.proto";
+import "stop_ack.proto";
+import "x2ap_traffic.proto";
+import "ric_policy_update.proto";
+import "ric_policy_update_ack.proto";
+import "ric_policy_delete.proto";
+import "ric_policy_delete_ack.proto";
+
+package sep_ran_message;
+
+message SepRanMessage
+{
+    oneof message
+    {
+        CellServedInfoRequest cellservedinforequest = 1;
+        CellServedInfoResponse cellservedinforesponse = 2;
+        Start start = 3;
+        StartAck startack = 4;
+        Stop stop = 5;
+        StopAck stopack = 6;
+        X2APTraffic x2aptraffic = 7;
+        RicPolicyUpdate ricpolicyupdate = 8;
+        RicPolicyUpdateAck ricpolicyupdateack = 9;
+        RicPolicyDelete ricpolicydelete = 10;
+        RicPolicyDeleteAck ricpolicydeleteack = 11;
+    }
+}

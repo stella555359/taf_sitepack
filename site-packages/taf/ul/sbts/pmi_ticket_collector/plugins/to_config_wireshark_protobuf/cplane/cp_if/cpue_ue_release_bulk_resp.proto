@@ -1,0 +1,13 @@
+syntax = "proto3";
+import "common_types/ue_context_release_cause.proto";
+import "common_types/common_status.proto";
+
+package cp_if_interface;
+
+message CpUeUeReleaseBulkResp
+{
+    uint32 transactionId = 1;
+    uint64 gnbDuId = 2;
+    UeContextReleaseCause Cause = 3;
+    Status status = 4;
+}

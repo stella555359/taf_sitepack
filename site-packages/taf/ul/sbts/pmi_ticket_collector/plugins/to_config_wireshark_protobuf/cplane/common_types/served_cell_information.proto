@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+import "common_types/ncgi.proto";
+import "options/protobuf_options.proto";
+import "common_types/Plmn.proto";
+import "common_types/NrModeInfo.proto";
+
+package common_type;
+
+message ServedCellInformation
+{
+    enum CellDirection
+    {
+        dlOnly = 0;
+        ulOnly = 1;
+    }
+
+    message SNSSAI
+    {
+        uint32 sst = 1 [ (sensitive_param) = true ];
+        oneof optional_Sd
+        {
+            uint32 sd = 2 [ (sensitive_param) = true ];
+        }
+    }
+
+    message SliceSupportList
+    {
+        repeated SNSSAI sliceSupportItem = 1;
+    }
+
+    message ServedPlmnItem
+    {
+        common_type.Plmn plmnIdentity = 1;
+        SliceSupportList sliceSupportList = 2;
+    }
+
+    message PLMNIdentityList
+    {
+        repeated common_type.Plmn plmnIdentity = 1;
+    }
+
+    message BroadcastPlmnIdInfoItem
+    {
+        PLMNIdentityList pLMNIdentityList = 1;
+        oneof optional_fiveGsTac
+        {
+            uint32 fiveGsTac = 2;
+        }
+        uint64 nrCellIdentity = 3;
+    }
+
+    message BroadcastPlmnIdInfoList
+    {
+        repeated BroadcastPlmnIdInfoItem broadcastPlmnIdInfoItem = 1;
+    }
+
+    common_type.NCGI nCGI = 1;
+    uint32 pci = 2;
+    repeated ServedPlmnItem broadcastPLMNs = 3;
+    common_type.NrModeInfo nrModeInfo = 4;
+    oneof optional_fiveGsTac
+    {
+        uint32 fiveGsTac = 6;
+    }
+    oneof optional_configEpsTac
+    {
+        uint32 configEpsTac = 7;
+    }
+    bytes measurementTimingConfiguration = 8;
+    oneof optional_cellDirection
+    {
+        CellDirection cellDirection = 9;
+    }
+    oneof optional_broadcastPlmnIdInfoList
+    {
+        BroadcastPlmnIdInfoList broadcastPlmnIdInfoList = 10;
+    }
+}

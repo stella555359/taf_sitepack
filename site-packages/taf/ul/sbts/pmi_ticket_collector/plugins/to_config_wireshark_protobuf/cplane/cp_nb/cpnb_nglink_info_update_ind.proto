@@ -1,0 +1,78 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/guami.proto";
+import "common_types/GuamiStatus.proto";
+
+package cp_nb_message;
+
+message CpNbNGLinkInfoUpdateInd
+{
+    enum AmfAction
+    {
+        add = 0;
+        update = 1;
+    }
+
+    enum LinkState
+    {
+        available = 0;
+        notAvailable = 1;
+    }
+
+    message ServedGuami
+    {
+        common_type.GUAMI guami = 1;
+        oneof optional_backupAMFName
+        {
+            string backupAMFName = 2;
+        }
+        GuamiStatus guamiStatus = 3;
+    }
+
+    message ServedGuamiList
+    {
+        repeated ServedGuami servedGuami = 1;
+    }
+
+    message SNSSAI
+    {
+        uint32 sst = 1 [ (sensitive_param) = true ];
+        oneof optional_Sd
+        {
+            uint32 sd = 2 [ (sensitive_param) = true ];
+        }
+    }
+    message SliceSupportList
+    {
+        repeated SNSSAI sliceSupportItem = 1;
+    }
+    message PlmnSupportItem
+    {
+        bytes plmnIdentity = 1 [ (sensitive_param) = true ];
+        SliceSupportList sliceSupportList = 2;
+    }
+    message PLMNSUPPORTITEMS
+    {
+        repeated PlmnSupportItem PlmnSupportItems = 1;
+    }
+    uint32 transactionId = 1;
+    AmfAction amfAction = 2;
+    string amfIpAddress = 3 [ (ipaddress_param) = true ];
+    oneof optional_linkState
+    {
+        LinkState linkState = 4;
+    }
+    oneof optional_servedGuamiList
+    {
+        ServedGuamiList servedGuamiList = 5;
+    }
+    string amfName = 6;
+    oneof optional_amfRelativeCapacity
+    {
+        uint32 amfRelativeCapacity = 7;
+    }
+    oneof optional_plmnSupportList
+    {
+        PLMNSUPPORTITEMS plmnSupportList = 8;
+    }
+}

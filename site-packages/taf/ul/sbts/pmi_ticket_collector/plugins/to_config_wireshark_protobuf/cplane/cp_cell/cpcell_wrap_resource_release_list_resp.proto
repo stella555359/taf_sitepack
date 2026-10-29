@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "cp_ue/cpcell_resource_release_list_resp.proto";
+
+package cell_request;
+
+message CpCellWrapResourceReleaseListResp
+{
+    enum PoolType
+    {
+        L3_UE = 0;
+        L3_IF = 1;
+    }
+    PoolType poolType = 1;
+    uint32 poolId = 2;
+    cp_ue_request.CpCellResourceReleaseListResp resourceReleaseListResp = 3;
+}

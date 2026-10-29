@@ -1,0 +1,13 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+package cp_sb_request;
+message SrbSendReq
+{
+    uint32 transactionId = 1;
+    uint32 cuUeId = 2 [ (cucpueid_param) = true ];
+    uint32 srbIdentity = 3;
+    uint32 bearerIndex = 4;
+    bytes rrcMsgPayload = 5;
+    bool isLockStepAct = 6;
+    bool bypassCipherFlag = 7;
+}

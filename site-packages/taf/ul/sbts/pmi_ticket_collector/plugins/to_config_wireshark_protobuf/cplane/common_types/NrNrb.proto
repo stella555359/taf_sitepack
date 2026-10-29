@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package common_type;
+
+enum NrNrb
+{
+    nrb11 = 0;
+    nrb18 = 1;
+    nrb24 = 2;
+    nrb25 = 3;
+    nrb31 = 4;
+    nrb32 = 5;
+    nrb38 = 6;
+    nrb51 = 7;
+    nrb52 = 8;
+    nrb65 = 9;
+    nrb66 = 10;
+    nrb78 = 11;
+    nrb79 = 12;
+    nrb93 = 13;
+    nrb106 = 14;
+    nrb107 = 15;
+    nrb121 = 16;
+    nrb132 = 17;
+    nrb133 = 18;
+    nrb135 = 19;
+    nrb160 = 20;
+    nrb162 = 21;
+    nrb189 = 22;
+    nrb216 = 23;
+    nrb217 = 24;
+    nrb245 = 25;
+    nrb264 = 26;
+    nrb270 = 27;
+    nrb273 = 28;
+}

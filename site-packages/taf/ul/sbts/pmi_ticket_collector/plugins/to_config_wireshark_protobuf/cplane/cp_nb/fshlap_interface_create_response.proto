@@ -1,0 +1,7 @@
+syntax = "proto3";
+package cp_nb_message;
+
+message FsHlApInterfaceCreateResponse
+{
+    uint32 nodeId = 1;
+}

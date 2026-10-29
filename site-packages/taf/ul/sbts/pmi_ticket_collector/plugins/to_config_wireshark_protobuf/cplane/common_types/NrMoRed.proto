@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "common_types/RedirRat.proto";
+
+package common_type;
+
+message NrMoRedItem
+{
+    oneof optional_redirFreqEutra
+    {
+        uint32 redirFreqEutra = 1;
+    }
+    oneof optional_redirFreqNr
+    {
+        uint32 redirFreqNr = 2;
+    }
+    uint32 redirPrio = 3;
+    RedirRat redirRat = 4;
+}
+
+message NrMoRed
+{
+    uint32 nrMoRedId = 1;
+    common_type.NrMoRedItem nrMoRedItem = 2;
+}

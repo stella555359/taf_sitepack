@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+import "options/protobuf_options.proto";
+import "cp_e2/cpe2_data_distribution_request.proto";
+import "cp_e2/cpe2_nidd_delivery_request.proto";
+import "cp_e2/cpe2_trsw_configuration_request.proto";
+import "cp_e2/cpif_cell_status_info_response.proto";
+import "cp_e2/cpe2_cell_status_info_indication.proto";
+import "cp_e2/cpe2_e2_ran_functions_conf.proto";
+import "cp_e2/cpe2_link_info_indication.proto";
+import "cp_e2/cpif_link_info_resp.proto";
+import "cp_e2/cpnb_e2_link_info_update_ack.proto";
+import "cp_e2/cpe2_cu_links_lock_req.proto";
+
+package cp_e2_interface;
+
+message CpE2Request
+{
+    option (port_numbers) = 30650;
+    oneof request
+    {
+        CpE2DataDistributionRequest cpE2DataDistributionRequest = 1;
+        CpE2NiddDeliveryRequest cpE2NiddDeliveryRequest = 2;
+        CpE2TransportSoftwareConfigurationRequest cpE2TransportSoftwareConfigurationRequest = 3;
+        CpIfCellStatusInfoResp cpIfCellStatusInfoResp = 4;
+        CpE2CellStatusInfoInd cpE2CellStatusInfoInd = 5;
+        CpE2LinkInfoInd cpE2LinkInfoInd = 6;
+        CpIfLinkInfoResp cpIfLinkInfoResp = 7;
+        CpE2E2RanFunctionsConf cpE2E2RanFunctionsConf = 8;
+        CpNbE2LinkInfoUpdateAck cpNbE2LinkInfoUpdateAck = 9;
+        CpE2CuLinksLockReq cpE2CuLinksLockReq = 10;
+    }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "hanging_resources_5G_test",
+  "tags": [
+    {
+      "name": "Hanging-resources",
+      "type": "Generic"
+    }
+  ],
+  "domain": "Hanging",
+  "algorithm": "hanging-analyzer",
+  "rule": {
+    "hanging_resources": "hanging_resources",
+    "rrc_inactive_enabled": true
+  }
+}

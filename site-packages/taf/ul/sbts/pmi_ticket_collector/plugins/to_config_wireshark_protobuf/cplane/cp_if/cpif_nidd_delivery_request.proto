@@ -1,0 +1,411 @@
+syntax = "proto3";
+
+import "common_types/CpCellVmsToMap.proto";
+import "common_types/global_amf_region_information.proto";
+import "options/protobuf_options.proto";
+import "common_types/GnbCuType.proto";
+import "common_types/served_guami_list.proto";
+import "common_types/CellDepType.proto";
+import "common_types/Plmn.proto";
+
+package cp_if_interface;
+
+enum PagingDrx
+{
+    v32 = 0;
+    v64 = 1;
+    v128 = 2;
+    v256 = 3;
+}
+
+message CpIfNiddDeliveryRequest
+{
+    message SctpProfile
+    {
+        uint32 sctpProfileId = 1;
+        uint32 sctpHeartbeatInterval = 2;
+        uint32 sctpMaxBurst = 3;
+        uint32 sctpMaxPayloadSize = 4;
+        uint32 sctpPathMaxRetrans = 5;
+        uint32 sctpRtoInit = 6;
+        uint32 sctpRtoMax = 7;
+        uint32 sctpRtoMin = 8;
+        uint32 sctpSackDelay = 9;
+        uint32 sctpSackFreq = 10;
+        uint32 sctpValidCookieLife = 11;
+        uint32 sctpWaitTimeInitSeqRetry = 12;
+        bool sctpChunkBundlingEnabled = 13;
+        uint32 sctpRandomTimeInitSeqRetry = 14;
+    }
+
+    message GnbAdjGnb
+    {
+        enum XnLinkLock
+        {
+            locked = 0;
+            unlocked = 2;
+        }
+
+        enum GNodeBIdCtrl
+        {
+            oamControlled = 0;
+            gnbControlled = 1;
+        }
+
+        uint32 GnbAdjGnbMocInstanceId = 1;
+        XnLinkLock administrativeState = 2;
+        uint32 gNodeBId = 3;
+        uint32 gnbIdLength = 4;
+        bytes gnbPlmn = 5 [ (sensitive_param) = true ];
+        oneof optional_xnLinkId
+        {
+            uint32 xnLinkId = 6;
+        }
+        oneof optional_xnLinkId2
+        {
+            uint32 xnLinkId2 = 7;
+        }
+        GNodeBIdCtrl gNodeBIdctrl = 8;
+        repeated common_type.GlobalAmfRegionInformation amfRegionInformation = 9;
+        oneof optional_cPlaneIpSecTrsAddr
+        {
+            string cPlaneIpSecTrsAddr = 10;
+        }
+    }
+
+    message XnLink
+    {
+        enum XnLinkStatus
+        {
+            unavailable = 0;
+            available = 1;
+            conflicting = 2;
+        }
+
+        enum CPlaneIpAddrCtrl
+        {
+            oamControlled = 0;
+            gnbControlled = 1;
+        }
+
+        uint32 xnLinkId = 1;
+        string cPlaneIpAddr = 2 [ (ipaddress_param) = true ];
+        CPlaneIpAddrCtrl cPlaneIpAddrCtrl = 3;
+        XnLinkStatus xnLinkStatus = 4;
+
+        oneof optional_xnTnlId
+        {
+            uint32 xnTnlId = 5;
+        }
+    }
+
+    enum F1SetupTimeToWait
+    {
+        v1s = 0;
+        v2s = 1;
+        v5s = 2;
+        v10s = 3;
+        v20s = 4;
+        v60s = 5;
+    }
+
+    message lteenb
+    {
+        string distName = 1;
+        oneof optional_eNodeBId
+        {
+            uint32 eNodeBId = 2;
+        }
+
+        oneof optional_enbPlmn
+        {
+            common_type.Plmn enbPlmn = 3;
+        }
+        oneof optional_ipAddr
+        {
+            string ipAddr = 4 [ (ipaddress_param) = true ];
+        }
+
+        enum EX2LinkLock
+        {
+            Ex2LinkLock_unlocked = 0;
+            Ex2LinkLock_locked = 1;
+        }
+        EX2LinkLock x2LinkLock = 5;
+
+        enum EX2LinkStatus
+        {
+            Ex2LinkStatus_unavailable = 0;
+            Ex2LinkStatus_available = 1;
+        }
+        oneof optional_x2LinkStatus
+        {
+            EX2LinkStatus x2LinkStatus = 6;
+        }
+    }
+
+    message ServedAmf
+    {
+        enum AdministrativeState
+        {
+            locked = 0;
+            unlocked = 2;
+        }
+        string amfIpAddress = 1 [ (ipaddress_param) = true ];
+        oneof optional_servedAmfId
+        {
+            uint32 servedAmfId = 2;
+        }
+
+        AdministrativeState administrativeState = 3;
+        bool defaultAMF = 4;
+
+        oneof optional_ngTnlId
+        {
+            uint32 ngTnlId = 5;
+        }
+
+        oneof optional_servedGuamiList
+        {
+            common_type.ServedGuamiList servedGuamiList = 6;
+        }
+    }
+
+    message nrpmrnl
+    {
+        string distName = 1;
+
+        enum EMiNrNgInterface
+        {
+            EmiNrNgInterface_disabled = 0;
+            EmiNrNgInterface_5min = 5;
+            EmiNrNgInterface_15min = 15;
+            EmiNrNgInterface_30min = 30;
+            EmiNrNgInterface_60min = 60;
+            EmiNrNgInterface_360min = 360;
+            EmiNrNgInterface_720min = 720;
+            EmiNrNgInterface_1440min = 1440;
+        }
+        EMiNrNgInterface miNrNgInterface = 2;
+    }
+
+    enum ProductVariantPlanned
+    {
+        BTS_5gCloud = 0;
+        BTS_5gClassical = 1;
+    }
+
+    enum E1SetupTimeToWait
+    {
+        v_1s = 0;
+        v_2s = 1;
+        v_5s = 2;
+        v_10s = 3;
+        v_20s = 4;
+        v_60s = 5;
+    }
+
+    message InternalSctpProfile
+    {
+        uint32 iSctpHeartbeatInterval = 1;
+        uint32 iSctpMaxBurst = 2;
+        uint32 iSctpMaxPayloadSize = 3;
+        uint32 iSctpPathMaxRetrans = 4;
+        uint32 iSctpRtoInit = 5;
+        uint32 iSctpRtoMax = 6;
+        uint32 iSctpRtoMin = 7;
+        uint32 iSctpSackDelay = 8;
+        uint32 iSctpSackFreq = 9;
+        uint32 iSctpValidCookieLife = 10;
+        uint32 iSctpWaitTimeInitSeqRetry = 11;
+        bool iSctpChunkBundlingEnabled = 12;
+    }
+
+    message CellParams
+    {
+        uint64 nrCellIdentity = 1;
+        message PlmnSetNSA
+        {
+            message NrPlmnId
+            {
+                uint32 nrPlmnId = 1;
+            }
+            repeated NrPlmnId nrPlmnIdList = 1;
+        }
+        oneof optional_plmnSetNSA
+        {
+            PlmnSetNSA nrPlmnSet_nsa = 2;
+        }
+
+        message PlmnSetsSA
+        {
+            message PlmnSetSA
+            {
+                message NrPlmnId
+                {
+                    uint32 nrPlmnId = 1;
+                }
+                repeated NrPlmnId nrPlmnIdList = 1;
+                uint32 trackingAreaId = 2;
+            }
+            repeated PlmnSetSA nrPlmnSet_saList = 1;
+        }
+        PlmnSetsSA nrPlmnSets_sa = 3;
+        CellDepType cellDepType = 4;
+    }
+    message NrPLMN
+    {
+        uint32 nrPlmnId = 1;
+        bytes plmnIdentity = 2 [ (sensitive_param) = true ];
+    }
+
+    message X2PlmnIdentity
+    {
+        oneof optional_plmn
+        {
+            common_type.Plmn plmn = 1;
+        }
+    }
+
+    enum XnNgRanCfUpTimeToWait
+    {
+        xnNgRanCfUp1s = 0;
+        xnNgRanCfUp2s = 1;
+        xnNgRanCfUp5s = 2;
+        xnNgRanCfUp10s = 3;
+        xnNgRanCfUp20s = 4;
+        xnNgRanCfUp60s = 5;
+    }
+
+    enum XnSetupTimeToWait
+    {
+        xnSetup1s = 0;
+        xnSetup2s = 1;
+        xnSetup5s = 2;
+        xnSetup10s = 3;
+        xnSetup20s = 4;
+        xnSetup60s = 5;
+    }
+
+    uint32 transactionId = 1;
+    ProductVariantPlanned productVariantPlanned = 2;
+    uint32 nrBtsId = 3;
+    uint32 gnbIdLength = 4;
+    string gNbCuName = 5;
+    GnbCuType gnbCuType = 6;
+    repeated CellParams cellsParams = 7;
+    PagingDrx defaultPagingDrx = 8;
+    uint32 cellBarringRecoveryTimer = 9;
+    uint32 mcc = 10 [ (sensitive_param) = true ];
+    uint32 mnc = 11 [ (sensitive_param) = true ];
+    uint32 mncLength = 12 [ (sensitive_param) = true ];
+    repeated NrPLMN nrPLMNs = 13;
+    repeated lteenb lteenbs = 14;
+    repeated GnbAdjGnb gnbAdjGnb = 15;
+    repeated ServedAmf servedAmfs = 16;
+    repeated SctpProfile sctpProfileList = 17;
+    InternalSctpProfile internalSctpProfile = 18;
+    bool actIncXn = 19;
+    bool actRanSharing = 20;
+    bool actNgcFlexSaMode = 21;
+    bool actPaging = 22;
+    bool actTrsSepaSARanSharing = 23;
+    bool actTrsSepaNSARanSharing = 24;
+    bool actEnhancedX2LinkSupervision = 25;
+    bool actConflictConfiguration = 26;
+    // F1 Interface Part
+    oneof optional_f1SctpProfileIdOfCu
+    {
+        uint32 f1SctpProfileIdOfCu = 27;
+    }
+    uint32 f1MaxParallelIncSetup = 28;
+    uint32 f1NbResetRetryForFault = 29;
+    uint32 f1ResetRspTmr = 30;
+    oneof optional_f1SetupTimeToWait
+    {
+        F1SetupTimeToWait f1SetupTimeToWait = 31;
+    }
+    uint32 maxNumF1Links = 32;
+    // X2 Interface Part
+    oneof optional_x2SctpProfileId
+    {
+        uint32 x2SctpProfileId = 33;
+    }
+    uint32 shutdownNoX2TrafficTmr = 34;
+    uint32 enDcX2SetupReqTmr = 35;
+    uint32 maxNumX2Links = 36;
+    uint32 maxParallelIncX2Setup = 37;
+    uint32 x2LinkReestabTmr = 38;
+    uint32 x2LinkSupervisionTmr = 39;
+    uint32 x2ResetRspTmr = 40;
+    uint32 maxX2EnDcCfUpRetry = 41;
+    uint32 x2EnDcCfUpRdmDelayTmr = 42;
+    uint32 x2EnDcCfUpNbInfoBackOffTmr = 43;
+    uint32 x2EnDcCfUpRspTmr = 44;
+    uint32 maxX2PartialResetReqRetry = 45;
+    uint32 x2PartialResetCnfTmr = 46;
+    uint32 shutdownNoXnTrafficTmr = 47;
+    bool actX2ConfigTransfer = 48;
+    repeated X2PlmnIdentity x2PlmnIdentityList = 49;
+    // E1 Interface Part
+    oneof optional_e1SctpProfileIdOfCucp
+    {
+        uint32 e1SctpProfileIdOfCucp = 50;
+    }
+    oneof optional_e1SetupTimeToWait
+    {
+        E1SetupTimeToWait e1SetupTimeToWait = 51;
+    }
+    uint32 timerE1ResetGuard = 52;
+    uint32 e1NbResetRetryForFault = 53;
+    // NG Interface Part
+    oneof optional_ngSctpProfileId
+    {
+        uint32 ngSctpProfileId = 54;
+    }
+    uint32 ngSetupResponseTimer = 55;
+    uint32 ngUERetentionTmr = 56;
+    bool ngUERetentionEnabled = 57;
+    oneof optional_ngInducedCellDeactDelayTimer
+    {
+        uint32 ngInducedCellDeactDelayTimer = 58;
+    }
+    // Xn Interface Part
+    oneof optional_xnSctpProfileId
+    {
+        uint32 xnSctpProfileId = 59;
+    }
+    uint32 xnSetupReqTmr = 60;
+    uint32 xnSetupRespTmr = 61;
+    uint32 xnLinkReestabTmr = 62;
+    uint32 xnResetRespTmr = 63;
+    uint32 maxXnNgRanCfUpRetry = 64;
+    uint32 xnNgRanCfUpRdmDelayTmr = 65;
+    uint32 xnNgRanCfUpNbInfoBackOffTmr = 66;
+    uint32 xnNgRanCfUpRspTmr = 67;
+    uint32 maxNumXnLinks = 68;
+    uint32 maxParallelIncXnSetup = 69;
+    oneof optional_xnSetupTimeToWait
+    {
+        XnSetupTimeToWait xnSetupTimeToWait = 70;
+    }
+    oneof optional_xnNgRanCfUpTimeToWait
+    {
+        XnNgRanCfUpTimeToWait xnNgRanCfUpTimeToWait = 71;
+    }
+    repeated XnLink xnLink = 72;
+    uint32 maxNumXnSetupRetry = 73;
+    uint32 retryXnSetupTmr = 74;
+    repeated nrpmrnl nrpmrnls = 75;
+    uint32 shutdownNogNBCellTmr = 76;
+    repeated nidd.CpCellVmsToMap cpCellVmsToMapList = 77;
+    uint32 maxNumOfNgSetupRequestRetries = 78;
+    uint32 maxNumOfNgRanConfigUpdRetries = 79;
+    bool actAmfPlannedRemoval = 80;
+    bool actGeneralConnectivitySilver = 81;
+    bool actNsaUeBasedAnrNr = 82;
+    uint32 iGnbCaXnCfUpBackOffTmr = 83;
+    uint32 iGnbCaXnSetupReqTmr = 84;
+    uint32 iGnbCaXnSetupRespTmr = 85;
+    string nrBtsDistName = 86;
+}

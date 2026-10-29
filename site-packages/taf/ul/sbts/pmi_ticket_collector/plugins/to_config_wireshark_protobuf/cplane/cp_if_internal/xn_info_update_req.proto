@@ -1,0 +1,25 @@
+syntax = "proto3";
+import "common_types/global_amf_region_information.proto";
+package cp_if_internal_message;
+
+message AmfRegionInformationToAdd
+{
+    repeated common_type.GlobalAmfRegionInformation amfToAdd = 1;
+}
+
+message AmfRegionInformationToDelete
+{
+    repeated common_type.GlobalAmfRegionInformation amfToDelete = 2;
+}
+
+message XnInfoUpdateReq
+{
+    oneof optional_amfRegionInformationToAdd
+    {
+        AmfRegionInformationToAdd amfRegionInformationToAdd = 1;
+    }
+    oneof optional_amfRegionInformationToDelete
+    {
+        AmfRegionInformationToDelete amfRegionInformationToDelete = 2;
+    }
+}

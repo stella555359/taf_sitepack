@@ -1,0 +1,24 @@
+syntax = "proto3";
+import "common/location_and_bandwidth_dl.proto";
+import "common/location_and_bandwidth_ul.proto";
+import "common/bwp_type.proto";
+package common_messages;
+
+message BwpProfileItem
+{
+    uint32 bwpProfileId = 1;
+    BwpType bwpType = 2;
+    oneof optional_locationAndBandwidthDl
+    {
+        LocationAndBandwidthDl locationAndBandwidthDl = 3;
+    }
+    oneof optional_locationAndBandwidthUl
+    {
+        LocationAndBandwidthUl locationAndBandwidthUl = 4;
+    }
+}
+
+message BwpProfileList
+{
+    repeated BwpProfileItem bwpProfileItem = 1;
+}

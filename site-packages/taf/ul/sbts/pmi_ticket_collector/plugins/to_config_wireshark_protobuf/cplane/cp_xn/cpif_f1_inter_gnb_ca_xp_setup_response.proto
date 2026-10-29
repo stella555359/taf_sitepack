@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "common/neid.proto";
+package cpif_xn_interface;
+
+enum XpConnectionStatus
+{
+    unavailable = 0;
+    available = 1;
+}
+
+message CpIfF1IgNBCAXpSetupResponse
+{
+    common_messages.NEID neid = 1;
+    XpConnectionStatus xpConnectionStatus = 2;
+    uint32 protocolVersion = 3;
+}

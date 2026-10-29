@@ -1,0 +1,8 @@
+syntax = "proto3";
+package cp_nb_message;
+
+message FsHlAp_nb_envelope
+{
+    uint32 msgId = 1;
+    bytes FsHlAp_message = 2;
+}

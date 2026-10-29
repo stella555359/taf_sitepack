@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+import "options/protobuf_options.proto";
+import "common_types/GnbCuType.proto";
+
+package cp_e2_interface;
+
+enum ProductVariantPlanned
+{
+    BTS_5gCloud = 0;
+    BTS_5gClassical = 1;
+}
+
+enum AdministrativeState
+{
+    Locked = 0;
+    Unlocked = 2;
+}
+
+message NearRtRICAddress
+{
+    string nearRTRICIPAddress = 1 [ (ipaddress_param) = true ];
+    uint32 nearRTRICIPPort = 2 [ (sensitive_param) = true ];
+}
+
+message CpE2NiddDeliveryRequest
+{
+    message SctpProfile
+    {
+        uint32 sctpProfileId = 1;
+        uint32 sctpHeartbeatInterval = 2;
+        uint32 sctpMaxBurst = 3;
+        uint32 sctpMaxPayloadSize = 4;
+        uint32 sctpPathMaxRetrans = 5;
+        uint32 sctpRtoInit = 6;
+        uint32 sctpRtoMax = 7;
+        uint32 sctpRtoMin = 8;
+        uint32 sctpSackDelay = 9;
+        uint32 sctpSackFreq = 10;
+        uint32 sctpValidCookieLife = 11;
+        uint32 sctpWaitTimeInitSeqRetry = 12;
+        bool sctpChunkBundlingEnabled = 13;
+        uint32 sctpRandomTimeInitSeqRetry = 14;
+    }
+
+    uint32 transactionId = 1;
+    ProductVariantPlanned productVariantPlanned = 2;
+    uint32 nrBtsId = 3;
+    uint32 gNbIdLength = 4;
+    oneof optional_gNbCuName
+    {
+        string gNbCuName = 5;
+    }
+    GnbCuType gNbCuType = 6;
+    repeated SctpProfile sctpProfileList = 7;
+    uint32 e2SetupRspTmr = 8;
+    oneof optional_e2SctpProfileId
+    {
+        uint32 e2SctpProfileId = 9;
+    }
+    AdministrativeState administrativeState = 10;
+    bool actE2Interface = 11;
+    bool actGeneralConnectivityBronze = 12;
+    NearRtRICAddress nearRtRICAddress = 13;
+    uint32 mcc = 14 [ (sensitive_param) = true ];
+    uint32 mnc = 15 [ (sensitive_param) = true ];
+    uint32 mncLength = 16 [ (sensitive_param) = true ];
+}

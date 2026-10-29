@@ -1,0 +1,21 @@
+syntax = "proto3";
+package common_type;
+
+enum PreemptionCapability
+{
+    shallNotTriggerPreemption = 0;
+    mayTriggerPreemption = 1;
+}
+
+enum PreemptionVulnerability
+{
+    notPreemptable = 0;
+    preemptable = 1;
+}
+
+message AllocationAndRetentionPriority
+{
+    uint32 priorityLevel = 1;
+    PreemptionCapability preemptionCapability = 2;
+    PreemptionVulnerability preemptionVulnerability = 3;
+}

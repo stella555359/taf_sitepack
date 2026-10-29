@@ -1,0 +1,147 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/global_enb_id.proto";
+
+package pmi_request;
+
+message PmiOccurence
+{
+    uint32 pmCounterId = 1;
+    fixed64 timestamp = 2;
+}
+
+message EventOccurence
+{
+    message EventResult
+    {
+        uint32 primaryResult = 1;
+        uint32 secondaryResult = 2;
+    }
+
+    message CuUeRelease
+    {
+        uint32 trigger = 1;
+    }
+
+    message GnbInitiatedSgNbModification
+    {
+        EventResult eventResult = 1;
+        uint32 trigger = 2;
+    }
+
+    message MeNbInitiatedSgNbModification
+    {
+        EventResult eventResult = 1;
+        uint32 trigger = 2;
+    }
+
+    message SgNbAddition
+    {
+        EventResult eventResult = 1;
+        uint32 trigger = 2;
+    }
+
+    message SgNbChange
+    {
+        EventResult eventResult = 1;
+    }
+
+    message SgNbRelease
+    {
+        uint32 trigger = 1;
+    }
+
+    message SourceHo
+    {
+        EventResult eventResult = 1;
+        uint64 targetCellId = 2;
+        uint32 trigger = 3;
+    }
+
+    message TargetHo
+    {
+        EventResult eventResult = 1;
+        uint64 sourceCellId = 2;
+    }
+
+    message UeDuConnectivity
+    {
+        EventResult eventResult = 1;
+    }
+
+    message PduSessionInformation
+    {
+        EventResult eventResult = 1;
+        uint32 trigger = 2;
+    }
+
+    message UeSetup
+    {
+        EventResult eventResult = 1;
+        uint32 trigger = 2;
+    }
+
+    message Bearer
+    {
+        EventResult eventResult = 1;
+    }
+
+    message MeNbConnectivity
+    {
+        EventResult eventResult = 1;
+        common_messages.GlobalEnbId globalEnbId = 2;
+    }
+
+    message IntraGnbSourceHo
+    {
+        EventResult eventResult = 1;
+        uint64 targetCellId = 2;
+        uint32 trigger = 3;
+    };
+
+    message IntraGnbTargetHo
+    {
+        EventResult eventResult = 1;
+        uint64 sourceCellId = 2;
+    };
+
+    oneof message
+    {
+        CuUeRelease cuUeRelease = 1;
+        GnbInitiatedSgNbModification gnbInitiatedSgNbModification = 2;
+        MeNbInitiatedSgNbModification meNbInitiatedSgNbModification = 3;
+        SgNbAddition sgNbAddition = 4;
+        SgNbChange sgNbChange = 5;
+        SgNbRelease sgNbRelease = 6;
+        SourceHo sourceHo = 7;
+        TargetHo targetHo = 8;
+        UeDuConnectivity ueDuConnectivity = 9;
+        PduSessionInformation pduSessionInformation = 10;
+        UeSetup ueSetup = 11;
+        Bearer bearer = 12;
+        MeNbConnectivity meNbConnectivity = 13;
+        IntraGnbSourceHo intraGnbSourceHo = 14;
+        IntraGnbTargetHo intraGnbTargetHo = 15;
+    }
+}
+
+message TimeoutOccurence
+{
+    string timerDescription = 1;
+    fixed64 timeoutTime = 2; // milliseconds
+    uint32 timerDurationMs = 3;
+    bool isFailure = 4;
+};
+
+message CpUePmiTicket
+{
+    option (port_numbers) = 30512;
+    uint32 transactionId = 1;
+    uint32 cuUeId = 2 [ (cucpueid_param) = true ];
+    repeated PmiOccurence pmiOccurences = 3;
+    repeated EventOccurence eventOccurences = 4;
+    repeated TimeoutOccurence timeoutOccurences = 8;
+    bool bufferFullEvent = 5;
+    uint64 nrCellId = 6;
+    bool procedureDone = 7;
+}

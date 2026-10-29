@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+enum QOffsetRange
+{
+    dBN24 = 0;
+    dBN22 = 1;
+    dBN20 = 2;
+    dBN18 = 3;
+    dBN16 = 4;
+    dBN14 = 5;
+    dBN12 = 6;
+    dBN10 = 7;
+    dBN8 = 8;
+    dBN6 = 9;
+    dBN5 = 10;
+    dBN4 = 11;
+    dBN3 = 12;
+    dBN2 = 13;
+    dBN1 = 14;
+    dB0 = 15;
+    dB1 = 16;
+    dB2 = 17;
+    dB3 = 18;
+    dB4 = 19;
+    dB5 = 20;
+    dB6 = 21;
+    dB8 = 22;
+    dB10 = 23;
+    dB12 = 24;
+    dB14 = 25;
+    dB16 = 26;
+    dB18 = 27;
+    dB20 = 28;
+    dB22 = 29;
+    dB24 = 30;
+}

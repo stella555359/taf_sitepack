@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "cp_nb/cp_nb_barring_status.proto";
+package cp_nb_message;
+
+message CpNbCellInfoUpdateInd
+{
+    message CellItem
+    {
+        uint64 nrCellIdentity = 1;
+        BarringStatus barringStatus = 2;
+    }
+    uint32 transactionId = 1;
+    repeated CellItem cellToBarredList = 2;
+}

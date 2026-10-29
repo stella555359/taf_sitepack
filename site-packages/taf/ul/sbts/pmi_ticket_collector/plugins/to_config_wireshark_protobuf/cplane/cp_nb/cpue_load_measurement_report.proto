@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package cp_nb_message;
+
+message CpUeLoadMeasReport
+{
+    uint32 poolId = 1;
+    uint32 cpuLoad = 2;
+    oneof optional_drbCount
+    {
+        uint32 drbCount = 3;
+    }
+    oneof optional_srbCount
+    {
+        uint32 srbCount = 4;
+    }
+}

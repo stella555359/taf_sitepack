@@ -1,0 +1,55 @@
+syntax = "proto3";
+import "common_types/global_enb_id.proto";
+import "common_types/global_gnb_id.proto";
+import "options/protobuf_options.proto";
+
+package cp_e1ap_interface;
+
+message SendToCuUp
+{
+    oneof optional_UE_ID
+    {
+        uint32 UE_ID = 1 [ (cucpueid_param) = true ];
+    }
+    bytes encodedL3Message = 2;
+    oneof optional_nodeAddress
+    {
+        string nodeAddress = 3;
+    }
+    oneof optional_meNBUeX2ApId
+    {
+        uint32 meNBUeX2ApId = 4;
+    }
+    oneof optional_meNBUeX2ApIdExtension
+    {
+        uint32 meNBUeX2ApIdExtension = 5;
+    }
+    oneof optional_globalEnbId
+    {
+        common_messages.GlobalEnbId globalEnbId = 6;
+    }
+    oneof optional_adjGnbUeXnApId
+    {
+        uint32 adjGnbUeXnApId = 7;
+    }
+    oneof optional_adjGlobalGnbId
+    {
+        common_messages.GlobalGnbId globalGnbId = 8;
+    }
+    oneof optional_cpCellNodeAddress
+    {
+        string cpCellNodeAddress = 9;
+    }
+    oneof optional_procedureCode
+    {
+        uint32 procedureCode = 10;
+    }
+    oneof optional_amfUeNgapId
+    {
+        uint64 amfUeNgapId = 11;
+    }
+    oneof optional_servedAmfId
+    {
+        uint32 servedAmfId = 12;
+    }
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "cp_nb/cp_nb_status.proto";
+
+package cp_nb_message;
+
+message CpUeLoadMeasSetupResp
+{
+    uint32 poolId = 1;
+    Status status = 2;
+}

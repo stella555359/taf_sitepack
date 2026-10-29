@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "common_types/common_status.proto";
+import "options/protobuf_options.proto";
+
+package cp_ue_request;
+message BearerSetupResp
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    message MessageResult
+    {
+        Status status = 1;
+        uint32 cause = 2;
+    }
+    MessageResult messageResult = 2;
+    uint32 srbid = 3;
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "common_types/e2_link_operation.proto";
+
+package cp_e2_interface;
+
+message CpIfCellStatusInfoResp
+{
+    uint32 transactionId = 1;
+    common_type.E2LinkOperation e2LinkOperation = 2;
+}

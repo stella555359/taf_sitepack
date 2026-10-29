@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "cp_nb/cpnb_overload_level.proto";
+
+package cp_nb_message;
+
+message CpNbOverloadStatusInd
+{
+    uint32 cpUeAppId = 2;
+    OverloadLevel level = 3;
+}

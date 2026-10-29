@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "common_types/common_status.proto";
+package cell_request;
+
+message CpIfEndcUpdateResponse
+{
+    uint32 transactionId = 1;
+    uint64 gnbDuId = 2;
+
+    message NrCellStatus
+    {
+        uint64 nrCellIdentity = 1;
+        Status status = 2;
+        bool isX2LinkAvailable = 3;
+    }
+    repeated NrCellStatus nrCellsInDu = 3;
+}

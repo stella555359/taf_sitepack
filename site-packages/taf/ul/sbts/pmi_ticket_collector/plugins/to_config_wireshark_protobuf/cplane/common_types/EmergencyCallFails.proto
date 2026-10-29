@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+enum EmergencyCallFails
+{
+    ecf_disabled = 0;
+    ecf_redirection = 1;
+}

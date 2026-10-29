@@ -1,0 +1,19 @@
+syntax = "proto3";
+import "common_types/MeasEnabled.proto";
+import "common_types/RsrpEventReportConfigMeasParams.proto";
+import "common_types/RsrqEventReportConfigMeasParams.proto";
+
+package common_type;
+
+message A4BasedSCellAddParams
+{
+    MeasEnabled measEnabled = 1;
+    oneof optional_rsrpReportConfigParams
+    {
+        RsrpEventReportConfigMeasParams rsrpReportConfigParams = 2;
+    }
+    oneof optional_rsrqReportConfigParams
+    {
+        RsrqEventReportConfigMeasParams rsrqReportConfigParams = 3;
+    }
+}

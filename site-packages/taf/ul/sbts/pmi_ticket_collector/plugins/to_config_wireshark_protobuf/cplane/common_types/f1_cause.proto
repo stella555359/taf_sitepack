@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package cp_f1ap_interface;
+
+enum F1Cause
+{
+    causeTransportUnspecified = 0;
+    causeTransportTransportResourceUnavailable = 1;
+    causeRadioNetworkUnspecified = 2;
+    causeRadioNetworkRlcFailure = 3;
+    causeRadioNetworkUnknownOrAlreadyAllocatedGnbCuUeF1apid = 4;
+    causeRadioNetworkUnknownOrAlreadyAllocatedGndDuUeF1apid = 5;
+    causeRadioNetworkUnknownOrInconsistentPairOfUeF1apid = 6;
+    causeRadioNetworkInteractionWithOtherProcedure = 7;
+    causeRadioNetworkNotSupportedQciValue = 8;
+    causeRadioNetworkActionDesirableForRadioReasons = 9;
+    causeRadioNetworkNoRadioResourcesAvailable = 10;
+    causeRadioNetworkProcedureCancelled = 11;
+    causeRadioNetworkNormalRelease = 12;
+    causeRadioNetworkCellNotAvailable = 13;
+    causeRadioNetworkRlFailureOthers = 14;
+    causeRadioNetworkUeRejection = 15;
+    causeRadioNetworkResourcesNotAvailableForTheSlice = 16;
+    causeRadioNetworkAmfInitiatedAbnormalRelease = 17;
+    causeRadioNetworkReleaseDueToPreEmption = 18;
+    causeRadioNetworkMultipleDrbInstances = 19;
+    causeRadioNetworkUnknownDrbId = 20;
+    causeRadioNetworkInsufficientUeCapabilities = 21;
+    causeMiscControlProcessingOverload = 22;
+    causeMiscNotEnoughUserPlaneProcessingResources = 23;
+    causeMiscHardwareFailure = 24;
+    causeMiscOmIntervention = 25;
+    causeMiscUnspecified = 26;
+    causeProtocolTransferSyntaxError = 27;
+    causeProtocolAbstractSyntaxErrorReject = 28;
+    causeProtocolAbstractSyntaxErrorIgnoreAndNotify = 29;
+    causeProtocolMessageNotCompatibleWithReceiverState = 30;
+    causeProtocolSemanticError = 31;
+    causeProtocolAbstractSyntaxErrorFalselyConstructedMessage = 32;
+    causeProtocolUnspecified = 33;
+}

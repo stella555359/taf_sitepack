@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions
+{
+    bool sensitive_param = 50000;
+    bool ipaddress_param = 50001;
+    bool cucpueid_param = 50002;
+    bool cucpueid_list_param = 50003;
+    bool ue_id_special_case_param = 50004;
+}
+
+extend google.protobuf.MessageOptions
+{
+    repeated uint32 port_numbers = 50000;
+}

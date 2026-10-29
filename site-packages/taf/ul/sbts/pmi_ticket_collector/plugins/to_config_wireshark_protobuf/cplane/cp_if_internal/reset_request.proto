@@ -1,0 +1,28 @@
+syntax = "proto3";
+package cp_if_internal_message;
+import "options/protobuf_options.proto";
+
+enum ResetCause
+{
+    unspecified = 0;
+    poolFailure = 1;
+    omIntervention = 2;
+}
+
+enum TriggerAP
+{
+    Normal = 0;
+    F1AP = 1;
+    E1AP = 2;
+    X2AP = 3;
+    NGAP_gnbInitiated = 4;
+    NGAP_amfInitiated = 5;
+}
+
+message ResetRequest
+{
+    repeated uint32 cuUeIds = 1 [ (cucpueid_list_param) = true ];
+    uint32 transactionId = 2;
+    ResetCause resetCause = 3;
+    TriggerAP triggerAP = 4;
+}

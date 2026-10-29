@@ -1,0 +1,13 @@
+syntax = "proto3";
+package control_command;
+
+enum LoggingSeverity
+{
+    trace = 0;
+    debug = 1;
+    info = 2;
+    warning = 3;
+    error = 4;
+    critical = 5;
+    off = 6;
+}

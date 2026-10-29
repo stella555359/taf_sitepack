@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+enum VoiceFBMode
+{
+    disabled = 0;
+    redirection = 1;
+}

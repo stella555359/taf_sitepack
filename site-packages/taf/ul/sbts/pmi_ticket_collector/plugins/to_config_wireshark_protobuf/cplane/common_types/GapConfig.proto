@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+enum Mgl
+{
+    ms1dot5 = 0;
+    ms3 = 1;
+    ms3dot5 = 2;
+    ms4 = 3;
+    ms5dot5 = 4;
+    ms6 = 5;
+}
+
+enum Mgrp
+{
+    mgrpms20 = 0;
+    mgrpms40 = 1;
+    mgrpms80 = 2;
+    mgrpms160 = 3;
+}
+
+enum Mgta
+{
+    mgtams0 = 0;
+    ms0dot25 = 1;
+    ms0dot5 = 2;
+};

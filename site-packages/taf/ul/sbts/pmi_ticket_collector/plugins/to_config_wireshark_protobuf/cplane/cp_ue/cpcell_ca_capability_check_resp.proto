@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/ueCaCapabilityCheck_result.proto";
+
+package cp_ue_request;
+
+message CpCellCaCapabilityCheckResp
+{
+    uint32 transactionId = 1;
+
+    uint32 cuUeId = 2 [ (cucpueid_param) = true ];
+
+    common_type.UeCaCapabilityCheckResult ueCaCapabilityCheckResult = 3;
+}

@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+import "cp_ng/cpif_send_to_core.proto";
+import "cp_if/ng_ran_update_req.proto";
+import "cp_if_internal/reset_request.proto";
+import "cp_if_internal/reset_response.proto";
+import "cp_if/cpif_ng_partial_reset_request.proto";
+import "cp_if/cpif_nidd_delivery_request.proto";
+import "cp_if/cpif_trsw_configuration_request.proto";
+import "cp_if/cpif_data_distribution_request.proto";
+import "cp_if/cpif_cell_config_update_request.proto";
+import "cp_if/cpif_pool_failure_ind.proto";
+import "cp_if/cpif_resource_release_req.proto";
+import "common/e1_status_indication.proto";
+import "common/f1_setup_ind.proto";
+import "common/f1_link_failure.proto";
+import "sctp/sctp_messages.proto";
+import "sctp_reply/sctp_reply_message.proto";
+import "cp_if_internal/amf_configuration_req.proto";
+import "options/protobuf_options.proto";
+import "cp_cell/cpcell_nglink_status_update_ack.proto";
+import "cp_nb/cpnb_nglink_info_update_ack.proto";
+import "cp_cell/cpcell_cell_supported_ta_list_ack.proto";
+import "cp_if/cpif_trsw_configuration_update_request.proto";
+
+package ng_request;
+
+message NgRequest
+{
+    option (port_numbers) = 30543;
+    oneof request
+    {
+        CpIfSendToCore cpIfSendToCore = 1;
+        cp_if_interface.CpIfNgRanUpdateReq cpIfNgRanUpdateReq = 2;
+        cp_if_internal_message.ResetRequest resetRequest = 3;
+        cp_if_internal_message.ResetResponse resetResponse = 4;
+        cp_if_interface.CpIfNiddDeliveryRequest cpIfNiddDeliveryRequest = 5;
+        cp_if_interface.CpIfTransportSoftwareConfigurationRequest cpIfTrswConfigurationRequest = 6;
+        cp_if_interface.CpIfDataDistributionRequest cpIfDataDistributionRequest = 8;
+        cp_if_interface.CpIfNgPartialResetRequest cpIfNgPartialResetRequest = 9;
+        cp_if_interface.CpIfCellConfigUpdateReq cpIfCellConfigUpdateReq = 10;
+        cp_if_interface.CpIfPoolFailureInd cpIfPoolFailureInd = 11;
+        common_messages.E1StatusIndication e1StatusIndication = 12;
+        common_messages.F1SetupInd f1SetupInd = 13;
+        common_messages.F1LinkFailure f1LinkFailure = 14;
+        sctp_reply.SCTPReply sctpReply = 15;
+        sctp.NgApUeIdMappingTableUpdate ngApUeIdMappingTableUpdate = 16;
+        cp_if_interface.CpIfResourceReleaseReq cpIfResourceReleaseReq = 17;
+        cp_if_internal_message.AmfConfigurationReq amfConfigurationReq = 18;
+        cell_request.CpCellNgLinkStatusUpdateAck cpCellNgLinkStatusUpdateAck = 19;
+        cp_nb_message.CpNbNGLinkInfoUpdateAck cpNbNgLinkInfoUpdateAck = 20;
+        cell_request.CpCellCellSupportedTAListAck cpCellCellSupportedTaListAck = 21;
+        cp_if_interface.CpIfTransportSoftwareConfigurationUpdateRequest cpIfTrswConfigurationUpdateRequest = 22;
+    }
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package cp_if_internal_message;
+
+message UeMapping
+{
+    uint32 gNBCuUeId = 1;
+    uint32 gNBUpUeId = 2;
+}
+
+message CpIfInternalGetUpUeIdResp
+{
+    repeated UeMapping ueMapping = 1;
+}

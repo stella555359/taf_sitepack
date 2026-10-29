@@ -1,0 +1,7 @@
+syntax = "proto3";
+package control_command;
+
+message SetOverloadHighThreshold
+{
+    uint32 overload_high_threshold = 1;
+}

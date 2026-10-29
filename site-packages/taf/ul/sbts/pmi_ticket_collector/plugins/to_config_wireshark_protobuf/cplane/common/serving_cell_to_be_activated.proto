@@ -1,0 +1,29 @@
+syntax = "proto3";
+import "common_types/ca_config_cu.proto";
+import "common/nrcgi.proto";
+
+package common_messages;
+
+message ServingCellToBeActivated
+{
+    NRCGI sCellId = 1;
+    CaConfigCu caConfigCu = 2;
+    message NgArfcn
+    {
+        uint32 ngArfcn = 1;
+    }
+    message Fdd
+    {
+        NgArfcn ulFrequency = 1;
+        NgArfcn dlFrequency = 2;
+    }
+    message Tdd
+    {
+        NgArfcn frequency = 1;
+    }
+    oneof NrFrequencyInfo
+    {
+        Fdd fdd = 3;
+        Tdd tdd = 4;
+    }
+}

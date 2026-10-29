@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package cpif_xn_interface;
+
+message CpNbXnLinkInfoUpdateConfirm
+{
+    uint32 transactionId = 1;
+    enum Status
+    {
+        ok = 0;
+        notOk = 1;
+    }
+    Status status = 2;
+}

@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package cp_x2ap_interface;
+
+message CpIfX2ServedCellInformationRequest
+{
+    uint32 transactionId = 1;
+}

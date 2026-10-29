@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+import "common_types/sCellCandidates_type.proto";
+
+package common_type;
+
+message UeCaCapabilityCheckResult
+{
+    bool status = 1;
+    oneof optional_sCellCandidatesType
+    {
+        SCellCandidatesType sCellCandidatesType = 2;
+    }
+}

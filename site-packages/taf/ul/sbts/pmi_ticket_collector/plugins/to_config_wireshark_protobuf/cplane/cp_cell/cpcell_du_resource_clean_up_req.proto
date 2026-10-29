@@ -1,0 +1,8 @@
+syntax = "proto3";
+package cell_request;
+
+message CpCellDuResourceCleanUpReq
+{
+    uint32 transactionId = 1;
+    uint64 gnbDuId = 2;
+}

@@ -1,0 +1,103 @@
+syntax = "proto3";
+
+import "common_types/MeasEnabled.proto";
+import "common_types/EmergencyFBMode.proto";
+import "common_types/EmergencyCallFails.proto";
+import "common_types/IdleMMSteeringAlgo.proto";
+import "common_types/VoiceFBMode.proto";
+
+package common_type;
+
+message NrMoImpSa
+{
+    uint32 nrMoImpSaId = 1;
+    message DlCarFreqEutraListItem
+    {
+        oneof optional_dlCarFreqEutra
+        {
+            uint32 dlCarFreqEutra = 1;
+        }
+        oneof optional_idleMMEutraCelResWeight
+        {
+            uint32 idleMMEutraCelResWeight = 2;
+        }
+        oneof optional_idleMMEutraCelResWeightEnDc
+        {
+            uint32 idleMMEutraCelResWeightEnDc = 3;
+        }
+    }
+    repeated DlCarFreqEutraListItem dlCarFreqEutraList = 2;
+    message DlCarFreqNrListItem
+    {
+        oneof optional_dlCarFreqNr
+        {
+            uint32 dlCarFreqNr = 1;
+        }
+        oneof optional_idleMMNrCelResWeight
+        {
+            uint32 idleMMNrCelResWeight = 2;
+        }
+    }
+    repeated DlCarFreqNrListItem dlCarFreqNrList = 3;
+    IdleMMSteeringAlgo idleMMSteeringAlgo = 4;
+    uint32 idleMMSteeringPercentageOfUes = 5;
+    bool idleMMSteeringWRREnabled = 6;
+    uint32 idleMMEnDcSteeringPercentageOfUes = 7;
+    bool idleMMEnDcSteeringWRREnabled = 8;
+    oneof optional_idleMMEnDcSteeringSsbFrequency
+    {
+        uint32 idleMMEnDcSteeringSsbFrequency = 9;
+    }
+}
+
+message NrMoPrSaItem
+{
+    oneof optional_a2MeasRedirectEnabled
+    {
+        MeasEnabled a2MeasRedirectEnabled = 1;
+    }
+    message NrMoRedDNList
+    {
+        repeated string nrMoRedDNListItem = 2;
+    }
+    oneof optional_nrMoRedDNList
+    {
+        NrMoRedDNList nrMoRedDNList = 3;
+    }
+    oneof optional_emergencyCallFails
+    {
+        EmergencyCallFails emergencyCallFails = 5;
+    }
+    oneof optional_emergencyFBMode
+    {
+        EmergencyFBMode emergencyFBMode = 6;
+    }
+    oneof optional_voiceFBMode
+    {
+        VoiceFBMode voiceFBMode = 7;
+    }
+
+    oneof optional_a1MeashoEnabledSA
+    {
+        MeasEnabled a1MeashoEnabledSA = 8;
+    }
+
+    oneof optional_a2MeashoEnabledSA
+    {
+        MeasEnabled a2MeashoEnabledSA = 9;
+    }
+
+    repeated string nrMeasCfgIfDNList = 10;
+    repeated string nrMeasCfgIrDNList = 11;
+
+    oneof optional_nrMoImpSa
+    {
+        NrMoImpSa nrMoImpSa = 12;
+    }
+}
+
+message NrMoPrSa
+{
+    uint32 nrMoPrSaId = 1;
+    common_type.NrMoPrSaItem nrMoPrSaItem = 2;
+}

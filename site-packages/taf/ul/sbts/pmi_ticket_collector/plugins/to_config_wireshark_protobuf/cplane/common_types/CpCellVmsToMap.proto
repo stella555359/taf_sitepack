@@ -1,0 +1,31 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/ActInterGnbCa.proto";
+
+package nidd;
+
+message CpCellVmsToMap
+{
+    message CpCellVm
+    {
+        string cpCellIpAddress = 1 [ (ipaddress_param) = true ];
+
+        message GnbDusToMap
+        {
+            uint64 gnbDuId = 1;
+            uint64 nrDuId = 2;
+
+            message NrCellInDu
+            {
+                uint64 nrCgi = 1;
+                uint32 phyCellId = 2;
+                uint32 nrarfcn = 3;
+                uint32 eNodebId = 4;
+            }
+            repeated NrCellInDu nrCellInDuList = 3;
+            common_type.ActInterGnbCa actInterGnbCa = 4;
+        }
+        repeated GnbDusToMap gnbDusToMapList = 2;
+    }
+    repeated CpCellVm cpCellVmList = 1;
+}

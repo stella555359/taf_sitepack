@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+enum CauseRadioNetwork
+{
+    causeRadioNetworkUnspecified = 0;
+    causeRadioNetworkTxnrelocoverallExpiry = 1;
+    causeRadioNetworkSuccessfulHandover = 2;
+    causeRadioNetworkReleaseDueToNgRanGeneratedReason = 3;
+    causeRadioNetworkReleaseDueTo5gcGeneratedReason = 4;
+    causeRadioNetworkHandoverCancelled = 5;
+    causeRadioNetworkPartialHandover = 6;
+    causeRadioNetworkHandoverFailureInTargetNodeOrTargetSystem = 7;
+    causeRadioNetworkHandoverTargetNotAllowed = 8;
+    causeRadioNetworkTngrelocoverallExpiry = 9;
+    causeRadioNetworkTngrelocprepExpiry = 10;
+    causeRadioNetworkCellNotAvailable = 11;
+    causeRadioNetworkUnknownTargetId = 12;
+    causeRadioNetworkNoRadioResourcesAvailableInTargetCell = 13;
+    causeRadioNetworkUnknownAmfUeNgapId = 14;
+    causeRadioNetworkUnknownRanUeNgapId = 15;
+    causeRadioNetworkUnknownPairUeNgapId = 16;
+    causeRadioNetworkHandoverDesirableForRadioReasons = 17;
+    causeRadioNetworkTimeCriticalHandover = 18;
+    causeRadioNetworkResourceOptimisationHandover = 19;
+    causeRadioNetworkReduceLoadInServingCell = 20;
+    causeRadioNetworkUserInactivity = 21;
+    causeRadioNetworkRadioConnectionWithUeLost = 22;
+    causeRadioNetworkRadioResourcesNotAvailable = 23;
+    causeRadioNetworkInvalidQosCombination = 24;
+    causeRadioNetworkFailureInTheRadioInterfaceProcedure = 25;
+    causeRadioNetworkInteractionWithOtherProcedure = 26;
+    causeRadioNetworkUnknownPduSessionId = 27;
+    causeRadioNetworkUnknownQosFlowId = 28;
+    causeRadioNetworkMultiplePduSessionIdInstances = 29;
+    causeRadioNetworkMultipleQosFlowIdInstances = 30;
+    causeRadioNetworkEncryptionAndOrIntegrityProtectionAlgorithmsNotSupported = 31;
+    causeRadioNetworkNgIntraSystemHandoverTriggered = 32;
+    causeRadioNetworkNgInterSystemHandoverTriggered = 33;
+    causeRadioNetworkXnHandoverTriggered = 34;
+    causeRadioNetworkNotSupported5qiValue = 35;
+    causeRadioNetworkUeContextTransfer = 36;
+    causeRadioNetworkImsVoiceEpsFallbackOrRatFallbackTriggered = 37;
+    causeRadioNetworkUpIntegrityProtectionNotPossible = 38;
+    causeRadioNetworkSliceNotSupported = 39;
+    causeRadioNetworkUpConfidentialityProtectionNotPossible = 40;
+    causeRadioNetworkUeInRrcInactiveStateNotReachable = 41;
+    causeRadioNetworkRedirection = 42;
+    causeRadioNetworkResourcesNotAvailableForTheSlice = 43;
+    causeRadioNetworkUeMaxIntegrityProtectedDataRateReason = 44;
+    causeRadioNetworkReleaseDueToCnDetectedMobility = 45;
+    causeRadioNetworkInsufficientUeCapabilities = 46;
+}
+
+enum CauseTransport
+{
+    causeTransportTransportResourceUnavailable = 0;
+    causeTransportUnspecified = 1;
+}
+
+enum CauseNas
+{
+    causeNasNormalRelease = 0;
+    causeNasAuthenticationFailure = 1;
+    causeNasDeregister = 2;
+    causeNasUnspecified = 3;
+}
+
+enum CauseProtocol
+{
+    causeProtocolTransferSyntaxError = 0;
+    causeProtocolAbstractSyntaxErrorReject = 1;
+    causeProtocolAbstractSyntaxErrorIgnoreAndNotify = 2;
+    causeProtocolMessageNotCompatibleWithReceiverState = 3;
+    causeProtocolSemanticError = 4;
+    causeProtocolAbstractSyntaxErrorFalselyConstructedMessage = 5;
+    causeProtocolUnspecified = 6;
+}
+
+enum CauseMiscellaneous
+{
+    causeMiscellaneousControlProcessingOverload = 0;
+    causeMiscellaneousNotEnoughUserPlaneProcessingResources = 1;
+    causeMiscellaneousHardwareFailure = 2;
+    causeMiscellaneousOmIntervention = 3;
+    causeMiscellaneousUnknownPlmnOrSnpn = 4;
+    causeMiscellaneousUnspecified = 5;
+}

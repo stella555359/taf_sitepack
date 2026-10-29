@@ -1,0 +1,7 @@
+syntax = "proto3";
+package cp_e2_interface;
+
+message CpNbE2LinkInfoUpdateAck
+{
+    uint32 transactionId = 1;
+}

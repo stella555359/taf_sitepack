@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+enum ScellAdditionMethod
+{
+    blind = 0;
+    covBasedA1 = 1;
+    covBasedA4 = 2;
+}

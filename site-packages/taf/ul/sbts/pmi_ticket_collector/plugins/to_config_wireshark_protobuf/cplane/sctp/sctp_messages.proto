@@ -1,0 +1,353 @@
+syntax = "proto3";
+
+import "common_types/SCTPConfiguration.proto";
+import "common_types/global_enb_id.proto";
+import "common_types/global_gnb_id.proto";
+import "options/protobuf_options.proto";
+
+package sctp;
+
+enum LinkStatus
+{
+    unavailable = 0;
+    available = 1;
+    conflicting = 2;
+}
+
+enum Status
+{
+    notok = 0;
+    ok = 1;
+}
+
+message ConnectionRequest
+{
+    enum Mode
+    {
+        noMode = 0;
+        server = 1;
+        client = 2;
+        serverClient = 3;
+    }
+    message restoredIpPortAssId
+    {
+        string remoteIp = 1 [ (ipaddress_param) = true ];
+        uint32 remotePort = 2;
+        int32 associationId = 3;
+        string localIp = 4 [ (ipaddress_param) = true ];
+        uint32 localPort = 5;
+    }
+    string remoteIp = 1 [ (ipaddress_param) = true ];
+    uint32 port = 2;
+    repeated string localIp = 3 [ (ipaddress_param) = true ];
+
+    Configuration configuration = 4;
+    uint32 ppid = 5;
+    RndParameter rndParameter = 6;
+    Mode mode = 7;
+    bool isHaRecovery = 8;
+    repeated restoredIpPortAssId restoredAssociations = 9;
+    uint32 nrBtsId = 10;
+}
+
+message ModifyConfigurationRequest
+{
+    Configuration configuration = 1;
+    uint32 mask = 2;
+    uint32 supportedMaximumSctpAssociation = 3;
+}
+
+message SendPayloadRequest
+{
+    uint32 streamId = 1;
+    bytes payload = 2;
+    int32 associationId = 3;
+}
+
+message DisconnectionRequest
+{
+}
+
+message DisconnectAssociationRequest
+{
+    int32 associationId = 1;
+    string ipaddress = 3 [ (ipaddress_param) = true ];
+}
+
+message ShutdownSctpRequest
+{
+    message ShutdownSctpInfo
+    {
+        oneof optional_associationId
+        {
+            int32 associationId = 1;
+        }
+        string remoteIp = 2 [ (ipaddress_param) = true ];
+        string localIp = 3 [ (ipaddress_param) = true ];
+    }
+
+    repeated ShutdownSctpInfo shutdownSctpInfoList = 1;
+}
+
+message ShutdownSctpResponse
+{
+    Status status = 1;
+    repeated string localIps = 2 [ (ipaddress_param) = true ];
+}
+
+message SendAlarmInformationRequest
+{
+    int32 associationId = 1;
+    uint32 applicationInstanceId = 2;
+    string remoteIp = 3 [ (ipaddress_param) = true ];
+}
+
+message AssociationCreated
+{
+    enum RecoveryType
+    {
+        noRecovery = 0;
+        recoveryBySocketFD = 1;
+        recoveryBySctpReEstablishment = 2;
+        recoveryByIpChange = 3;
+    }
+    uint32 maxOutbound = 1;
+    string remoteIp = 2 [ (ipaddress_param) = true ];
+    int32 associationId = 3;
+    uint32 maxInbound = 4;
+    uint32 remotePort = 5;
+    RecoveryType haRecovery = 6;
+    string localIp = 7 [ (ipaddress_param) = true ];
+    uint32 localPort = 8;
+}
+
+message DataIndication
+{
+    bytes payload = 1;
+    int32 associationId = 2;
+    uint32 streamId = 3;
+}
+
+message FailureIndication
+{
+    enum Cause
+    {
+        connectionEstablishmentFailed = 0;
+        connectionBrokenDown = 1;
+        bindFailed = 2;
+        modifyFailed = 3;
+        haRecoveryConnectionBrokenDown = 4;
+        connectionAlreadyExist = 5;
+        ipAddressChange = 6;
+    }
+    Cause cause = 1;
+    int32 associationId = 2;
+    string remoteIp = 3 [ (ipaddress_param) = true ];
+    uint32 port = 4;
+}
+
+message F1APCommonEnvelope
+{
+    bytes payload = 1;
+    int32 associationId = 2;
+    uint32 streamId = 3;
+}
+
+message F1APCellEnvelope
+{
+    bytes payload = 1;
+    int32 associationId = 2;
+    uint32 streamId = 3;
+}
+
+message F1APXpEnvelope
+{
+    bytes payload = 1;
+    int32 associationId = 2;
+    uint32 streamId = 3;
+}
+
+message F1APUEEnvelope
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    bytes payload = 2;
+    bool isLastMsg = 3;
+    oneof optional_ueIdDu
+    {
+        uint32 duUeId = 4;
+    }
+    oneof optional_Rnti
+    {
+        uint32 cRnti = 5;
+    }
+    int32 associationId = 6;
+}
+
+message F1UeMappingUpdate
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    oneof optional_ueIdDu
+    {
+        uint32 duUeId = 2;
+    }
+    oneof optional_Rnti
+    {
+        uint32 cRnti = 3;
+    }
+    oneof optional_gnbDuId
+    {
+        uint64 gnbDuId = 4;
+    }
+    oneof optional_menbUeX2ApId
+    {
+        uint32 menbUeX2ApId = 5;
+    }
+    oneof optional_meNBUeX2ApIdExtension
+    {
+        uint32 meNBUeX2ApIdExtension = 6;
+    }
+    oneof optional_globalEnbId
+    {
+        common_messages.GlobalEnbId globalEnbId = 7;
+    }
+    oneof optional_cpUeAddress
+    {
+        string cpUeAddress = 8;
+    }
+    oneof optional_cpCellNodeAddress
+    {
+        string cpCellNodeAddress = 9;
+    }
+    oneof optional_sourceGnbDuId
+    {
+        uint64 sourceGnbDuId = 10;
+    }
+    oneof optional_targetGnbDuId
+    {
+        uint64 targetGnbDuId = 11;
+    }
+    oneof optional_procedureCode
+    {
+        uint32 procedureCode = 12;
+    }
+    oneof optional_newServingNrCellIdentity
+    {
+        uint64 newServingNrCellIdentity = 13;
+    }
+    oneof optional_isReestablishment
+    {
+        bool isReestablishment = 14;
+    }
+    oneof optional_adjGnbUeXnApId
+    {
+        uint32 adjGnbUeXnApId = 15;
+    }
+    oneof optional_adjGlobalGnbId
+    {
+        common_messages.GlobalGnbId adjGlobalGnbId = 16;
+    }
+}
+
+message SCTPE1APUEMapping
+{
+    enum MessageType
+    {
+        bearerContextSetupRequest = 0;
+        bearerContextSetupResponse = 1;
+        bearerContextReleaseComplete = 2;
+    }
+    MessageType sourceMessageType = 1;
+    uint32 ueIdCu = 2 [ (cucpueid_param) = true ];
+    oneof optional_ueIdUp
+    {
+        uint32 ueIdUp = 3;
+    }
+    oneof optional_adjGlobalGnbId
+    {
+        common_messages.GlobalGnbId adjGlobalGnbId = 4;
+    }
+    oneof optional_adjGnbUeXnApId
+    {
+        uint32 adjGnbUeXnApId = 5;
+    }
+    oneof optional_cpCellNodeAddress
+    {
+        string cpCellNodeAddress = 6;
+    }
+    oneof optional_amfUeNgapId
+    {
+        uint64 amfUeNgapId = 7;
+    }
+    oneof optional_servedAmfId
+    {
+        uint32 servedAmfId = 8;
+    }
+}
+
+message NgApUeIdMappingTableUpdate
+{
+    uint32 sourceMessageName = 1;
+    int32 associationId = 2;
+    oneof optional_amfUeNgapId
+    {
+        uint64 amfUeNgapId = 3;
+    }
+    oneof optional_ranUeNgapId
+    {
+        uint32 ranUeNgapId = 4;
+    }
+}
+
+message DisconnectAssociation
+{
+    string remoteIp = 1 [ (ipaddress_param) = true ];
+}
+
+message CpUeSenderInformation
+{
+    uint32 poolId = 1;
+    bytes realAddress = 2;
+    uint32 ueIdStart = 3 [ (ue_id_special_case_param) = true ];
+    uint32 ueIdEnd = 4 [ (ue_id_special_case_param) = true ];
+}
+
+message CpUeSenderInformationUpdate
+{
+    repeated CpUeSenderInformation cpUeSenderInformation = 1;
+    repeated uint32 failedPoolId = 2;
+}
+
+message LinkInfo
+{
+
+    int32 associationId = 1;
+    oneof optional_linkStatus
+    {
+        LinkStatus linkStatus = 2;
+    }
+    oneof optional_maxOutbound
+    {
+        uint32 maxOutbound = 3;
+    }
+    oneof optional_duId
+    {
+        uint64 duId = 4;
+    }
+    oneof optional_globalEnbId
+    {
+        common_messages.GlobalEnbId globalEnbId = 5;
+    }
+    oneof optional_amfId
+    {
+        uint32 amfId = 6;
+    }
+    oneof optional_tnlId
+    {
+        uint32 tnlId = 7;
+    }
+}
+
+message LinkInformationUpdate
+{
+    repeated LinkInfo linkInfos = 1;
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package cp_ue_request;
+
+message CpUeRecvInitialRRCMsg
+{
+    uint64 gnbDuId = 1;
+    uint32 duUeId = 2;
+    bytes encodedL3Message = 3;
+    oneof optional_oldServingNrCellIdentity
+    {
+        uint64 oldServingNrCellIdentity = 4;
+    }
+}

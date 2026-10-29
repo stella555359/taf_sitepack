@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+import "sctp/sctp_messages.proto";
+import "cp_e1ap/send_to_cu_up.proto";
+import "cp_f1ap/send_to_du.proto";
+import "cp_x2ap/send_to_menb.proto";
+import "cp_ng/cpif_send_to_core.proto";
+import "common/overload_protection_ping.proto";
+import "options/protobuf_options.proto";
+
+package sctp_req;
+
+message SCTPRequest
+{
+    option (port_numbers) = 30535;
+    option (port_numbers) = 30536;
+    option (port_numbers) = 30537;
+    option (port_numbers) = 30538;
+    oneof request
+    {
+        sctp.ConnectionRequest connectionRequest = 1;
+        sctp.SendPayloadRequest sendPayloadRequest = 2;
+        sctp.DisconnectionRequest disconnectionRequest = 3;
+        sctp.DisconnectAssociationRequest disconnectAssociationRequest = 4;
+        sctp.ModifyConfigurationRequest modifyConfigurationRequest = 5;
+        sctp.SendAlarmInformationRequest sendAlarmInformationRequest = 6;
+        sctp.DisconnectAssociation disconnectAssociation = 7;
+        sctp.LinkInformationUpdate LinkInformationUpdate = 8;
+        sctp.CpUeSenderInformationUpdate cpUeSenderInformationUpdate = 9;
+        sctp.ShutdownSctpRequest shutdownSctpRequest = 10;
+        cp_f1ap_interface.SendToDu sendToDu = 11;
+        cp_e1ap_interface.SendToCuUp sendToCuUp = 12;
+        common_messages.OverloadProtectionPing overloadProtectionPing = 13;
+        cp_x2ap_interface.SendToMeNb sendToMeNb = 14;
+        ng_request.CpIfSendToCore sendToCore = 15;
+    }
+    uint32 tnlId = 16;
+}

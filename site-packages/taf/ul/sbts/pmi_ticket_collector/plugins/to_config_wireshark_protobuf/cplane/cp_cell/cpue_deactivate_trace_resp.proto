@@ -1,0 +1,11 @@
+syntax = "proto3";
+import "common_types/common_status.proto";
+
+package cell_request;
+message CpUeDeactivateTraceResp
+{
+    uint32 transactionId = 1;
+    uint64 cellId = 2;
+    Status status = 3;
+    repeated bytes deactivatedTRs = 4;
+}

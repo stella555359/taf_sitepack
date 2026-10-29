@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "common/snssai.proto";
+package common_messages;
+
+message PduSessionResourcesToBeSetupItemInterGnbHo
+{
+    // (PDU Session Resource to be Setup List Inter Gnb Handover)
+    uint32 pduSessionId = 1;
+    common_messages.SNSSAI sNssai = 2;
+    bool isEmergencySession = 3;
+    repeated uint32 qosFlowList = 4;
+}

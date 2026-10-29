@@ -1,0 +1,20 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+package cp_ue_request;
+message CpIfResourceReleaseResp
+{
+    oneof optional_cuUeId
+    {
+        uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    }
+
+    oneof optional_gnbDuId
+    {
+        uint32 gnbDuId = 2;
+    }
+
+    oneof optional_duUeId
+    {
+        uint32 duUeId = 3;
+    }
+}

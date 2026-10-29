@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "sctp/sctp_messages.proto";
+import "options/protobuf_options.proto";
+
+package sctp_reply;
+
+message SCTPReply
+{
+    option (port_numbers) = 30534;
+    oneof reply
+    {
+        sctp.DataIndication dataIndication = 1;
+        sctp.FailureIndication failureIndication = 2;
+        sctp.AssociationCreated associationCreated = 3;
+        sctp.ShutdownSctpResponse shutdownSctpResponse = 4;
+    }
+    uint32 tnlId = 5;
+}
+
+message ReplyWrapper
+{
+    SCTPReply sctpReply = 1;
+}

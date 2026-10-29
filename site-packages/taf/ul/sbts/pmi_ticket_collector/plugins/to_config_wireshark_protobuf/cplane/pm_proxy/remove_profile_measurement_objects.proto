@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "pm_proxy/profileid.proto";
+
+package pm_agent_proxy_request;
+
+message RemoveProfileMeasurementObjects
+{
+    repeated ProfileId profile_ids = 1;
+}

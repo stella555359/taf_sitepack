@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package rnd_params_modification;
+
+enum LoggingSeverity
+{
+    trace = 0;
+    debug = 1;
+    info = 2;
+    warning = 3;
+    error = 4;
+    vip = 5;
+    off = 6;
+}
+
+message SetLoggingSeverity
+{
+    LoggingSeverity severity_level = 1;
+}

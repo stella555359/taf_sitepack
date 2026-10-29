@@ -1,0 +1,7 @@
+syntax = "proto3";
+package common_type;
+
+message EUtraMultibandInfoList
+{
+    repeated uint32 eUtraMultibandInfoItem = 1;
+}

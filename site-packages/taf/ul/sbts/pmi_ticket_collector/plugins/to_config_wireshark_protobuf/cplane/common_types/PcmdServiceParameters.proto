@@ -1,0 +1,54 @@
+syntax = "proto3";
+import "common_types/PcmdRecordId.proto";
+import "common_types/PeriodicUeMeasurement.proto";
+
+package common_type;
+
+message PcmdServiceParameters
+{
+    oneof optional_cookie
+    {
+        uint32 cookie = 1;
+    }
+    oneof optional_btsTraceControllerAssignedSicad
+    {
+        uint32 btsTraceControllerAssignedSicad = 2;
+    }
+    oneof optional_pcmdActivationFlag
+    {
+        bool pcmdActivationFlag = 3;
+    }
+    message PcmdRecordsList
+    {
+        repeated PcmdRecordId pcmdRecordId = 1;
+    }
+    oneof optional_pcmdRecordsList
+    {
+        PcmdRecordsList pcmdRecordsList = 4;
+    }
+    oneof optional_cellTraceActivationFlag
+    {
+        bool cellTraceActivationFlag = 5;
+    }
+    message CellTraceL3MsgIdList
+    {
+        repeated L3MsgId cellTraceL3MsgId = 1;
+    }
+    oneof optional_cellTraceL3MsgIdList
+    {
+        CellTraceL3MsgIdList cellTraceL3MsgIdList = 6;
+    }
+    oneof optional_traceReference
+    {
+        bytes traceReference = 7; // 6 bytes
+    }
+    oneof optional_traceRecordingSessionReferenceNumber
+    {
+        uint32 traceRecordingSessionReferenceNumber = 8;
+    }
+    oneof optional_periodicUeMeasurement
+    {
+        common_type.PeriodicUeMeasurement periodicUeMeasurement = 9;
+    }
+    bool subscriberTraceActivationFlag = 10;
+}

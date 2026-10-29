@@ -1,0 +1,15 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/common_status.proto";
+
+package cp_ue_request;
+message ProceedLockStepResp
+{
+    uint32 ueIdCu = 1 [ (cucpueid_param) = true ];
+    message MessageResult
+    {
+        Status status = 1;
+        uint32 cause = 2;
+    }
+    MessageResult messageResult = 2;
+}

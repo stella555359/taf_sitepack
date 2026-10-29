@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package cell_request;
+
+message CpCellCellConfigUpdateReq
+{
+    uint32 transactionId = 1;
+    repeated uint64 cellsToActivateList = 2;
+    repeated uint64 cellsToDeactivateList = 3;
+}

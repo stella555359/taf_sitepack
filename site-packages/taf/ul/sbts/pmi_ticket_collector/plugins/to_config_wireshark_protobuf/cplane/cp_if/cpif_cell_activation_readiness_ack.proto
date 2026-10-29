@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package cp_if_interface;
+
+message CpCellCellActivationReadinessAck
+{
+    uint32 transactionId = 1;
+    enum CpIfSendingService
+    {
+        xnap = 0;
+        f1ap = 1;
+    }
+    CpIfSendingService cpIfSendingService = 2;
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package common_messages;
+
+message GlobalEnbId
+{
+    bytes plmnIdentity = 1 [ (sensitive_param) = true ];
+    bytes enbId = 2;
+}

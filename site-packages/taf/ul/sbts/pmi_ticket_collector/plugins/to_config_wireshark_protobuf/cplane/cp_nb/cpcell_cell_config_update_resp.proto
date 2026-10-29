@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "cp_nb/cp_nb_status.proto";
+
+package cp_nb_message;
+
+message CpCellCellConfigUpdateResp
+{
+    message CellStatusItem
+    {
+        uint64 nrCellIdentity = 1;
+        Status status = 2;
+    }
+
+    uint32 transactionId = 1;
+    repeated CellStatusItem cellsToActivateList = 2;
+    repeated CellStatusItem cellsToDeactivateList = 3;
+}

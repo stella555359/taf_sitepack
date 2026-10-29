@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+import "common/plmn_identity.proto";
+import "common/snssai.proto";
+
+package cell_request;
+
+message SliceSupportList
+{
+    repeated common_messages.SNSSAI sliceSupportList = 1;
+}
+message BroadcastPlmnsItem
+{
+    common_messages.PlmnIdentity plmnIdentity = 1;
+    SliceSupportList sliceSupportList = 2;
+}
+message BroadcastPLMNList
+{
+    repeated BroadcastPlmnsItem broadcastPlmnsList = 1;
+}
+message TaSupportItem
+{
+    bytes tac = 1;
+    BroadcastPLMNList broadcastPLMNList = 2;
+}
+message TASupportList
+{
+    repeated TaSupportItem tASupportList = 1;
+}
+message CpCell_CellSupportedTAListInd
+{
+    enum Reason
+    {
+        ngSetup = 0;
+        ngDown = 1;
+        f1Setup = 2;
+        f1Down = 3;
+        ranUpdate = 4;
+        amfUpdate = 5;
+    }
+
+    oneof optional_ngRanUpdateTransactionId
+    {
+        uint32 ngRanUpdateTransactionId = 1;
+    }
+    TASupportList SupportedTAList = 2;
+    Reason reason = 3;
+}

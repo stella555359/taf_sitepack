@@ -1,0 +1,36 @@
+syntax = "proto3";
+import "common_types/global_gnb_id.proto";
+import "common/cell_to_report_list.proto";
+
+package cell_request;
+
+message CpCellInterGnbCaAvblInd
+{
+    enum InterGNBCAXnLinkStatus
+    {
+        xn_unavailable = 0;
+        xn_available = 1;
+    }
+    enum XpConnectionStatus
+    {
+        xp_unavailable = 0;
+        xp_available = 1;
+    }
+    common_messages.GlobalGnbId globalNgRanNodeId = 1;
+    oneof optional_cellToReportList
+    {
+        common_messages.CellToReportList cellToReportList = 2;
+    }
+    oneof optional_InterGNBCAXnLinkStatus
+    {
+        InterGNBCAXnLinkStatus interGNBCAXnLinkStatus = 3;
+    }
+    oneof optional_XpConnectionStatus
+    {
+        XpConnectionStatus interGNBCAXpLinkStatus = 4;
+    }
+    oneof optional_igNBCAXpProtocolVersion
+    {
+        uint32 igNBCAXpProtocolVersion = 5;
+    }
+}

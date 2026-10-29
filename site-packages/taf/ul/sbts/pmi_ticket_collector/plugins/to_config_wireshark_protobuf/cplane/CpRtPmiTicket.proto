@@ -1,0 +1,81 @@
+syntax = "proto3";
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions
+{
+    bool cucpueid_param = 50002;
+}
+
+package cp_rt_pmi_request;
+
+message PmiOccurence
+{
+    uint32 pmCounterId = 1;
+    fixed64 timestamp = 2;
+}
+
+message EventOccurence
+{
+    message EventResult
+    {
+        uint32 primaryResult = 1;
+        uint32 secondaryResult = 2;
+    }
+
+    message DuContextSetup
+    {
+        uint32 callType = 1;
+        EventResult eventResult = 2;
+    }
+
+    message DuUeRelease
+    {
+        uint32 trigger = 1;
+    }
+
+    message DuUeContextModification
+    {
+        uint32 trigger = 1;
+        EventResult eventResult = 2;
+    }
+
+    message GnbDuSourceHo
+    {
+        EventResult eventResult = 1;
+        uint64 targetCellId = 2;
+    }
+
+    message GnbDuTargetHo
+    {
+        EventResult eventResult = 1;
+        uint64 sourceCellId = 2;
+    }
+
+    message DuContextRelease
+    {
+        uint32 callType = 1;
+        uint32 trigger = 2;
+    }
+
+    oneof message
+    {
+        DuContextSetup duContextSetup = 1;
+        DuUeRelease duUeRelease = 2;
+        DuUeContextModification duUeContextModification = 3;
+        GnbDuSourceHo gnbDuSourceHo = 4;
+        GnbDuTargetHo gnbDuTargetHo = 5;
+        DuContextRelease duContextRelease = 6;
+    }
+}
+
+message CpRtPmiTicket
+{
+    uint32 transactionId = 1;
+    uint32 duUeId = 2;
+    uint32 cuUeId = 3 [ (cucpueid_param) = true ];
+    repeated PmiOccurence pmiOccurences = 4;
+    repeated EventOccurence eventOccurences = 5;
+    bool bufferFullEvent = 6;
+    uint64 nrCellId = 7;
+    bool procedureDone = 8;
+}

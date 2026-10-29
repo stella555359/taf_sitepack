@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package common_messages;
+
+enum CellAvailability
+{
+    cell_unavailable = 0;
+    cell_available = 1;
+}

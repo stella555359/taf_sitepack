@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "control/logging_severity.proto";
+package control_command;
+
+message SetLoggingLevel
+{
+    LoggingSeverity logging_severity = 1;
+}

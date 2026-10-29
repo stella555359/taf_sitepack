@@ -1,0 +1,8 @@
+syntax = "proto3";
+package common_type;
+
+enum RedirRat
+{
+    nr = 0;
+    eutra = 1;
+}

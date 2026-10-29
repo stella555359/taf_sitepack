@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package sctp;
+
+message Configuration
+{
+    uint32 maximumNumberOfUnanwseredMessagesBeforeSCTPAssociationFailure = 1;
+    uint32 heartbeatMessageInterval = 2;
+    uint32 maximumRetransmissionTimeout = 3;
+    uint32 minimumRetransmissionTimeout = 4;
+    uint32 selectiveAcknowledgeDelay = 5;
+    uint32 selectiveAcknowledgeFrequency = 6;
+    uint32 heartbeatMaximumRetransmissionNumber = 7;
+    uint32 initRetransmissionTimeout = 8;
+    uint32 sctpWaitTimeInitSeqRetry = 9;
+    uint32 maximumNumberBurst = 10;
+    uint32 maximumNumberPayload = 11;
+    uint32 validCookieLife = 12;
+    bool chunkBundlingEnabled = 13;
+    uint32 sctpRandomTimeInitSeqRetry = 14;
+}
+
+message RndParameter
+{
+    enum AlarmType
+    {
+        x2ap = 0;
+        f1ap = 1;
+        xnap = 2;
+        ngap = 3;
+        e1ap = 4;
+    }
+
+    uint32 sctpSendBufferSize = 1;
+    uint32 sctpBlockedAssociationResetTime = 2;
+    uint32 supportedMaximumSctpAssociation = 3;
+    uint32 alarmClearTimeInterval = 4;
+    oneof type
+    {
+        AlarmType alarmType = 5;
+    }
+}

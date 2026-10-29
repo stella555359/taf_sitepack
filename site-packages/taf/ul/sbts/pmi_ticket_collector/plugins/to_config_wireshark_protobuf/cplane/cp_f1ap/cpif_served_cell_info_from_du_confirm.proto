@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "common_types/f1_cause.proto";
+import "common_types/common_status.proto";
+
+package cp_f1ap_interface;
+
+message CpCellServedCellInfoFromDuConfirm
+{
+    uint32 transactionId = 1;
+    uint64 gnbDuId = 2;
+    Status status = 3;
+    oneof optional_cause
+    {
+        F1Cause cause = 4;
+    }
+}

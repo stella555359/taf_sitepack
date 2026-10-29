@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+enum EncryptionAlgorithm
+{
+    NEA0 = 0;
+    NEA1_128 = 1;
+    NEA2_128 = 2;
+    NEA3_128 = 3;
+}

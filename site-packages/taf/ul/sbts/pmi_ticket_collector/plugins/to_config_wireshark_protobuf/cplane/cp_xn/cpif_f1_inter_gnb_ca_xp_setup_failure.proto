@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "common/neid.proto";
+
+package cpif_xn_interface;
+
+enum F1IgNBCAXpSetupFailureCause
+{
+    subscriptionFailure = 0;
+    registrationFailure = 1;
+    xpProtocolVersionReadFailure = 2;
+}
+
+message CpIfF1IgNBCAXpSetupFailure
+{
+    common_messages.NEID neid = 1;
+    F1IgNBCAXpSetupFailureCause cause = 2;
+}

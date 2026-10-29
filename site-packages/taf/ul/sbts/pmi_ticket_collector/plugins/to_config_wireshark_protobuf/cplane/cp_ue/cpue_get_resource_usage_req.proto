@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package cp_ue_request;
+import "common_types/ResourceUsageReqType.proto";
+
+message CpUeGetResourceUsageReq
+{
+    common_type.ResourceUsageReqType requestType = 1;
+}

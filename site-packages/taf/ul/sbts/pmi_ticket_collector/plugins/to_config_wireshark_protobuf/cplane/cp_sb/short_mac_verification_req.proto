@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "cp_sb/integrity_algorithm.proto";
+import "options/protobuf_options.proto";
+
+package cp_sb_request;
+
+message ShortMacVerificationReq
+{
+    uint32 ueIdCu = 1 [ (cucpueid_param) = true ];
+    uint32 shortMacI = 2;
+    bytes integrityKey = 3 [ (sensitive_param) = true ];
+    IntegrityAlgorithm integrityAlgorithm = 4;
+    bytes msgPayload = 5;
+}

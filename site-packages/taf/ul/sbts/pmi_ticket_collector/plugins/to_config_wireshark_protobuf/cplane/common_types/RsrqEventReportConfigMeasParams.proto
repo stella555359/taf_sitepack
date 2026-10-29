@@ -1,0 +1,11 @@
+syntax = "proto3";
+import "common_types/TimeToTrigger.proto";
+
+package common_type;
+
+message RsrqEventReportConfigMeasParams
+{
+    uint32 threshold = 1;
+    TimeToTrigger timeToTrigger = 2;
+    uint32 hysteresis = 3;
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+package cell_request;
+
+message CpCellX2LinkStatusUpdateInd
+{
+    uint32 transactionId = 1;
+    message NrCellsList
+    {
+        repeated uint64 nrCellIdentity = 2;
+    }
+
+    oneof optional_cellsToDeactivateList
+    {
+        NrCellsList cellsToDeactivateList = 2;
+    }
+}

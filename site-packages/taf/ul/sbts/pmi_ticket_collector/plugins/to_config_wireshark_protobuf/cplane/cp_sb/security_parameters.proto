@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "cp_sb/integrity_algorithm.proto";
+import "cp_sb/encryption_algorithm.proto";
+import "options/protobuf_options.proto";
+
+message SecurityParameters
+{
+    bytes integrityKey = 1 [ (sensitive_param) = true ];
+    IntegrityAlgorithm integrityAlgorithm = 2;
+    bytes encryptionKey = 3 [ (sensitive_param) = true ];
+    EncryptionAlgorithm encryptionAlgorithm = 4;
+}

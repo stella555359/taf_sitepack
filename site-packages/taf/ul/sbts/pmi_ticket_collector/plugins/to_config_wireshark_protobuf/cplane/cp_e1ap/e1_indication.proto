@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package cp_e1ap_interface;
+
+import "common/e1_status_indication.proto";
+
+message E1Indication
+{
+    oneof indication
+    {
+        common_messages.E1StatusIndication e1StatusInd = 1;
+    }
+}

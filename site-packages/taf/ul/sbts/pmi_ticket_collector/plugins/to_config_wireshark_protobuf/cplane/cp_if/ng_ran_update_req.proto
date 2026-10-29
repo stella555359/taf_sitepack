@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+import "common_types/served_cell_information.proto";
+import "options/protobuf_options.proto";
+
+package cp_if_interface;
+
+message NrCellsInDu
+{
+    message NRCGI
+    {
+        bytes plmnId = 1 [ (sensitive_param) = true ];
+        uint64 nrCellId = 2;
+    }
+
+    message CellOperationAdd
+    {
+        common_type.ServedCellInformation servedCellInformation = 1;
+    }
+
+    message CellOperationModify
+    {
+        NRCGI oldNrcgi = 1;
+        common_type.ServedCellInformation servedCellInformation = 2;
+    }
+
+    message CellOperationDelete
+    {
+        NRCGI nrcgi = 1;
+    }
+
+    oneof CellOperation
+    {
+        CellOperationAdd cellOperationAdd = 1;
+        CellOperationModify cellOperationModify = 2;
+        CellOperationDelete cellOperationDelete = 3;
+    }
+}
+
+enum RequestType
+{
+    sa = 0;
+    nrDcSn = 1;
+}
+
+message CpIfNgRanUpdateReq
+{
+    uint32 transactionId = 1;
+    uint64 gnbDuId = 2;
+    repeated NrCellsInDu nrCellsInDuList = 3;
+    RequestType reqType = 4;
+}

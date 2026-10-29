@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+import "common_types/Plmn.proto";
+import "common/nr_cell_identity.proto";
+
+package cp_nb_message;
+
+message AdmittedUsersPerCell
+{
+    uint32 pSCellCounter = 1;
+    uint32 sCellDlCounter = 2;
+    uint32 sCellUlCounter = 3;
+    uint32 pSCellCaCounter = 4;
+}
+
+message ConfiguredSib
+{
+    uint32 sibType = 1;
+    uint32 valueTag = 2;
+    bytes payload = 3;
+}
+
+message CellResources
+{
+    enum CellState
+    {
+        deactivated = 0;
+        activated = 1;
+        deactivating = 2;
+        served = 3;
+    }
+    enum CellOperationalMode
+    {
+        none = 0;
+        nsa = 1;
+        sa = 2;
+        nsaAndSa = 3;
+        nrDcSn = 4;
+        nsaAndNrDcSn = 5;
+    }
+    message OptionalNrArfcn
+    {
+        uint32 value = 1;
+    }
+    common_messages.NRCellIdentity cellId = 1;
+    CellState cellState = 2;
+    CellOperationalMode operationalMode = 3;
+    repeated ConfiguredSib configuredSibs = 4;
+    repeated common_type.Plmn plmns = 5;
+    oneof optional_ssbFrequency
+    {
+        OptionalNrArfcn ssbFrequency = 6;
+    }
+    AdmittedUsersPerCell admittedSaUsersPerCell = 7;
+    AdmittedUsersPerCell admittedNsaUsersPerCell = 8;
+}
+
+message CellGroupResources
+{
+    message BearersPerUser
+    {
+        uint32 cuUeId = 1;
+        uint32 nonGbrBearers = 2;
+    }
+    uint32 cellGroupId = 1;
+    repeated BearersPerUser nsaBearersPerUser = 2;
+    repeated BearersPerUser saBearersPerUser = 3;
+}
+
+message CpCellResources
+{
+    repeated CellResources cells = 1;
+    repeated CellGroupResources cellGroups = 2;
+    repeated common_messages.NRCellIdentity blacklistedCells = 3;
+}
+
+message CpCellGetResourceUsageResp
+{
+    uint32 admittedNsaUsers = 1;
+    uint32 admittedSaUsers = 2;
+    CpCellResources resources = 3;
+}

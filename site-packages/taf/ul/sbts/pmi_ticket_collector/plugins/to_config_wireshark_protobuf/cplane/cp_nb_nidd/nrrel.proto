@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package nidd_db_model;
+
+import "common_types/QOffsetRange.proto";
+import "common_types/ScellAdditionMethod.proto";
+import "common_types/HandoverAllowedSA.proto";
+import "common_types/ca_config_cu.proto";
+
+enum RefType
+{
+    NRCELL = 0;
+    NRADJNRCELL = 1;
+}
+
+enum PciStatus
+{
+    Identified = 0;
+    Recheck = 1;
+    Confirmed = 2;
+    Duplicated = 3;
+}
+
+message NrRel
+{
+    uint32 lcrId = 1;
+    uint32 gnbId = 2;
+    uint32 gnbIdLength = 3;
+    uint32 mcc = 4;
+    uint32 mncValue = 5;
+    uint32 mncLength = 6;
+    uint32 phyCellId = 7;
+    RefType refType = 8;
+    uint32 hoFailCounter = 9;
+    PciStatus pciStatus = 10;
+    oneof optional_idleTimeAllowed
+    {
+        uint32 idleTimeAllowed = 11;
+    }
+    oneof optional_consecRecheckAllowed
+    {
+        uint32 consecRecheckAllowed = 12;
+    }
+    bool isRemoveForbidden = 13;
+    QOffsetRange cellIndividualSsbRsrpOffset = 14;
+    QOffsetRange cellIndividualSsbRsrqOffset = 15;
+    oneof optional_scellAdditionMethod
+    {
+        ScellAdditionMethod scellAdditionMethod = 16;
+    }
+    bool dontReportToOam = 17;
+    HandoverAllowedSA handoverAllowedSA = 18;
+    oneof optional_scellOperationalMode
+    {
+        CaConfigCu scellOperationalMode = 19;
+    }
+}

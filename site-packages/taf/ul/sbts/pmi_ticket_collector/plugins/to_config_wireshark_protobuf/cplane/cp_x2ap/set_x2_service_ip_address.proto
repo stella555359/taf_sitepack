@@ -1,0 +1,13 @@
+syntax = "proto3";
+import "common_types/cplaneIpAddress.proto";
+
+package cp_x2ap_interface;
+
+message SetX2ServiceIpAddress
+{
+    uint32 transactionId = 1;
+    common_type.CplaneIpAddressOfDualStack cpIfX2IpAddress = 2;
+    common_type.CplaneIpAddressOfDualStack cpIfF1IpAddress = 3;
+    common_type.CplaneIpAddressOfDualStack cpIfXnIpAddress = 4;
+    common_type.CplaneIpAddressOfDualStack cpIfNGIpAddress = 5;
+}

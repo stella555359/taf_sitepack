@@ -1,0 +1,29 @@
+syntax = "proto3";
+import "common_types/ngap_cause.proto";
+
+package cp_if_interface;
+
+message CpIfNgPartialResetRequest
+{
+    message AmfUeNgapId
+    {
+        uint64 amfUeNgapId = 1;
+    }
+
+    uint32 transactionID = 2;
+    oneof ngCause
+    {
+        CauseRadioNetwork causeRadioNetwork = 3;
+        CauseTransport causeTransport = 4;
+        CauseNas CauseNas = 5;
+        CauseProtocol causeProtocol = 6;
+        CauseMiscellaneous causeMiscellaneous = 7;
+    }
+
+    repeated AmfUeNgapId amfUeNgapIdList = 8;
+
+    oneof optional_amfId
+    {
+        uint32 amfId = 9;
+    }
+}

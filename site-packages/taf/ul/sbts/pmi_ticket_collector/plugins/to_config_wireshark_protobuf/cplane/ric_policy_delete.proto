@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package sep_ran_message;
+
+message RicPolicyDelete
+{
+    uint32 transactionId = 1;
+    repeated uint32 policy_id = 2;
+}

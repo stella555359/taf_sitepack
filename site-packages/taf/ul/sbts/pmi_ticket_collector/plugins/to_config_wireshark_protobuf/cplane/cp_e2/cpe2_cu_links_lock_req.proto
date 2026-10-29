@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package cp_e2_interface;
+
+message CpE2CuLinksLockReq
+{
+    uint32 transactionId = 1;
+}

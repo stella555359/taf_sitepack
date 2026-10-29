@@ -1,0 +1,38 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package cell_request;
+
+message CpCellResourceReleaseListReq
+{
+    message UeIdRange
+    {
+        uint32 ueIdStart = 1 [ (ue_id_special_case_param) = true ];
+        uint32 ueIdEnd = 2 [ (ue_id_special_case_param) = true ];
+    }
+
+    message UeIdRangeList
+    {
+        repeated UeIdRange ueIdRange = 1;
+    }
+
+    message UeIdList
+    {
+        repeated uint32 ueId = 1 [ (cucpueid_list_param) = true ];
+    }
+
+    oneof uesToBeReleased
+    {
+        UeIdList ueIdList = 1;
+        UeIdRangeList ueIdRangeList = 2;
+    }
+
+    enum PoolType
+    {
+        L3_UE = 0;
+        L3_IF = 1;
+    }
+
+    PoolType poolType = 3;
+    uint32 transactionId = 4;
+}

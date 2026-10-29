@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package cp_ue_request;
+
+message CpUeDeactivateTraceReq
+{
+    uint32 transactionId = 1;
+    uint64 nrCellId = 2;
+    bool isLomAvailable = 3;
+    repeated uint32 deactivatedTraceTypes = 4;
+    repeated bytes deactivatedTRs = 5;
+}

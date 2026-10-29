@@ -1,0 +1,40 @@
+syntax = "proto3";
+import "common/nrcgi.proto";
+import "options/protobuf_options.proto";
+import "common_types/allocationAndRetentionPriority.proto";
+
+package cell_request;
+
+message CpCellResourceModificationReq
+{
+    uint32 cuF1UeId = 1 [ (cucpueid_param) = true ];
+    common_messages.NRCGI psCell = 2;
+    oneof optional_newPsCell
+    {
+        common_messages.NRCGI newPsCell = 5;
+    }
+    repeated common_messages.NRCGI sCellToBeSetupList = 6;
+    repeated common_messages.NRCGI sCellFailedToSetupList = 7;
+    message NonGbrDrbsToBeAddedItem
+    {
+        uint32 erabId = 1;
+        common_type.AllocationAndRetentionPriority allocationAndRetentionPriority = 2;
+    }
+    message NonGbrDrbsToBeAddedList
+    {
+        repeated NonGbrDrbsToBeAddedItem nonGbrDrbsToBeAddedItem = 1;
+    }
+    oneof optional_nonGbrDrbsToBeAddedList
+    {
+        NonGbrDrbsToBeAddedList nonGbrDrbsToBeAddedList = 8;
+    }
+    message NonGbrDrbsToBeRemovedList
+    {
+        repeated uint32 erabId = 1;
+    }
+    oneof optional_nonGbrDrbsToBeRemovedList
+    {
+        NonGbrDrbsToBeRemovedList nonGbrDrbsToBeRemovedList = 9;
+    }
+    uint32 transactionId = 10;
+}

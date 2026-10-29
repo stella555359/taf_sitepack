@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "common_types/global_gnb_id.proto";
+
+package common_messages;
+
+message CpIfInitialNrDc
+{
+    common_messages.GlobalGnbId globalGnbId = 1;
+    bytes encodedXnMessage = 2;
+}

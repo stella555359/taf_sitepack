@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+enum TimeToTrigger
+{
+    timeToTriggerMs0 = 0;
+    timeToTriggerMs40 = 1;
+    timeToTriggerMs64 = 2;
+    timeToTriggerMs80 = 3;
+    timeToTriggerMs100 = 4;
+    timeToTriggerMs128 = 5;
+    timeToTriggerMs160 = 6;
+    timeToTriggerMs256 = 7;
+    timeToTriggerMs320 = 8;
+    timeToTriggerMs480 = 9;
+    timeToTriggerMs512 = 10;
+    timeToTriggerMs640 = 11;
+    timeToTriggerMs1024 = 12;
+    timeToTriggerMs1280 = 13;
+    timeToTriggerMs2560 = 14;
+    timeToTriggerMs5120 = 15;
+}

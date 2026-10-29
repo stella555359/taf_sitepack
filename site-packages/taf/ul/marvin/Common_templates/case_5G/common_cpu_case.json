@@ -1,0 +1,43 @@
+{
+  "name": "Common 5G BTS and radio case CPU analysis",
+  "tags": [],
+  "domain": "CPU",
+  "algorithm": "generic-cpu-and-mem-analyzer",
+  "trigger": "cpu_data_available",
+  "rule": {
+    "bts_cpu_chosen_reference": {
+      "exclude_first_x_mins": 2,
+      "difference_range": {
+        "process": {
+          "overflow": {
+            "fail": 10,
+            "warning": 2.5
+          }
+        },
+        "system": {
+          "overflow": {
+            "fail": 10,
+            "warning": 2.5
+          }
+        }
+      }
+    },
+    "radio_cpu_chosen_reference": {
+      "exclude_first_x_mins": 2,
+      "difference_range": {
+        "process": {
+          "overflow": {
+            "fail": 10,
+            "warning": 2.5
+          }
+        },
+        "system": {
+          "overflow": {
+            "fail": 10,
+            "warning": 2.5
+          }
+        }
+      }
+    }
+  }
+}

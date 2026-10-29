@@ -1,0 +1,11 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package cell_request;
+
+message CpCellPcmdCookieAllocationReq
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    uint64 nrCellIdentifier = 2;
+    uint32 transactionId = 3;
+}

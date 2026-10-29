@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package cp_nb_message;
+
+enum OverloadLevel
+{
+    off = 0;
+    high = 1;
+}

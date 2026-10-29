@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package sep_ran_message;
+
+message CellServedInfoResponse
+{
+    enum CellPresenceInfo
+    {
+        NO_CELL = 0;
+        CELLS_PRESENT = 1;
+    };
+    uint32 transactionId = 1;
+    CellPresenceInfo cell_present = 2;
+    repeated bytes encodedEndcX2SetupResponses = 3;
+}

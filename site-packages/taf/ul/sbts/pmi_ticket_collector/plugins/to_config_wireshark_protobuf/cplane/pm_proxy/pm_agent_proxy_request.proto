@@ -1,0 +1,28 @@
+syntax = "proto3";
+import "pm_proxy/remove_profile_measurement_objects.proto";
+import "pm_proxy/update_cell_counter.proto";
+import "pm_proxy/update_cell_profile_counter.proto";
+import "pm_proxy/update_gnb_counter.proto";
+import "pm_proxy/update_du_counter.proto";
+import "pm_proxy/update_nrcuup_counter.proto";
+import "pm_proxy/update_snssai_counter.proto";
+import "pm_proxy/update_nrrel_counter.proto";
+import "pm_proxy/update_nremo_counter.proto";
+
+package pm_agent_proxy_request;
+
+message PmAgentProxyRequest
+{
+    oneof request
+    {
+        UpdateCellCounter update_cell_counter = 1;
+        UpdateGnbCounter update_gnb_counter = 2;
+        UpdateDuCounter update_du_counter = 3;
+        UpdateNrCuUpCounter update_nrcuup_counter = 4;
+        UpdateSnssaiCounter update_snssai_counter = 5;
+        UpdateNrRelCounter update_nrrel_counter = 6;
+        UpdateNremoCounter update_nremo_counter = 7;
+        UpdateCellProfileCounter update_cell_profile_counter = 8;
+        RemoveProfileMeasurementObjects remove_profile_measurement_objects = 9;
+    }
+}

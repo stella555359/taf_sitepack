@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package common_type;
+
+enum E2LinkOperation
+{
+    e2SetupNotPermitted = 0;
+    e2SetupPermitted = 1;
+    e2ShutdownRequired = 2;
+}

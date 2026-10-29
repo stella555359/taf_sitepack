@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package cell_request;
+
+message CpCellPoolFailureInd
+{
+    enum PoolType
+    {
+        L3_UE = 0;
+    }
+    enum PoolFailureCause
+    {
+        partialCuFailure = 0;
+    }
+    message FailedPool
+    {
+        uint32 poolId = 1;
+        PoolType poolType = 2;
+    }
+    uint32 transactionId = 1;
+    repeated FailedPool failedPoolList = 2;
+    PoolFailureCause cause = 3;
+}

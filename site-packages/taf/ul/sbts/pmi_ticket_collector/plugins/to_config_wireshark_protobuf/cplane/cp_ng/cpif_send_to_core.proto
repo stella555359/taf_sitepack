@@ -1,0 +1,37 @@
+syntax = "proto3";
+import "common_types/guami.proto";
+
+package ng_request;
+
+message CpIfSendToCore
+{
+    oneof optional_servedAmfId
+    {
+        uint32 servedAmfId = 1;
+    }
+    oneof optional_guami
+    {
+        common_type.GUAMI guami = 2;
+    }
+    oneof optional_ranUeNgapId
+    {
+        uint32 ranUeNgapId = 3;
+    }
+
+    oneof optional_amfUeNgapId
+    {
+        uint64 amfUeNgapId = 4;
+    }
+
+    oneof optional_newAmfUeNgapId
+    {
+        uint64 newAmfUeNgapId = 5;
+    }
+
+    bytes encodedNGMessage = 6;
+
+    oneof optional_procedureCode
+    {
+        uint32 procedureCode = 7;
+    }
+}

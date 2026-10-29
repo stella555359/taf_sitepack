@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+import "cp_if/cpif_nidd_delivery_request.proto";
+import "cp_if/cpif_data_distribution_request.proto";
+import "cp_if/cpif_deployment_complete_ind.proto";
+import "cp_if/cpif_trsw_configuration_request.proto";
+import "cp_e1ap/cpnb_e1_link_info_update_ack.proto";
+import "cp_xn/cpnb_xn_link_info_update_ack.proto";
+import "cp_if/ng_ran_update_req.proto";
+import "cp_if/cpif_cell_config_update_request.proto";
+import "cp_f1ap/cpnb_f1_link_info_update_ack.proto";
+import "cp_if/cpif_pool_failure_ind.proto";
+import "cp_ue/cpcell_resource_release_list_resp.proto";
+import "cp_if/cpif_partial_reset_request.proto";
+import "cp_if/cpue_ue_release_bulk_resp.proto";
+import "cp_if/cpif_cu_links_lock_req.proto";
+import "cp_xn/cpif_inter_gnb_resource_needed_ind.proto";
+import "cp_if/cpif_get_resource_usage_req.proto";
+import "options/protobuf_options.proto";
+import "cp_cell/cpcell_x2link_status_update_ack.proto";
+import "cp_if/cpif_trsw_configuration_update_request.proto";
+import "cp_if/cpif_cell_status_info_req.proto";
+import "cp_if/cpe2_cell_status_info_ack.proto";
+import "cp_if/cpe2_link_info_ack.proto";
+import "cp_if/cpif_link_info_req.proto";
+
+package cp_if_interface;
+
+message CpIfRequest
+{
+    option (port_numbers) = 30541;
+    option (port_numbers) = 30542;
+    oneof request
+    {
+        CpIfNiddDeliveryRequest cpIfNiddDeliveryRequest = 1;
+        CpIfDataDistributionRequest cpIfDataDistributionRequest = 2;
+        CpIfDeploymentCompleteInd cpIfDeploymentCompleteInd = 3;
+        cp_if_interface.CpIfTransportSoftwareConfigurationRequest cpIfTrswDeliveryRequest = 4;
+        cp_e1ap_interface.CpNbE1LinkInfoUpdateAck cpNbE1LinkInfoUpdateAck = 5;
+        cpif_xn_interface.CpNbXnLinkInfoUpdateAck cpNbXnLinkInfoUpdateAck = 6;
+        CpIfNgRanUpdateReq cpIfNgRanUpdateReq = 7;
+        cp_f1ap_interface.CpNbF1LinkInfoUpdateAck cpNbF1LinkInfoUpdateAck = 8;
+        CpIfPoolFailureInd cpIfPoolFailureInd = 9;
+        cp_ue_request.CpCellResourceReleaseListResp cp_cell_resource_release_list_resp = 10;
+        CpIfPartialResetRequest cpIfPartialResetRequest = 11;
+        cp_if_interface.CpUeUeReleaseBulkResp cpueUeReleaseBulkResp = 12;
+        CpIfCellConfigUpdateReq cpIfCellConfigUpdateReq = 14;
+        CpIfCuLinksLockReq cpIfCuLinksLockReq = 15;
+        cpif_xn_interface.CpIfInterGnbResourceNeededInd cpIfInterGnbResourceNeededInd = 16;
+        CpIfGetResourceUsageReq cpIfGetResourceUsageReq = 17;
+        cell_request.CpCellX2LinkStatusUpdateAck cpCellX2LinkStatusUpdateAck = 18;
+        cp_if_interface.CpIfTransportSoftwareConfigurationUpdateRequest cpIfTrswDeliveryUpdateRequest = 19;
+        cp_if_interface.CpIfCellStatusInfoReq cpIfCellStatusInfoReq = 20;
+        cp_if_interface.CpE2CellStatusInfoAck cpE2CellStatusInfoAck = 21;
+        cp_if_interface.CpE2LinkInfoAck cpE2LinkInfoAck = 22;
+        cp_if_interface.CpIfLinkInfoReq cpIfLinkInfoReq = 23;
+    }
+}

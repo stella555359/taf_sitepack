@@ -1,0 +1,13 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package cell_request;
+
+message CpCellRrcResourceReq
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    uint32 duUeId = 2;
+    uint64 nrCellIdentifier = 3;
+    uint32 transactionId = 4;
+    bool isEmergencyCall = 5;
+}

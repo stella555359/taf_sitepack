@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+enum FilterCoefficient
+{
+    fc0 = 0;
+    fc1 = 1;
+    fc2 = 2;
+    fc3 = 3;
+    fc4 = 4;
+    fc5 = 5;
+    fc6 = 6;
+    fc7 = 7;
+    fc8 = 8;
+    fc9 = 9;
+    fc11 = 10;
+    fc13 = 11;
+    fc15 = 12;
+    fc17 = 13;
+    fc19 = 14;
+    spare1 = 15;
+}

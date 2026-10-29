@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import "common/plmn_identity.proto";
+import "common/nr_cell_identity.proto";
+
+package common_messages;
+
+message NRCGI
+{
+    PlmnIdentity plmnIdentity = 1;
+    NRCellIdentity nrCellIdentity = 2;
+}

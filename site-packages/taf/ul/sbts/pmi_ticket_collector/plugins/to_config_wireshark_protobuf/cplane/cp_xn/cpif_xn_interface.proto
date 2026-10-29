@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+import "common/f1_setup_ind.proto";
+import "common/ng_setup_indication.proto";
+import "cp_if/cpif_data_distribution_request.proto";
+import "cp_if/cpif_nidd_delivery_request.proto";
+import "cp_if/cpif_trsw_configuration_request.proto";
+import "cp_if/ng_ran_update_req.proto";
+import "cp_if_internal/reset_request.proto";
+import "cp_xn/cpif_inter_gnb_resource_needed_ind.proto";
+import "common/cpif_receive_from_core.proto";
+import "cp_xn/cpif_send_to_gnb.proto";
+import "cp_xn/cpnb_xn_link_info_update_ack.proto";
+import "cp_if_internal/xn_info_update_req.proto";
+import "cp_if/cpif_cell_config_update_request.proto";
+import "cp_if/cpif_pool_failure_ind.proto";
+import "common/overload_protection_ping.proto";
+import "common/e1_status_indication.proto";
+import "cp_if_internal/amf_configuration_resp.proto";
+import "options/protobuf_options.proto";
+import "cp_if/cpif_cell_activation_readiness_ack.proto";
+import "cp_cell/cpcell_ho_cell_avbl_ack.proto";
+import "cp_if/cpif_inter_gnb_ca_cell_config_resp.proto";
+import "cp_if/cpif_resource_status_update_notification.proto";
+import "cp_if/cpif_trsw_configuration_update_request.proto";
+import "common/cpif_initial_nrdc.proto";
+import "common/cpif_transfer_nrdc.proto";
+import "cp_if/cpif_inter_gnb_ca_cell_update_notification.proto";
+import "cp_xn/cpif_f1_inter_gnb_ca_xp_setup_failure.proto";
+import "cp_xn/cpif_f1_inter_gnb_ca_xp_setup_response.proto";
+
+package cpif_xn_interface;
+
+message XnServiceRequest
+{
+    option (port_numbers) = 30533;
+    option (port_numbers) = 30545;
+    oneof request
+    {
+        common_messages.F1SetupInd f1SetupInd = 1;
+        cp_if_interface.CpIfNiddDeliveryRequest cpIfNiddDeliveryRequest = 2;
+        cp_if_interface.CpIfTransportSoftwareConfigurationRequest cpIfTrswConfigurationRequest = 3;
+        cpif_xn_interface.CpNbXnLinkInfoUpdateAck cpNbXnLinkInfoUpdateAck = 4;
+        common_messages.NGSetupIndication ngSetupIndication = 5;
+        cpif_xn_interface.CpIfSendToGnb cpIfSendToGnb = 6;
+        cp_if_internal_message.ResetRequest resetRequest = 7;
+        cp_if_interface.CpIfDataDistributionRequest cpIfDataDistributionRequest = 8;
+        cp_if_interface.CpIfNgRanUpdateReq cpIfNgRanUpdateReq = 9;
+        cp_if_internal_message.XnInfoUpdateReq xnInfoUpdateReq = 10;
+        cp_if_interface.CpIfCellConfigUpdateReq cpIfCellConfigUpdateReq = 11;
+        cp_if_interface.CpIfPoolFailureInd cpIfPoolFailureInd = 12;
+        common_messages.OverloadProtectionPing overloadProtectionPing = 13;
+        common_messages.E1StatusIndication e1StatusIndication = 14;
+        common_messages.CpIfReceiveFromCore cpIfReceiveFromCore = 15;
+        cp_if_internal_message.AmfConfigurationResp amfConfigurationResp = 16;
+        cpif_xn_interface.CpIfInterGnbResourceNeededInd cpIfInterGnbResourceNeededInd = 17;
+        cp_if_interface.CpCellCellActivationReadinessAck cpCellCellActivationReadinessAck = 18;
+        cell_request.CpCellHoCellAvblAck cpCellHoCellAvblAck = 19;
+        cp_if_interface.CpIfTransportSoftwareConfigurationUpdateRequest cpIfTrswConfigurationUpdateRequest = 20;
+        common_messages.CpIfInitialNrDc cpIfInitialNrDc = 21;
+        common_messages.CpIfTransferNrDc cpIfTransferNrDc = 22;
+        cp_if_interface.CpCellInterGnbCaCellConfigResp cpCellInterGnbCaCellConfigResp = 23;
+        cp_if_interface.CpCellResourceStatusUpdateNotification cpCellResourceStatusUpdateNotification = 24;
+        cp_if_interface.CpCellInterGnbCaCellUpdateNotification cpCellInterGnbCaCellUpdateNotification = 25;
+        CpIfF1IgNBCAXpSetupResponse cpIfF1IgNBCAXpSetupResponse = 26;
+        CpIfF1IgNBCAXpSetupFailure cpIff1IgNBCAXpSetupFailure = 27;
+    }
+}

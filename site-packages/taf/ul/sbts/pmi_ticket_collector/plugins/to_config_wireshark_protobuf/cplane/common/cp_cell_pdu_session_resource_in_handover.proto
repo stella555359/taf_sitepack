@@ -1,0 +1,37 @@
+syntax = "proto3";
+import "common/cp_cell_pdu_session_resource_to_be_setup_item.proto";
+import "common/snssai.proto";
+package common_messages;
+
+message PduSessionResourcesToBeSetupItem
+{
+    // 5G_RAN_CP_4909 (PDU Session Resource to be Setup List)
+
+    message DrbToQosMappingList
+    {
+        message DrbToQosMappingItem
+        {
+            uint32 drbId = 1;
+            repeated PduSessionResourceToBeSetupItem.QoSFlowSetupRequestItem qosFlowSetupList = 2;
+        }
+        repeated DrbToQosMappingItem drbToQosMappingsList = 1;
+    }
+
+    message QoSFlowSetupRequestList
+    {
+        repeated PduSessionResourceToBeSetupItem.QoSFlowSetupRequestItem qosFlowSetupRequestList = 1;
+    }
+
+    uint32 pduSessionId = 1;
+    common_messages.SNSSAI sNssai = 2;
+    oneof PduSessionResources
+    {
+        DrbToQosMappingList drbToQos = 3;
+        QoSFlowSetupRequestList qosFlow = 4;
+    };
+    bool isEmergencySession = 5;
+    oneof optional_defaultDrbId
+    {
+        uint32 defaultDrbId = 6;
+    }
+}

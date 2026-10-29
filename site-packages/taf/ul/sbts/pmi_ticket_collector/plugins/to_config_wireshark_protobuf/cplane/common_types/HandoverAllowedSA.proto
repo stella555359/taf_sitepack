@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+enum HandoverAllowedSA
+{
+    forbidden = 0;
+    allowed = 1;
+    xnHoNotAllowed = 3;
+}

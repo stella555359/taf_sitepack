@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package common_type;
+
+enum NrScs
+{
+    scs15 = 0;
+    scs30 = 1;
+    scs60 = 2;
+    scs120 = 3;
+}

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package cp_x2ap_interface;
+
+enum CauseRadioNetwork
+{
+    causeCellNotAvailable = 0;
+}
+
+enum CauseMisc
+{
+    omIntervention = 0;
+}

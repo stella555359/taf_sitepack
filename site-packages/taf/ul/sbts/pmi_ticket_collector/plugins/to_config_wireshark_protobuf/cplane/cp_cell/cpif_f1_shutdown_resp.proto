@@ -1,0 +1,11 @@
+syntax = "proto3";
+import "common_types/common_status.proto";
+
+package cell_request;
+
+message CpIfF1ShutdownResp
+{
+    Status status = 1;
+    uint64 gnbDuId = 2;
+    uint32 transactionId = 3;
+}

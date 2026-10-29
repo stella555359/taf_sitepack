@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+package cp_ue_request;
+message BearerDeleteListResp
+{
+    message UeIdCuList
+    {
+        uint32 ueIdCu = 1 [ (cucpueid_param) = true ];
+        message BearerList
+        {
+            uint32 srbIdentity = 1;
+        }
+        repeated BearerList bearerList = 2;
+    }
+    repeated UeIdCuList ueIdCuList = 1 [ (cucpueid_list_param) = true ];
+}

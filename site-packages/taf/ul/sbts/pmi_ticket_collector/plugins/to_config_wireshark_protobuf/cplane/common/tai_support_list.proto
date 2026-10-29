@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+import "common/snssai.proto";
+import "common/plmn_identity.proto";
+
+package common;
+
+message TAISupportList
+{
+    message SliceSupportList
+    {
+        repeated common_messages.SNSSAI sliceSupportList = 1;
+    }
+    message BroadcastPlmnsItem
+    {
+        common_messages.PlmnIdentity plmnIdentity = 1;
+        SliceSupportList sliceSupportList = 2;
+    }
+    message BroadcastPLMNList
+    {
+        repeated BroadcastPlmnsItem broadcastPlmnsList = 1;
+    }
+    message TaiSupportItem
+    {
+        bytes tac = 1;
+        BroadcastPLMNList broadcastPLMNList = 2;
+    }
+    repeated TaiSupportItem tAISupportList = 1;
+}

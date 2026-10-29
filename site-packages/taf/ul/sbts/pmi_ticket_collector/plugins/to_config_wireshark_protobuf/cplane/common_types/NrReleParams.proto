@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "common_types/Plmn.proto";
+
+package common_type;
+
+message NrReleParams
+{
+    uint32 eNodeBId = 1;
+    common_type.Plmn ecgiPlmn = 2;
+    uint32 lcrId = 3;
+    enum CellIndividualOffset
+    {
+        dBneg24 = 0;
+        dBneg22 = 2;
+        dBneg20 = 4;
+        dBneg18 = 6;
+        dBneg16 = 8;
+        dBneg14 = 10;
+        dBneg12 = 12;
+        dBneg10 = 14;
+        dBneg8 = 16;
+        dBneg6 = 18;
+        dBneg5 = 19;
+        dBneg4 = 20;
+        dBneg3 = 21;
+        dBneg2 = 22;
+        dBneg1 = 23;
+        dB0 = 24;
+        dB1 = 25;
+        dB2 = 26;
+        dB3 = 27;
+        dB4 = 28;
+        dB5 = 29;
+        dB6 = 30;
+        dB8 = 32;
+        dB10 = 34;
+        dB12 = 38;
+        dB14 = 40;
+        dB16 = 42;
+        dB18 = 44;
+        dB20 = 48;
+        dB22 = 50;
+        dB24 = 54;
+    }
+    oneof optional_cellIndividualOffset
+    {
+        CellIndividualOffset cellIndividualOffset = 4;
+    }
+    bool eutranCellBlacklisted = 5;
+    uint32 hoFailCounter = 6;
+    enum PciStatus
+    {
+        Identified = 0;
+        Recheck = 1;
+        Confirmed = 2;
+        Duplicated = 3;
+    }
+    PciStatus pciStatus = 7;
+    bool removeNotAllowed = 8;
+    bool dontReportToOam = 9;
+    oneof optional_consecRecheckAllowed
+    {
+        uint32 consecRecheckAllowed = 10;
+    }
+    oneof optional_idleTimeAllowed
+    {
+        uint32 idleTimeAllowed = 11;
+    }
+}

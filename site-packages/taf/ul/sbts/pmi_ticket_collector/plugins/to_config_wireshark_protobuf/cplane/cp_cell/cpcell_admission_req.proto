@@ -1,0 +1,187 @@
+syntax = "proto3";
+import "common/cp_cell_pdu_session_resource_in_handover.proto";
+import "common_types/Plmn.proto";
+import "common_types/PlmnIdentities.proto";
+import "common_types/allocationAndRetentionPriority.proto";
+import "options/protobuf_options.proto";
+import "common_types/sCellCandidates_type.proto";
+import "common_types/UeContextInformation.proto";
+import "common_types/global_gnb_id.proto";
+package cell_request;
+
+message CpCellAdmissionReq
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    oneof optional_nsaMEnbUeX2apId
+    {
+        uint32 menbUeX2apId = 2;
+    }
+    oneof optional_saGnbDuUeF1apId
+    {
+        uint32 gnbDuUeF1apId = 3;
+    }
+    oneof optional_serveCellId
+    {
+        uint32 serveCellId = 4;
+    }
+    repeated uint64 cellList = 5;
+
+    enum Reason
+    {
+        psCellChange = 0;
+        nsaSgnbAddition = 1;
+        intraGnbHo = 2;
+        newSaUeContextInGnbWithHo = 3;
+        scgConfigurationChange = 4;
+        interGnbResumeFromInactive = 5;
+        intraGnbResumeFromInactive = 6;
+        initialContextSetup = 7;
+        intraGnbDuRRE = 8;
+        interGnbCaAddition = 9;
+        nrDcSNodeAddition = 10;
+    }
+
+    Reason reason = 6;
+
+    ue_context_information.UeContextInformation ueContextInformation = 8;
+
+    repeated common_messages.PduSessionResourcesToBeSetupItem pduSessionResourcesToBeSetupList = 9;
+
+    oneof optional_numberOfNonGbrDrbsToBeAdded
+    {
+        uint32 numberOfNonGbrDrbsToBeAdded = 10;
+    }
+
+    oneof optional_selectedPlmn
+    {
+        common_type.Plmn selectedPlmn = 11;
+    }
+
+    message HandoverRestrictionList
+    {
+        common_type.Plmn servingPLMN = 1;
+        oneof optional_equivalentPLMNs
+        {
+            common_type.PlmnIdentities equivalentPLMNs = 2;
+        }
+    }
+
+    oneof optional_handoverRestrictionList
+    {
+        HandoverRestrictionList handoverRestrictionList = 12;
+    }
+
+    message TAC
+    {
+        uint32 tac = 1;
+    }
+
+    message ForbiddenAreaInformation
+    {
+        common_type.Plmn plmnIdentity = 1;
+        repeated TAC forbiddenTACs = 2;
+    }
+
+    message ServiceAreainformation
+    {
+        common_type.Plmn plmnIdentity = 1;
+        repeated TAC allowedTACs = 2;
+        repeated TAC notAllowedTACs = 3;
+    }
+
+    message MobilityRestrictionList
+    {
+        common_type.Plmn servingPLMN = 1;
+        oneof optional_equivalentPLMNs
+        {
+            common_type.PlmnIdentities equivalentPLMNs = 2;
+        }
+        repeated ForbiddenAreaInformation forbiddenAreaInformation = 3;
+        repeated ServiceAreainformation serviceAreainformation = 4;
+    }
+
+    oneof optional_mobilityRestrictionList
+    {
+        MobilityRestrictionList mobilityRestrictionList = 13;
+    }
+
+    message SNSSAI
+    {
+        uint32 sst = 1 [ (sensitive_param) = true ];
+        oneof optional_Sd
+        {
+            uint32 sd = 2 [ (sensitive_param) = true ];
+        }
+    }
+
+    message SliceSupportItem
+    {
+        SNSSAI snssai = 1;
+    }
+
+    message SliceSupportList
+    {
+        repeated SliceSupportItem sliceSupportItem = 1;
+    }
+
+    message AmfPlmnSupportItem
+    {
+        common_type.Plmn plmnIdentity = 1;
+        SliceSupportList sliceSupportList = 2;
+    }
+
+    message AmfPlmnSupportList
+    {
+        repeated AmfPlmnSupportItem amfPlmnSupportItem = 1;
+    }
+
+    oneof optional_amfPlmnSupportList
+    {
+        AmfPlmnSupportList amfPlmnSupportList = 14;
+    }
+
+    uint32 transactionId = 15;
+
+    message ErabItem
+    {
+        uint32 erabId = 1;
+        uint32 qciId = 2;
+        common_type.AllocationAndRetentionPriority allocationAndRetentionPriority = 3;
+    }
+
+    message ErabList
+    {
+        repeated ErabItem erabItem = 1;
+    }
+
+    ErabList erabList = 16;
+
+    bool ueCaCapabilityCheckRequired = 17;
+
+    message psCellCandidateAndSCellCandidatesType
+    {
+        uint64 cellId = 1;
+        SCellCandidatesType sCellCandidatesType = 2;
+    }
+    repeated psCellCandidateAndSCellCandidatesType scellAdditionBaseOnHoOptimizationPSCellList = 18;
+
+    oneof optional_srcGnbUeXnapId
+    {
+        uint32 srcGnbUeXnapId = 19;
+    }
+
+    oneof optional_amfUeNgapId
+    {
+        uint64 amfUeNgapId = 20;
+    }
+
+    oneof optional_primeGnbId
+    {
+        common_messages.GlobalGnbId primeGnbId = 21;
+    }
+
+    oneof optional_mnUeXnApId
+    {
+        uint32 mnUeXnApId = 22;
+    }
+}

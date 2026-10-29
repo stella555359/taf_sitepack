@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+import "common_types/PlmnIdentities.proto";
+import "common_types/EUtraMultibandInfoList.proto";
+
+package common_type;
+
+message NrAdjECellParams
+{
+    uint32 eNodeBId = 1;
+    uint32 ePSTrackingAreaCode = 2;
+    uint32 earfcnValue = 3;
+    common_type.Plmn ecgiPlmn = 4;
+    uint32 lcrId = 5;
+    uint32 physCellId = 6;
+    common_type.EUtraMultibandInfoList eUtraMultibandInfoList = 7;
+    common_type.PlmnIdentities secondaryPlmnIdList = 8;
+}

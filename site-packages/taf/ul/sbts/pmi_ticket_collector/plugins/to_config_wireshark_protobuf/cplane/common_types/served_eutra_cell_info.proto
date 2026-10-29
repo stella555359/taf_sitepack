@@ -1,0 +1,48 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+
+package common_type;
+
+message ServedEutraCellInfo
+{
+    enum TransBandwidth
+    {
+        bw6 = 0;
+        bw15 = 1;
+        bw25 = 2;
+        bw50 = 3;
+        bw75 = 4;
+        bw100 = 5;
+        bw1 = 6;
+    }
+    message FDDInfo
+    {
+        uint32 ulEarfcn = 1;
+        uint32 dlEarfcn = 2;
+        TransBandwidth ulTransBandwidth = 3;
+        TransBandwidth dlTransBandwidth = 4;
+    }
+
+    message TDDInfo
+    {
+        uint32 earfcn = 1;
+        TransBandwidth transBandwidth = 2;
+    }
+
+    message ECGI
+    {
+        Plmn plmn = 1;
+        bytes eutraCellIdentity = 2;
+    }
+    ECGI eCGI = 1;
+    int32 pci = 2;
+
+    repeated Plmn broadcastPLMNs = 3;
+
+    oneof EutraModeInfo
+    {
+        FDDInfo fddInfo = 4;
+        TDDInfo tddInfo = 5;
+    }
+    bytes tac = 6;
+}

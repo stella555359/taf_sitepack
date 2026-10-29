@@ -1,0 +1,92 @@
+syntax = "proto3";
+import "cp_nb/fshlap_interface_create_response.proto";
+import "cp_nb/fshlap_nb_envelope.proto";
+import "cp_nb/cpnb_cell_status_ind.proto";
+import "cp_nb/cpnb_cell_status_ack.proto";
+import "cp_nb/cpnb_cell_info_update_ind.proto";
+import "cp_nb/cpnb_cell_info_update_ack.proto";
+import "cp_nb/cpcell_nidd_delivery_response.proto";
+import "cp_nb/cpif_nidd_delivery_response.proto";
+import "cp_nb/cpue_nidd_delivery_response.proto";
+import "cp_nb/cpif_data_distribution_response.proto";
+import "cp_nb/cpcell_data_distribution_response.proto";
+import "cp_nb/cpue_data_distribution_response.proto";
+import "cp_nb/cpif_trsw_configuration_response.proto";
+import "cp_nb/cpif_trsw_configuration_update_response.proto";
+import "cp_nb/cpnb_x2_link_info_update_ind.proto";
+import "cp_nb/cpcell_resource_cleanup_resp.proto";
+import "cp_nb/cpif_deployment_complete_ack.proto";
+import "cp_nb/cpnb_f1_link_info_update_ind.proto";
+import "cp_nb/cpnb_e1_link_info_update_ind.proto";
+import "cp_nb/cpnb_nglink_info_update_ind.proto";
+import "cp_nb/cpue_load_measurement_report.proto";
+import "cp_nb/cpue_load_measurement_setup_response.proto";
+import "cp_nb/cpnb_xn_link_info_update_ind.proto";
+import "cp_nb/cpvemc_nidd_delivery_response.proto";
+import "cp_nb/cpvemc_data_distribution_response.proto";
+import "cp_nb/cpcell_cell_config_update_resp.proto";
+import "cp_nb/cpcell_neighbour_plan_update_info_ack.proto";
+import "cp_nb/cpif_cu_links_lock_resp.proto";
+import "cp_nb/cpnb_overload_status_ind.proto";
+import "cp_nb/cpcell_get_resource_usage_resp.proto";
+import "cp_nb/cpue_get_resource_usage_resp.proto";
+import "cp_nb/cpif_get_resource_usage_resp.proto";
+import "cp_nb/cpcell_pool_failure_ack.proto";
+import "cp_nb/cpe2_data_distribution_response.proto";
+import "cp_nb/cpe2_nidd_delivery_response.proto";
+import "cp_nb/cpif_pool_failure_ack.proto";
+import "cp_nb/cpe2_trsw_configuration_response.proto";
+import "cp_nb/cpnb_e2_ran_functions_stateind.proto";
+import "cp_nb/cpnb_e2_link_info_update_ind.proto";
+import "cp_nb/cpe2_cu_links_lock_resp.proto";
+import "options/protobuf_options.proto";
+
+package cp_nb_message;
+
+message CpNbMessage
+{
+    option (port_numbers) = 30510;
+    oneof message
+    {
+        FsHlApInterfaceCreateResponse fsHLAP_interface_create_response = 1;
+        FsHlAp_nb_envelope fsHLAP_nb_envelope = 99;
+        CpCellNiddDeliveryResponse cpCellNiddDeliveryResponse = 3;
+        CpIfNiddDeliveryResponse cpIfNiddDeliveryResponse = 4;
+        CpUeNiddDeliveryResponse cpUeNiddDeliveryResponse = 5;
+        CpIfDataDistributionResponse cpIfDataDistributionResponse = 6;
+        CpCellDataDistributionResponse cpCellDataDistributionResponse = 7;
+        CpIfTransportSoftwareConfigurationResponse cpIfTransportSoftwareConfigurationResponse = 8;
+        CpCellResourceCleanUpResp cpCellResourceCleanUpResp = 9;
+        CpNbF1LinkInfoUpdateInd cpNbF1LinkInfoUpdateInd = 10;
+        CpNbE1LinkInfoUpdateInd cpNbE1LinkInfoUpdateInd = 11;
+        CpIfTransportSoftwareConfigurationUpdateResponse cpIfTransportSoftwareConfigurationUpdateResponse = 13;
+        CpVemcNiddDeliveryResponse cpVemcNiddDeliveryResponse = 98;
+        CpVemcDataDistributionResponse cpVemcDataDistributionResponse = 12;
+        CpUeDataDistributionResponse cpUeDataDistributionResponse = 100;
+        CpNbX2LinkInfoUpdateInd cpNbX2LinkInfoUpdateInd = 101;
+        CpUeLoadMeasSetupResp cpUeLoadMeasSetupResp = 103;
+        CpUeLoadMeasReport cpUeLoadMeasReport = 104;
+        CpNbNGLinkInfoUpdateInd cpNbNGLinkInfoUpdateInd = 105;
+        CpNbXnLinkInfoUpdateInd cpNbXnLinkInfoUpdateInd = 106;
+        CpIfDeploymentCompleteAck cpIfDeploymentCompleteAck = 108;
+        CpCellCellConfigUpdateResp cpCellCellConfigUpdateResp = 110;
+        CpNbCellStatusInd cpNbCellStatusInd = 111;
+        CpCellNeighbourPlanUpdateInfoAck cpCellNeighbourPlanUpdateInfoAck = 112;
+        CpIfCuLinksLockResp cpIfCuLinksLockResp = 113;
+        CpNbOverloadStatusInd cpNbOverloadStatusInd = 114;
+        CpNbCellInfoUpdateInd cpNbCellInfoUpdateInd = 115;
+        CpCellGetResourceUsageResp cpCellGetResourceUsageRes = 116;
+        CpUeGetResourceUsageResp cpUeGetResourceUsageRes = 117;
+        CpIfGetResourceUsageResp cpIfGetResourceUsageRes = 118;
+        CpCellPoolFailureAck cpCellPoolFailureAck = 119;
+        CpNbCellStatusAck cpNbCellStatusAck = 120;
+        CpNbCellInfoUpdateAck cpNbCellInfoUpdateAck = 121;
+        CpE2DataDistributionResponse cpE2DataDistributionResponse = 122;
+        CpE2NiddDeliveryResponse cpE2NiddDeliveryResponse = 123;
+        CpIfPoolFailureAck cpIfPoolFailureAck = 124;
+        CpE2TransportSoftwareConfigurationResponse cpE2TransportSoftwareConfigurationResponse = 125;
+        CpNbE2RanFunctionsStateInd cpNbE2RanFunctionsStateInd = 126;
+        CpNbE2LinkInfoUpdateInd cpNbE2LinkInfoUpdateInd = 127;
+        CpE2CuLinksLockResp cpE2CuLinksLockResp = 128;
+    }
+}

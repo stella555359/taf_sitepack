@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+import "cp_x2ap/send_to_menb.proto";
+import "cp_if/cpif_resource_release_req.proto";
+import "cp_if/cpif_trsw_configuration_request.proto";
+import "common/f1_setup_ind.proto";
+import "cp_if/cpif_nidd_delivery_request.proto";
+import "cp_if/cpif_deployment_complete_ind.proto";
+import "cp_if/cpif_data_distribution_request.proto";
+import "cp_if/cpif_cell_config_update_request.proto";
+import "cp_x2ap/cpif_endc_update_request.proto";
+import "cp_x2ap/cpnb_x2_link_info_update_ack.proto";
+import "cp_x2ap/cpif_cpue_scale_in_indication.proto";
+import "cp_x2ap/uemappingentry_updated_ind.proto";
+import "cp_if/cpif_pool_failure_ind.proto";
+import "common/e1_status_indication.proto";
+import "cp_if_internal/reset_request.proto";
+import "cp_if_internal/reset_response.proto";
+import "cp_x2ap/cpif_x2_served_cell_information_request.proto";
+import "cp_if/cpif_cu_links_lock_req.proto";
+import "cp_cell/cpcell_x2link_status_update_ack.proto";
+import "common/overload_protection_ping.proto";
+import "sctp_reply/sctp_reply_message.proto";
+import "options/protobuf_options.proto";
+import "cp_if/cpif_trsw_configuration_update_request.proto";
+
+package cp_x2ap_interface;
+
+message X2apRequest
+{
+    option (port_numbers) = 30532;
+    oneof request
+    {
+        cp_if_interface.CpIfTransportSoftwareConfigurationRequest cpIfTrswConfigurationRequest = 1;
+        SendToMeNb sendToMeNb = 2;
+        common_messages.F1SetupInd f1SetupInd = 3;
+        cp_if_interface.CpIfResourceReleaseReq cpIfResourceReleaseReq = 4;
+        cp_if_interface.CpIfDeploymentCompleteInd cpIfDeploymentCompleteInd = 7;
+        cp_if_interface.CpIfDataDistributionRequest cpIfDataDistributionRequest = 8;
+        CpIfEndcUpdateRequest cpIfEndcUpdateRequest = 9;
+        CpNbX2LinkInfoUpdateAck cpNbX2LinkInfoUpdateAck = 11;
+        CpIfCpUeScaleInIndication cpIfCpUeScaleInIndication = 12;
+        UeMappingEntryUpdatedInd ueMappingEntryUpdatedInd = 14;
+        cp_if_interface.CpIfPoolFailureInd cpIfPoolFailureInd = 15;
+        common_messages.E1StatusIndication e1StatusIndication = 18;
+        cp_if_interface.CpIfNiddDeliveryRequest cpIfNiddDeliveryRequest = 21;
+        cp_if_internal_message.ResetRequest resetRequest = 22;
+        CpIfX2ServedCellInformationRequest x2ServedCellInformationRequest = 23;
+        cp_if_internal_message.ResetResponse resetResponse = 24;
+        cp_if_interface.CpIfCellConfigUpdateReq cpIfCellConfigUpdateReq = 25;
+        cp_if_interface.CpIfCuLinksLockReq cpIfCuLinksLockReq = 26;
+        common_messages.OverloadProtectionPing overloadProtectionPing = 27;
+        sctp_reply.SCTPReply sctpReply = 28;
+        cell_request.CpCellX2LinkStatusUpdateAck cpCellX2LinkStatusUpdateAck = 29;
+        cp_if_interface.CpIfTransportSoftwareConfigurationUpdateRequest cpIfTrswConfigurationUpdateRequest = 30;
+    }
+}

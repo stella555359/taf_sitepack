@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "common/nrcgi.proto";
+
+package common_messages;
+
+message NRCellsItem
+{
+    NRCGI nrCGI = 1;
+}
+
+message CellToReportList
+{
+    repeated NRCellsItem nrCellsItemList = 1;
+}

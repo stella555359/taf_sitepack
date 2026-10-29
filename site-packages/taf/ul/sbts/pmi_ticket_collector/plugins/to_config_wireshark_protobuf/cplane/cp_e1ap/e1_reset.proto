@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package cp_e1ap_interface;
+
+message E1Reset
+{
+    repeated uint32 cuUeIds = 1 [ (cucpueid_list_param) = true ];
+}

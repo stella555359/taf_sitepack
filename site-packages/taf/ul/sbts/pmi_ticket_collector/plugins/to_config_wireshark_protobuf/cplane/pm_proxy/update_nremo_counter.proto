@@ -1,0 +1,15 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+
+package pm_agent_proxy_request;
+
+message UpdateNremoCounter
+{
+    uint32 counter_id = 1;
+    int64 cell_id = 2;
+    common_type.Plmn source_plmn_id = 3;
+    common_type.Plmn ecgi_plmn_id = 4;
+    uint32 enodeb_id = 5;
+    uint32 lte_cell_lcr_id = 6;
+    uint64 value = 7;
+}

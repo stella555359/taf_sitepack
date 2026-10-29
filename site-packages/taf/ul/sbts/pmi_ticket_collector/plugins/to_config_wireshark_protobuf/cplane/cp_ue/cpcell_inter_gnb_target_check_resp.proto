@@ -1,0 +1,34 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common/nrcgi.proto";
+
+package cp_ue_request;
+
+message CpCellInterGnbTargetCheckResp
+{
+    enum Result
+    {
+        available = 0;
+        unavailable = 1;
+    }
+
+    enum CellCause
+    {
+        cellNotFound = 0;
+        other = 1;
+        onlyNgHoPossible = 2;
+    }
+
+    message NrCellIdWithTargetCheckResultList
+    {
+        common_messages.NRCGI nrCGI = 1;
+        Result result = 2;
+        oneof optional_cellCause
+        {
+            CellCause cause = 3;
+        }
+    }
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    repeated NrCellIdWithTargetCheckResultList nrCellIdWithResultList = 2;
+    uint32 transactionId = 3;
+}

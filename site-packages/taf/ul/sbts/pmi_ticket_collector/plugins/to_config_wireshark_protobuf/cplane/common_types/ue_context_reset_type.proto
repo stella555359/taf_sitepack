@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+enum UeContextResetType
+{
+    x2ResetMenbInitiated = 0;
+    x2ResetSgnbInitiated = 1;
+    ngResetGnbInitiated = 2;
+    ngResetAmfInitiated = 3;
+}

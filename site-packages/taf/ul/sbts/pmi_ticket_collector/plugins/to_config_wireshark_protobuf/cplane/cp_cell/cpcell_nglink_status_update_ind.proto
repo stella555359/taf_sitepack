@@ -1,0 +1,22 @@
+syntax = "proto3";
+package cell_request;
+
+message CpCellNgLinkStatusUpdateInd
+{
+    uint32 transactionId = 1;
+
+    message Operable
+    {
+        repeated uint64 gnbDuIdList = 2;
+    }
+
+    message Inoperable
+    {
+    }
+
+    oneof operability
+    {
+        Operable operable = 2;
+        Inoperable inoperable = 3;
+    }
+}

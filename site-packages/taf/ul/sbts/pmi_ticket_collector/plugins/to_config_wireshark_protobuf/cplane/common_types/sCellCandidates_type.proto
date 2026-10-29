@@ -1,0 +1,7 @@
+syntax = "proto3";
+enum SCellCandidatesType
+{
+    all = 0;
+    fdd = 1;
+    fR1Tdd = 2;
+}

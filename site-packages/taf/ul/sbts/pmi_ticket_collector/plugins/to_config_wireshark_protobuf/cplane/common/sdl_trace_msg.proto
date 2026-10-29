@@ -1,0 +1,74 @@
+syntax = "proto3";
+import "common_types/ImlbOffsets.proto";
+import "common_types/CaOffsets.proto";
+import "options/protobuf_options.proto";
+
+package common_messages;
+
+message SdlTraceMsg
+{
+    option (port_numbers) = 30546;
+    option (port_numbers) = 30547;
+    option (port_numbers) = 30548;
+
+    enum SdlOperation
+    {
+        setAndPublishAsync = 0;
+        removeAndPublishAsync = 1;
+        getAsync = 2;
+        setAsync = 3;
+        removeAsync = 4;
+        notificationCallback = 5;
+    }
+    SdlOperation operation = 1;
+
+    message SdlData
+    {
+        oneof data
+        {
+            common_type.ImlbOffsets imlbOffsets = 1;
+            common_type.CaOffsets caOffsets = 2;
+        }
+    }
+
+    message DataMap
+    {
+        map<string, SdlData> dataMapElem = 1;
+    }
+
+    oneof optional_datamap
+    {
+        DataMap dataMap = 2;
+    }
+
+    message SdlKeyList
+    {
+        repeated string key = 1;
+    }
+
+    oneof optional_keyList
+    {
+        SdlKeyList keyList = 3;
+    }
+
+    enum SdlOperationStatus
+    {
+        success = 0;
+        notConnected = 1;
+        operationInterrupted = 2;
+        backendFailure = 3;
+        rejectedByBackend = 4;
+        rejectedBySdl = 5;
+        timeout = 6;
+    }
+
+    oneof optional_operationStatus
+    {
+        SdlOperationStatus operationStatus = 4;
+    }
+
+    oneof optional_notificationChannel
+    {
+        string notificationChannel = 5;
+    }
+}

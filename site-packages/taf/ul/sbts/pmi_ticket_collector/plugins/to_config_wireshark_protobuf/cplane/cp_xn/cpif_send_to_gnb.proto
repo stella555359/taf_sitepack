@@ -1,0 +1,25 @@
+syntax = "proto3";
+import "common_types/global_gnb_id.proto";
+
+package cpif_xn_interface;
+
+message CpIfSendToGnb
+{
+    oneof optional_gnbUeXnapId
+    {
+        uint32 gnbUeXnapId = 1;
+    }
+    common_messages.GlobalGnbId globalGnbId = 2;
+
+    oneof optional_adjGnbUeXnApId
+    {
+        uint32 adjGnbUeXnApId = 3;
+    }
+
+    bytes encodedXnMessage = 4;
+
+    oneof optional_handoverCompleteIndicator
+    {
+        bool handoverCompleteIndicator = 5;
+    }
+}

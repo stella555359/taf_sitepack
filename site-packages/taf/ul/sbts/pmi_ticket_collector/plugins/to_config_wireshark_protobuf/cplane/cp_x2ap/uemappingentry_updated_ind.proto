@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "common_types/global_enb_id.proto";
+
+package cp_x2ap_interface;
+
+message UeMappingEntryUpdatedInd
+{
+    common_messages.GlobalEnbId globalEnbId = 1;
+}

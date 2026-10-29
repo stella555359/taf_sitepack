@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package cell_request;
+
+message CpCellPeriodicUeMeasForTraceReq
+{
+    uint32 transactionId = 1;
+    uint32 cuUeId = 2 [ (cucpueid_param) = true ];
+    uint64 nrCellIdentity = 3;
+    uint32 cookie = 4;
+}

@@ -1,0 +1,1005 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/ActInterGnbCa.proto";
+import "common_types/GnbCuType.proto";
+import "common_types/CellDepType.proto";
+import "common_types/CarrierAggregationSupportList.proto";
+import "common_types/ActNrDualConnectivity.proto";
+import "common/snssai.proto";
+import "common/cell_bwp_list.proto";
+import "common/bwp_profile_list.proto";
+
+package cell_request;
+
+enum Scs
+{
+    khz15 = 0;
+    khz30 = 1;
+    khz60 = 2;
+    khz120 = 3;
+}
+
+message SystemInfoParameters
+{
+    enum SsbScs
+    {
+        khz15 = 0;
+        khz30 = 1;
+        khz120 = 2;
+        khz240 = 3;
+    }
+
+    enum QHyst
+    {
+        QHyst_dB0 = 0;
+        QHyst_dB1 = 1;
+        QHyst_dB2 = 2;
+        QHyst_dB3 = 3;
+        QHyst_dB4 = 4;
+        QHyst_dB5 = 5;
+        QHyst_dB6 = 6;
+        QHyst_dB8 = 7;
+        QHyst_dB10 = 8;
+        QHyst_dB12 = 9;
+        QHyst_dB14 = 10;
+        QHyst_dB16 = 11;
+        QHyst_dB18 = 12;
+        QHyst_dB20 = 13;
+        QHyst_dB22 = 14;
+        QHyst_dB24 = 15;
+    }
+
+    enum TEvaluation
+    {
+        s30 = 0;
+        s60 = 1;
+        s120 = 2;
+        s180 = 3;
+        s240 = 4;
+    }
+
+    enum HystSf
+    {
+        HystSf_dB_6 = 0;
+        HystSf_dB_4 = 1;
+        HystSf_dB_2 = 2;
+        HystSf_dB0 = 3;
+    }
+
+    message OptionalHystSf
+    {
+        HystSf value = 1;
+    }
+
+    enum QOffsetRange
+    {
+        QOffset_dBN24 = 0;
+        QOffset_dBN22 = 1;
+        QOffset_dBN20 = 2;
+        QOffset_dBN18 = 3;
+        QOffset_dBN16 = 4;
+        QOffset_dBN14 = 5;
+        QOffset_dBN12 = 6;
+        QOffset_dBN10 = 7;
+        QOffset_dBN8 = 8;
+        QOffset_dBN6 = 9;
+        QOffset_dBN5 = 10;
+        QOffset_dBN4 = 11;
+        QOffset_dBN3 = 12;
+        QOffset_dBN2 = 13;
+        QOffset_dBN1 = 14;
+        QOffset_dB0 = 15;
+        QOffset_dB1 = 16;
+        QOffset_dB2 = 17;
+        QOffset_dB3 = 18;
+        QOffset_dB4 = 19;
+        QOffset_dB5 = 20;
+        QOffset_dB6 = 21;
+        QOffset_dB8 = 22;
+        QOffset_dB10 = 23;
+        QOffset_dB12 = 24;
+        QOffset_dB14 = 25;
+        QOffset_dB16 = 26;
+        QOffset_dB18 = 27;
+        QOffset_dB20 = 28;
+        QOffset_dB22 = 29;
+        QOffset_dB24 = 30;
+    }
+
+    message OptionalQOffsetRange
+    {
+        QOffsetRange value = 1;
+    }
+
+    enum CellReselectionSubPriority
+    {
+        oDot2 = 0;
+        oDot4 = 1;
+        oDot6 = 2;
+        oDot8 = 3;
+    }
+
+    message OptionalCellReselectionSubPriority
+    {
+        CellReselectionSubPriority value = 1;
+    }
+
+    message OptionalBool
+    {
+        bool value = 1;
+    }
+
+    message OptionalInteger
+    {
+        uint32 value = 1;
+    }
+
+    message NeighCellInfo
+    {
+        uint32 physicalCellId = 1;
+        QOffsetRange qOffsetCell = 2;
+        OptionalInteger qRxLevMinOffsetCell = 3;
+        OptionalInteger qQualMinOffsetCell = 4;
+    }
+
+    enum Range
+    {
+        n4 = 0;
+        n8 = 1;
+        n12 = 2;
+        n16 = 3;
+        n24 = 4;
+        n32 = 5;
+        n48 = 6;
+        n64 = 7;
+        n84 = 8;
+        n96 = 9;
+        n128 = 10;
+        n168 = 11;
+        n252 = 12;
+        n504 = 13;
+        n1008 = 14;
+        range_spare1 = 15;
+    }
+
+    message OptionalRange
+    {
+        Range value = 1;
+    }
+
+    message BlackListInfo
+    {
+        uint32 start = 1;
+        OptionalRange range = 2;
+    }
+
+    message TReselectionNRSF
+    {
+        enum SpeedStateScaleFactor
+        {
+            oDot25 = 0;
+            oDot5 = 1;
+            oDot75 = 2;
+            lDot0 = 3;
+        }
+
+        SpeedStateScaleFactor medium = 1;
+        SpeedStateScaleFactor high = 2;
+    }
+
+    message OptionalTReselectionNRSF
+    {
+        TReselectionNRSF value = 1;
+    }
+
+    enum SsbMtcPeriodicity
+    {
+        sf5 = 0;
+        sf10 = 1;
+        sf20 = 2;
+        sf40 = 3;
+        sf80 = 4;
+        sf160 = 5;
+    }
+
+    message OptionalSsbMtcPeriodicity
+    {
+        SsbMtcPeriodicity value = 1;
+    }
+
+    enum SsbMtcDuration
+    {
+        sf_1 = 0;
+        sf_2 = 1;
+        sf_3 = 2;
+        sf_4 = 3;
+        sf_5 = 4;
+    }
+
+    message OptionalSsbMtcDuration
+    {
+        SsbMtcDuration value = 1;
+    }
+
+    message IntraFreqIdleModeParams
+    {
+        int32 qRxLevMin = 1;
+        OptionalSInteger qQualMin = 2;
+        uint32 sIntraSearchP = 3;
+        OptionalInteger sIntraSearchQ = 4;
+        int32 tReselectionNr = 5;
+        OptionalSInteger pMax = 6;
+        repeated NeighCellInfo neighCellInfo = 7;
+        repeated BlackListInfo blackListInfo = 8;
+        OptionalTReselectionNRSF tReselectionNrSf = 9;
+        OptionalMultifreqBandIndicatorNR multiFreqBandIndicatorNR = 10;
+        repeated OptionalNrMultibandInfoList nrMultibandInfoList = 11;
+        OptionalSsbMtcPeriodicity ssbMtcPeriodicity = 12;
+        OptionalInteger ssbMtcOffset = 13;
+        OptionalSsbMtcDuration ssbMtcDuration = 14;
+        OptionalBool deriveSsbIndexFromCell = 15;
+    }
+
+    enum EutraPhysCellIdRange
+    {
+        eutra_n4 = 0;
+        eutra_n8 = 1;
+        eutra_n12 = 2;
+        eutra_n16 = 3;
+        eutra_n24 = 4;
+        eutra_n32 = 5;
+        eutra_n48 = 6;
+        eutra_n64 = 7;
+        eutra_n84 = 8;
+        eutra_n96 = 9;
+        eutra_n128 = 10;
+        eutra_n168 = 11;
+        eutra_n252 = 12;
+        eutra_n504 = 13;
+        eutra_spare2 = 14;
+        eutra_spare1 = 15;
+    }
+
+    message OptionalEutraPhysCellIdRange
+    {
+        EutraPhysCellIdRange value = 1;
+    }
+
+    message OptionalSInteger
+    {
+        int32 value = 1;
+    }
+
+    message EutraIdleModeParams
+    {
+        message NeighCarrierInfo
+        {
+            uint32 carrierFreq = 1;
+
+            message NeighCellInfo
+            {
+                uint32 physCellId = 1;
+                QOffsetRange qOffsetCell = 2;
+                OptionalInteger qRxLevMinOffsetCell = 3;
+                OptionalInteger qQualMinOffsetCell = 4;
+            }
+            repeated NeighCellInfo neighCellInfo = 2;
+
+            message BlackListInfo
+            {
+                uint32 start = 1;
+                OptionalEutraPhysCellIdRange range = 2;
+            }
+            repeated BlackListInfo blackListInfo = 3;
+
+            enum AllowedMeasBw
+            {
+                mbw6 = 0;
+                mbw15 = 1;
+                mbw25 = 2;
+                mbw50 = 3;
+                mbw75 = 4;
+                mbw100 = 5;
+            }
+            AllowedMeasBw allowedMeasBw = 4;
+            bool presenceAntPort1 = 5;
+            OptionalInteger cellReselectionPriority = 6;
+
+            enum CellReselectionSubPriority
+            {
+                oDot2 = 0;
+                oDot4 = 1;
+                oDot6 = 2;
+                oDot8 = 3;
+            }
+
+            message OptionalCellReselectionSubPriority
+            {
+                CellReselectionSubPriority value = 1;
+            }
+
+            OptionalCellReselectionSubPriority cellReselectionSubPriority = 7;
+            uint32 threshXHigh = 8;
+            uint32 threshXLow = 9;
+            int32 qRxLevMin = 10;
+            int32 qQualMin = 11;
+            int32 pMaxEutra = 12;
+            OptionalInteger threshXHighQ = 13;
+            OptionalInteger threshXLowQ = 14;
+
+            message EutraFreqBandIndicator
+            {
+                uint32 value = 1;
+            }
+            message OptionalEutraMultiBandInfo
+            {
+                EutraFreqBandIndicator eutraFreqBandIndicator = 1;
+            }
+            repeated OptionalEutraMultiBandInfo eutraMultiBandInfoList = 15;
+        }
+        repeated NeighCarrierInfo neighCarrierInfo = 1;
+    }
+
+    enum SfMediumEutra
+    {
+        oDot25 = 0;
+        oDot5 = 1;
+        oDot75 = 2;
+        lDot0 = 3;
+    }
+
+    enum SfHighEutra
+    {
+        high_oDot25 = 0;
+        high_oDot5 = 1;
+        high_oDot75 = 2;
+        high_lDot0 = 3;
+    }
+
+    message OptionalSfMediumEutra
+    {
+        SfMediumEutra value = 1;
+    }
+
+    message OptionalSfHighEutra
+    {
+        SfHighEutra value = 1;
+    }
+
+    message ThreshXQ
+    {
+        uint32 highQ = 1;
+        uint32 lowQ = 2;
+    }
+
+    message OptionalThreshXQ
+    {
+        ThreshXQ value = 1;
+    }
+
+    message Smtc
+    {
+        enum Periodicity
+        {
+            sf5 = 0;
+            sf10 = 1;
+            sf20 = 2;
+            sf40 = 3;
+            sf80 = 4;
+            sf160 = 5;
+        }
+
+        enum Duration
+        {
+            sf_1 = 0;
+            sf_2 = 1;
+            sf_3 = 2;
+            sf_4 = 3;
+            sf_5 = 4;
+        }
+
+        Periodicity periodicity = 1;
+        uint32 offset = 2;
+        Duration duration = 3;
+    }
+
+    message OptionalMultifreqBandIndicatorNR
+    {
+        repeated uint32 value = 1;
+    }
+
+    message OptionalFreqBandIndicatorNR
+    {
+        uint32 value = 1;
+    }
+
+    message OptionalNrBandPriority
+    {
+        uint32 value = 1;
+    }
+
+    message OptionalNrNsPmaxList
+    {
+        message NrNsPmaxValue
+        {
+            message OptionalAdditionalPmax
+            {
+                sint32 optvalue = 1;
+            }
+
+            message AdditionalSpectrumEmission
+            {
+                uint32 value = 1;
+            }
+
+            message OptionalNrNsPmaxPriority
+            {
+                uint32 optvalue = 1;
+            }
+
+            OptionalAdditionalPmax additionalPmax = 1;
+            AdditionalSpectrumEmission additionalSpectrumEmission = 2;
+            OptionalNrNsPmaxPriority nrNsPmaxPriority = 3;
+        }
+        repeated NrNsPmaxValue items = 1;
+    }
+
+    message OptionalNrMultibandInfoList
+    {
+        OptionalFreqBandIndicatorNR freqBandIndicatorNR = 1;
+        OptionalNrBandPriority nrBandPriority = 2;
+        OptionalNrNsPmaxList nrNsPmaxList = 3;
+    }
+
+    message NeighCarrierInfo
+    {
+        message AbsThreshSsbConsolidation
+        {
+            OptionalInteger thresholdRSRP = 1;
+            OptionalInteger thresholdRSRQ = 2;
+        }
+
+        uint32 dlCarrierFreq = 1;
+        SsbScs ssbSubcarrierSpacing = 2;
+        OptionalInteger numberOfTransmittedSsBlocks = 3;
+        Smtc smtc = 4;
+        int32 qRxLevMin = 5;
+        uint32 tReselectionNr = 6;
+        uint32 threshXHighP = 7;
+        uint32 threshXLowP = 8;
+        QOffsetRange qOffsetFrequency = 9;
+        repeated NeighCellInfo neighCellList = 10;
+        repeated BlackListInfo blackListInfo = 11;
+        OptionalThreshXQ threshXQ = 12;
+        OptionalInteger cellReselectionPriority = 13;
+        OptionalCellReselectionSubPriority cellReselectionSubPriority = 14;
+        OptionalSInteger qQualMin = 15;
+        OptionalSInteger pMax = 16;
+        OptionalTReselectionNRSF tReselectionNrSf = 17;
+        OptionalInteger numberOfSSBlocksToAverage = 18;
+        AbsThreshSsbConsolidation absThreshSsbConsolidation = 19;
+        uint32 freqBandIndicatorNR = 20;
+        OptionalMultifreqBandIndicatorNR multiFreqBandIndicatorNR = 21;
+        repeated OptionalNrMultibandInfoList nrMultibandInfoList = 22;
+        bool interFreqCarrierFreqIsDSS = 23;
+        OptionalBool deriveSsbIndexFromCell = 24;
+    }
+
+    message OptionalTEvaluation
+    {
+        TEvaluation value = 1;
+    }
+
+    enum SibType
+    {
+        sib2 = 0;
+        sib3 = 1;
+        sib4 = 2;
+        sib5 = 3;
+        sib6 = 4;
+        sib7 = 5;
+        sib8 = 6;
+        sib9 = 7;
+    }
+
+    enum SibPeriodicity
+    {
+        rf8 = 0;
+        rf16 = 1;
+        rf32 = 2;
+        rf64 = 3;
+        rf128 = 4;
+        rf256 = 5;
+        rf512 = 6;
+    }
+
+    message SibSchedulingListItem
+    {
+        SibType sibType = 1;
+        SibPeriodicity sibPeriodicity = 2;
+    }
+
+    OptionalInteger nrofSsBlocksToAverage = 1;
+    OptionalInteger absThreshSsbRsrpConsolidation = 2;
+    OptionalInteger absThreshSsbRsrqConsolidation = 3;
+    OptionalQOffsetRange rangeToBestCell = 4;
+    QHyst qHyst = 5;
+    OptionalTEvaluation tEvaluation = 6;
+    OptionalTEvaluation tHystNormal = 7;
+    OptionalInteger nCellChangeMedium = 8;
+    OptionalInteger nCellChangeHigh = 9;
+    OptionalHystSf addHystSfMedium = 10;
+    OptionalHystSf addHystSfHigh = 11;
+    OptionalInteger sNonIntraSearchP = 12;
+    OptionalInteger sNonIntraSearchQ = 13;
+    uint32 threshServingLowP = 14;
+    OptionalInteger threshServingLowQ = 15;
+    uint32 cellReselectionPriority = 16;
+    uint32 tReselectionEutra = 17;
+    OptionalSfMediumEutra sfMediumEutra = 18;
+    OptionalSfHighEutra sfHighEutra = 19;
+    OptionalCellReselectionSubPriority cellReselectionSubPriority = 20;
+    IntraFreqIdleModeParams intraFreqIdleModeParams = 22;
+    repeated NeighCarrierInfo interFreqIdleModeParams = 23;
+    EutraIdleModeParams eutraIdleModeParameters = 24;
+    repeated SibSchedulingListItem sibSchedulingList = 25;
+    bool skipSsbToMeasInSib = 26;
+}
+
+message CpCellNiddDeliveryRequest
+{
+    uint32 transactionId = 1;
+    bytes masterPlmnIdentity = 2 [ (sensitive_param) = true ];
+
+    enum CellTechnology
+    {
+        FDD = 0;
+        TDD = 1;
+    }
+
+    enum ChBw
+    {
+        mhz5 = 0;
+        mhz10 = 1;
+        mhz15 = 2;
+        mhz20 = 3;
+        mhz30 = 4;
+        mhz40 = 5;
+        mhz50 = 6;
+        mhz60 = 7;
+        mhz70 = 8;
+        mhz80 = 9;
+        mhz90 = 10;
+        mhz100 = 11;
+    }
+
+    message OptionalInteger
+    {
+        uint32 value = 1;
+    }
+
+    message Nsa
+    {
+        uint32 maxNumOfUsers = 1;
+        uint32 maxNumOfNonGBRBearers = 2;
+        uint32 addNumOfHoUsers = 3;
+        uint32 addNumOfNonGBRBearersHo = 4;
+        bool spCellChangeEnabled = 5;
+    }
+
+    message Sa
+    {
+        uint32 maxNumOfNonGBRBearersCGRPSA = 1;
+        uint32 maxNumOfRrcCGRPSA = 2;
+        uint32 addNumOfRrcCGRPSAHo = 3;
+        uint32 addNumOfNonGBRBearersCGRPSAHo = 4;
+    }
+
+    message NrPlmnSetNSA
+    {
+        repeated uint32 nrPlmnIdList = 1;
+    }
+
+    message NrPlmnSetSA
+    {
+        repeated uint32 nrPlmnIdList = 1;
+        uint32 trackingAreaId = 2;
+    }
+
+    message LteNrDssMbsfnRatio
+    {
+        uint32 minValue = 1;
+        uint32 maxValue = 2;
+    }
+
+    message LteNrDssDlRatio
+    {
+        uint32 minNrDssRatio = 1;
+        uint32 maxNrDssRatio = 2;
+    }
+
+    message NrDssLTE
+    {
+        oneof optional_lteNrDssMbsfnRatio
+        {
+            LteNrDssMbsfnRatio lteNrDssMbsfnRatio = 1;
+        }
+        oneof optional_lteNrDssDlRatio
+        {
+            LteNrDssDlRatio lteNrDssDlRatio = 2;
+        }
+    }
+
+    message UeCaConnectionsLimits
+    {
+        OptionalInteger maxNumOf5To8CCUsers = 1;
+        OptionalInteger maxNumOf3To4CCUsers = 2;
+        OptionalInteger maxNumOf2CCUsers = 3;
+    }
+
+    message EmergencyCallRestrictions
+    {
+        bool emergencyCallMrListIgnore = 1;
+        bool emergencyCallPlmnHoAllowed = 2;
+    }
+
+    message BwpProfile
+    {
+        uint32 cRbSizeDl = 1;
+        uint32 cRbSizeUl = 2;
+    }
+
+    message NrCellData
+    {
+        uint64 nrCellIdentity = 1;
+        uint32 physicalCellId = 2;
+        uint32 nrArfcn = 3;
+        CellTechnology cellTechnology = 4; // not specified in CP_2362, yet needed in CP_19995
+        uint32 freqBandIndicatorNR = 5;
+        oneof optional_chBw
+        {
+            ChBw chBw = 6;
+        }
+        uint32 maxNumOfUsersPerCell = 7;
+        uint32 maxNumOfSCellAlloc = 8;
+        uint32 maxNumOfNonGBRBearersSA = 9;
+        uint32 maxNumOfRrcSA = 10;
+        uint32 maxNumOfUsersNRCell = 11;
+        uint32 nrCellId = 12;
+        SystemInfoParameters systemInfoParameters = 13;
+        uint32 ccLoadThreshold = 14;
+        NrPlmnSetNSA nrPlmnSetNSA = 15;
+        repeated NrPlmnSetSA nrPlmnSetSAList = 16;
+        enum LteNrDssMode
+        {
+            none = 0;
+            dssPhase1 = 1;
+            dlCrsTdmUlFdm = 2;
+            dssPhase3 = 3;
+        }
+        LteNrDssMode lteNrDssMode = 17;
+        oneof optional_nrDssLTE
+        {
+            NrDssLTE nrDssLTE = 18;
+        }
+        repeated uint32 emergencyAreaIdList = 19;
+        oneof optional_ueCaConnectionsLimits
+        {
+            UeCaConnectionsLimits ueCaConnectionsLimits = 20;
+        }
+        uint32 maxNumOfCaUsersNRCell = 21;
+        uint32 numOfRadioResReservForEmergency = 22;
+        uint32 maxNumOfGBRBearersSA = 23;
+        uint32 addNumOfGBRBearers = 24;
+        EmergencyCallRestrictions emergencyCallRestrictions = 25;
+        bool actEmergencyCall = 26;
+        oneof optional_arpPrioEmergencyCall
+        {
+            uint32 arpPrioEmergencyCall = 27;
+        }
+        CellDepType cellDepType = 29;
+        repeated BwpProfile bwpList = 30;
+        uint32 weightForSCellSelection = 31;
+        bool acceptUnknownBcInCaTable = 32;
+        bool acceptUnsupportedBcs = 33;
+        bool actCaAwarePsCellSelectionFr1 = 34;
+        oneof optional_maxNumSCellsDlFr1
+        {
+            uint32 maxNumSCellsDlFr1 = 35;
+        }
+        enum ActARPBasedAC
+        {
+            actArpBasedAcOff = 0;
+            actArpBasedAcOn = 1;
+            actArpBasedAcHandover = 2;
+        }
+        ActARPBasedAC actARPBasedAC = 36;
+        bool actEnhMultipleDedicatedBWPs = 37;
+        bool actNonVoNRGBRService = 38;
+        oneof optional_numOfRadioResReservForTempUse
+        {
+            uint32 numOfRadioResReservForTempUse = 39;
+        }
+        oneof optional_allowEmergencyReservForTempUse
+        {
+            bool allowEmergencyReservForTempUse = 40;
+        }
+        oneof optional_preferNsaPreemption
+        {
+            bool preferNsaPreemption = 41;
+        }
+        ActNrDualConnectivity actNrDualConnectivity = 42;
+        oneof optional_cellBwpList
+        {
+            common_messages.CellBwpList cellBwpList = 43;
+        }
+    }
+
+    message NrCellGroupData
+    {
+
+        uint32 nrCellGroupId = 1;
+        Nsa nsa = 2;
+        Sa sa = 3;
+        repeated NrCellData nrCellDataContainer = 4;
+        Scs scs = 5;
+    }
+
+    message GnbDuData
+    {
+        uint64 gnbDuId = 1;
+        uint64 nrDuId = 2;
+        repeated NrCellGroupData nrCellGroupDataContainer = 3;
+        bool actInterNumerologyCa = 4;
+        repeated CarrierAggregationSupportList carrierAggregationSupportList = 5;
+        uint32 numOfDrbsReservForEmergency = 6;
+        enum FlexibleCAMode
+        {
+            BasicCAMode = 0;
+            MixedCAMode = 1;
+            ConfigurationIndependent = 2;
+            NumberCellAmount = 3;
+        }
+        FlexibleCAMode flexibleCAMode = 7;
+        enum CrntiAllocationOption
+        {
+            max72cells = 0;
+            max144cells = 1;
+        }
+        CrntiAllocationOption crntiAllocationOption = 8;
+        uint32 dlToUlContributionRatio = 9;
+        common_type.ActInterGnbCa actInterGnbCa = 10;
+    }
+
+    repeated GnbDuData gnbDuDataContainer = 4;
+
+    enum CaConfigurationSupport
+    {
+        None = 0;
+        Support_2DL2UL = 1;
+        Support_4DL2UL = 2;
+        Support_8DL4UL = 3;
+    }
+
+    message CarrierAggregationSettings
+    {
+        bool actCarrierAggregation = 1;
+        oneof optional_maxNumSCellsDl
+        {
+            uint32 maxNumSCellsDl = 2;
+        }
+        oneof optional_maxNumSCellsUl
+        {
+            uint32 maxNumSCellsUl = 3;
+        }
+        CaConfigurationSupport caConfigurationSupport = 4;
+    }
+
+    CarrierAggregationSettings carrierAggregationSettings = 5;
+
+    enum DlBandwidth
+    {
+        prbs32 = 0;
+        prbs64 = 1;
+        prbs128 = 2;
+        prbs256 = 3;
+    }
+
+    message SubCellGroup
+    {
+        DlBandwidth dlBandwidth = 1;
+    }
+
+    SubCellGroup subCellGroup = 6;
+
+    uint32 timerf1NonUeProcGuard = 7;
+    uint32 nsaCellActivationAlarmTimer = 8;
+    enum F1SetupTimeToWait
+    {
+        v1s = 0;
+        v2s = 1;
+        v5s = 2;
+        v10s = 3;
+        v20s = 4;
+        v60s = 5;
+    }
+
+    oneof optional_f1SetupTimeToWait
+    {
+        F1SetupTimeToWait f1SetupTimeToWait = 9;
+    }
+
+    GnbCuType gnbCuType = 10;
+
+    uint32 nrBtsId = 11;
+    uint32 x2partialresetcnftmr = 12;
+    uint32 maxX2EnDcCfUpRetry = 13;
+    uint32 x2EnDcCfUpRdmDelayTmr = 14;
+    uint32 x2EnDcCfUpNbInfoBackOffTmr = 15;
+    uint32 x2EnDcCfUpRspTmr = 16;
+
+    message NrCellBlockHoTimer
+    {
+        uint64 nrCellIdentity = 1;
+        oneof optional_blockHoTimer
+        {
+            uint32 blockHoTimer = 2;
+        }
+    }
+
+    repeated NrCellBlockHoTimer nrCellBlockHoTimerContainer = 17;
+
+    bool actRanSharing = 18;
+
+    message NrPLMN
+    {
+        uint32 nrPlmnId = 1;
+        bytes plmnIdentity = 2 [ (sensitive_param) = true ];
+    }
+
+    repeated NrPLMN nrPlmnContainer = 19;
+
+    uint32 saCellActivationAlarmTimer = 20;
+    uint32 gnbIdLength = 21;
+    bool actCMAS = 22;
+    bool actTrsSepaNSARanSharing = 23;
+    bool actETWS = 25;
+
+    message TrackingArea
+    {
+        uint32 fiveGsTac = 1;
+        uint32 trackingAreaId = 2;
+    }
+
+    repeated TrackingArea trackingAreaList = 26;
+    oneof optional_maxX2CellListSize
+    {
+        uint32 maxX2CellListSize = 27;
+    }
+    message AnrConfiguration
+    {
+        uint32 consecHoFailThreshold = 1;
+
+        message NrAnrProfile
+        {
+            oneof optional_ssbFrequency
+            {
+                uint32 ssbFrequency = 1;
+            }
+            uint32 idleTimeForNrNbRemoval = 2;
+            uint32 maxNumAnrNrrelAllowed = 3;
+            uint32 consecRecheckForNrNbRemoval = 4;
+
+            enum CellDepMode
+            {
+                NSA = 0;
+                SA = 1;
+                both = 2;
+                automatic = 3;
+                saPlusNsa = 4;
+            }
+            CellDepMode cellDepMode = 5;
+            oneof optional_nrarfcn
+            {
+                uint32 nrarfcn = 6;
+            }
+        }
+        message NrAnrProfileE
+        {
+            oneof optional_carrierFrequency
+            {
+                uint32 carrierFrequency = 1;
+            }
+            uint32 idleTimeForEutraNbRemoval = 2;
+            uint32 maxNumAnrNrrelPerCell = 3;
+            uint32 consecRecheckForEutraNbRemoval = 4;
+        }
+        repeated NrAnrProfile nrAnrProfiles = 2;
+        oneof optional_defaultAnrProfile
+        {
+            NrAnrProfile defaultAnrProfile = 3;
+        }
+        bool actAutoNrNbRemoval = 4;
+        bool actNsaUeBasedAnrNr = 5;
+        bool actSaUeBasedAnrNr = 6;
+        bool actNsaUeBasedInterFreqAnrNr = 7;
+        bool actEnhanceIntraNrIntraFreqAnr = 8;
+        bool actSaUeBasedAnrEutra = 9;
+        repeated NrAnrProfileE nrAnrProfileEs = 10;
+        oneof optional_defaultAnrProfileE
+        {
+            NrAnrProfileE defaultAnrProfileE = 11;
+        }
+        bool actAutoEutraNbRemoval = 12;
+        uint32 consecHoFailThresEutra = 13;
+        uint32 maxNumNrAnrMoiAllowed = 14;
+    }
+    AnrConfiguration anrConfiguration = 28;
+    uint32 networkPlanVersion = 29;
+    bool actMultiFreqBandIndicatorNr = 30;
+    uint32 nrDcSnCellActivationAlarmTimer = 31;
+    enum ActBcsCheck
+    {
+        disabled = 0;
+        enabledFr1 = 1;
+    }
+    ActBcsCheck actBcsCheck = 32;
+    bool actNrpmqapProfiles = 33;
+    message Nrpmqaps
+    {
+        message NrPmqapRange
+        {
+            uint32 min = 1;
+            uint32 max = 2;
+        }
+        enum ProfileType
+        {
+            Nsa = 0;
+            Sa = 1;
+            Both = 2;
+        }
+
+        uint32 profileId = 1;
+        ProfileType profileType = 2;
+        repeated NrPmqapRange arpPriorityLevel = 3;
+        repeated NrPmqapRange qci = 4;
+        repeated NrPmqapRange fiveQi = 5;
+        oneof optional_plmnIdentity
+        {
+            bytes plmnIdentity = 6 [ (sensitive_param) = true ];
+        }
+        oneof optional_sliceSupportItem
+        {
+            common_messages.SNSSAI snssai = 7;
+        }
+    }
+    repeated Nrpmqaps nrpmqaps = 34;
+    enum ProductVariantPlanned
+    {
+        BTS_5gCloud = 0;
+        BTS_5gClassical = 1;
+    }
+    ProductVariantPlanned productVariantPlanned = 35;
+    bool actTrsSepaSARanSharing = 36;
+    bool actConnRrcPooling = 37;
+    bool actExtN77Support = 38;
+    bool act3gppBL22R4 = 39;
+    enum RejectSuppBcs
+    {
+        none = 0;
+        BCS4 = 1;
+    }
+    RejectSuppBcs rejectSuppBcs = 40;
+    bool actAllowedBcListMrdcPrioBcSel = 41;
+    bool actDrbPreemption = 42;
+    bool actUserPreemption = 43;
+    uint32 numOfDRBReservedPerEmergency = 44;
+    bool actMultipleDedicatedBWPs = 45;
+    bool actCaContCalcMaxAllowedScsFr1 = 46;
+    oneof optional_bwpProfileList
+    {
+        common_messages.BwpProfileList bwpProfileList = 47;
+    }
+    string nrBtsDistName = 48;
+    bool actHighestEstNrTputBcSel = 49;
+}

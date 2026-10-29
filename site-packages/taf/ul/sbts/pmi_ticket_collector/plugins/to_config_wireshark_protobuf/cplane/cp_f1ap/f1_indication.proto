@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package cp_f1ap_interface;
+
+import "common/f1_setup_ind.proto";
+import "common/f1_link_failure.proto";
+
+message F1Indication
+{
+    oneof indication
+    {
+        common_messages.F1SetupInd f1SetupInd = 1;
+        common_messages.F1LinkFailure f1LinkFailure = 2;
+    }
+}

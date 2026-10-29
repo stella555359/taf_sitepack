@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+enum NumberOfTransmittedSsBlocks
+{
+    numberOfTransmittedSsBlocks1beam = 0;
+    numberOfTransmittedSsBlocks2beams = 1;
+    numberOfTransmittedSsBlocks4beams = 2;
+    numberOfTransmittedSsBlocks6beams = 3;
+    numberOfTransmittedSsBlocks8beams = 4;
+    numberOfTransmittedSsBlocks9beams = 5;
+    numberOfTransmittedSsBlocks12beams = 6;
+    numberOfTransmittedSsBlocks15beams = 7;
+    numberOfTransmittedSsBlocks18beams = 8;
+    numberOfTransmittedSsBlocks21beams = 9;
+    numberOfTransmittedSsBlocks24beams = 10;
+    numberOfTransmittedSsBlocks32beams = 11;
+    numberOfTransmittedSsBlocks56beams = 12;
+}

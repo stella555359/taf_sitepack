@@ -1,0 +1,24 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/common_status.proto";
+
+package cp_ue_request;
+message UlSduReceiveInd
+{
+    uint32 transactionId = 1;
+    uint32 cuUeId = 2 [ (cucpueid_param) = true ];
+    message MessageResult
+    {
+        Status status = 1;
+        uint32 cause = 2;
+    }
+    MessageResult messageResult = 3;
+    uint32 srbIdentity = 4;
+    enum RrcIntegrityCheckResult
+    {
+        passed = 0;
+        failed = 1;
+    }
+    RrcIntegrityCheckResult rrcIntegrityCheckResult = 5;
+    bytes rrcMsgPayload = 6;
+}

@@ -1,0 +1,66 @@
+syntax = "proto3";
+package common_type;
+
+import "common_types/MeasEnabled.proto";
+import "common_types/AllowedMeasBandwidth.proto";
+import "common_types/TimeToTrigger.proto";
+import "common_types/QOffsetRange.proto";
+import "common_types/ReportAmount.proto";
+import "common_types/ReportInterval.proto";
+
+message NrHoIrParams
+{
+    AllowedMeasBandwidth allowedMeasBandwidth = 1;
+    MeasEnabled b2MeashoEnabled = 2;
+    oneof optional_b2Threshold1hoRsrp
+    {
+        uint32 b2Threshold1hoRsrp = 3;
+    }
+    oneof optional_b2Threshold1hoRsrq
+    {
+        uint32 b2Threshold1hoRsrq = 4;
+    }
+    uint32 eArfcnValue = 5;
+    message EutraB2MeashoRsrp
+    {
+        uint32 b2HysteresishoRsrp = 1;
+        uint32 b2Threshold2hoRsrp = 2;
+        TimeToTrigger b2TimeToTriggerhoRsrp = 3;
+        uint32 b2HysteresishoRsrpVoNr = 4;
+        uint32 b2Threshold2hoRsrpVoNr = 5;
+        TimeToTrigger b2TimeToTriggerhoRsrpVoNr = 6;
+    }
+    oneof optional_eutraB2MeashoRsrp
+    {
+        EutraB2MeashoRsrp eutraB2MeashoRsrp = 6;
+    }
+    message EutraB2MeashoRsrq
+    {
+        uint32 b2HysteresishoRsrq = 1;
+        uint32 b2Threshold2hoRsrq = 2;
+        TimeToTrigger b2TimeToTriggerhoRsrq = 3;
+        uint32 b2HysteresishoRsrqVoNr = 4;
+        uint32 b2Threshold2hoRsrqVoNr = 5;
+        TimeToTrigger b2TimeToTriggerhoRsrqVoNr = 6;
+    }
+    oneof optional_eutraB2MeashoRsrq
+    {
+        EutraB2MeashoRsrq eutraB2MeashoRsrq = 7;
+    }
+    oneof optional_eutraFreqQOffsetRange
+    {
+        QOffsetRange eutraFreqQOffsetRange = 8;
+    }
+    bool presenceAntennaPort1 = 9;
+    ReportAmount reportAmount = 10;
+    ReportInterval reportInterval = 11;
+    bool widebandRsrqMeas = 12;
+    oneof optional_b2Threshold1hoRsrpVoNr
+    {
+        uint32 b2Threshold1hoRsrpVoNr = 13;
+    }
+    oneof optional_b2Threshold1hoRsrqVoNr
+    {
+        uint32 b2Threshold1hoRsrqVoNr = 14;
+    }
+}

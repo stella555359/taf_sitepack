@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package pm_agent_proxy_request;
+
+message SNSSAI
+{
+    uint32 sst = 1 [ (sensitive_param) = true ];
+    uint32 sd = 2 [ (sensitive_param) = true ];
+}

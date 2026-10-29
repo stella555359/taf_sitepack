@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "common_types/pdu_session_resource_resp_cause.proto";
+package common_messages;
+
+message PduSessionNotAdmittedResources
+{
+    uint32 pduSessionId = 1;
+    PduSessionResourceRespCause cause = 2;
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package common_messages;
+
+message GlobalGnbId
+{
+    bytes plmnIdentity = 1 [ (sensitive_param) = true ];
+    uint32 gnbId = 2;
+    uint32 gnbIdLength = 3;
+}

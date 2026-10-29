@@ -1,0 +1,99 @@
+{
+    "name": "5G negative KPI analysis EDA MNRCA-60316",
+    "description": "Fail on negative KPI values unless kpi or unit is defined in exclude lists",
+    "tags": [
+      {
+      "name": "5G",
+      "type": "RAT"
+      },
+      {
+       "name": "Common",
+        "type": "scope"
+      }
+    ],
+    "domain": "KPI",
+    "algorithm": "negative-kpi-counter-detector",
+    "trigger": "test_case_collection_ended",
+    "rule": {
+      "kpi": {
+        "exclude_kpi_id": ["LTE_5092i","NR_5143a","NR_6096a","NR_2473a"],
+        "exclude_kpi_unit": [
+          "dBm",
+          "dB",
+          "1.0E-1 dBm",
+          "1.0E-1 dB",
+          "0.001 CQI"
+        ],
+        "custom_targets": [
+          {
+              "kpi_id": "NR_5023b",
+              "gte": -0.06
+          },
+          {
+              "kpi_id": "NR_5033b",
+              "gte": -0.06
+          },
+          {
+              "kpi_id": "NR_5032c",
+              "gte": -0.06
+          },
+          {
+              "kpi_id": "LTE_5089b",
+              "gte": -1.0
+          },
+          {
+              "kpi_id": "LTE_6642c",
+              "gte": -0.1
+          },
+          {
+              "kpi_id": "LTE_6954d",
+              "gte": -0.1
+          },
+          {
+              "kpi_id": "LTE_5432b",
+              "gte": -15
+          },
+          {
+              "kpi_id": "LTE_5089b",
+              "gte": -0.5
+          },
+          {
+              "kpi_id": "NR_1407b",
+              "gte": -0.5
+          },
+          {
+              "kpi_id": "C_LTE_1009a",
+              "gte": -1.5
+          },
+          {
+              "kpi_id": "C_LTE_1012a",
+              "gte": -1.5
+          },
+          {
+              "kpi_id": "C_LTE_1010a",
+              "gte": -1.5
+          },
+          {
+              "kpi_id": "LTE_5004d",
+              "gte": -0.5
+          },
+          {
+              "kpi_id": "LTE_5025i",
+              "gte": -0.5
+          },
+          {
+              "kpi_id": "LTE_5092j",
+              "gte": -0.5
+          },
+          {
+              "kpi_id": "LTE_5119g",
+              "gte": -0.5
+          },
+          {
+              "kpi_id": "LTE_5812e",
+              "gte": -0.5
+          }
+      ]
+      }
+    }
+}

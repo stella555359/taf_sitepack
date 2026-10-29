@@ -1,0 +1,16 @@
+syntax = "proto3";
+package common_messages;
+
+message CpIfReceiveFromCore
+{
+    uint32 servedAmfId = 1;
+    oneof optional_ranUeNgapId
+    {
+        uint32 ranUeNgapId = 2;
+    }
+    oneof optional_amfUeNgapId
+    {
+        uint64 amfUeNgapId = 3;
+    }
+    bytes EncodedMessage = 4;
+}

@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package nidd_db_model;
+
+import "common_types/CellDepType.proto";
+import "common_types/ChannelBandwidth.proto";
+
+message NrAdjNrCell
+{
+    uint32 lcrId = 1;
+    uint32 gnbId = 2;
+    uint32 gnbIdLength = 3;
+    uint32 mcc = 4;
+    uint32 mncValue = 5;
+    uint32 mncLength = 6;
+    uint32 nrarfcn = 7;
+    uint32 phyCellId = 8;
+    oneof optional_fiveGsTac
+    {
+        uint32 fiveGsTac = 9;
+    }
+    CellDepType cellDepType = 10;
+    oneof optional_ssbFrequency
+    {
+        uint32 ssbFrequency = 11;
+    }
+    oneof optional_nrConnectModeProfileDN
+    {
+        string nrConnectModeProfileDN = 12;
+    }
+    oneof optional_freqBandIndicatorNR
+    {
+        uint32 freqBandIndicatorNR = 13;
+    }
+
+    message PlmnSetNsa
+    {
+        repeated uint32 nrPlmnId = 1;
+    }
+    PlmnSetNsa plmnSetNsa = 14;
+
+    message PlmnSetSa
+    {
+        uint32 tac = 1;
+        repeated uint32 nrPlmnId = 2;
+    }
+    repeated PlmnSetSa plmnSetSaList = 15;
+    bool actNrDualConnectivity = 16;
+
+    oneof optional_chBwDl
+    {
+        ChannelBandwidth chBwDl = 17;
+    }
+
+    oneof optional_chBwUl
+    {
+        ChannelBandwidth chBwUl = 18;
+    }
+}

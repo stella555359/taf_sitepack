@@ -1,0 +1,17 @@
+syntax = "proto3";
+package common_messages;
+
+import "common_types/global_gnb_id.proto";
+import "common/plmn_identity.proto";
+
+message IpsecQueryResult
+{
+    common_messages.PlmnIdentity plmnIdentity = 1;
+    bool status = 2;
+}
+
+message IpsecQueryStatus
+{
+    common_messages.GlobalGnbId globalGnbId = 1;
+    repeated IpsecQueryResult ipsecQueryResults = 2;
+}

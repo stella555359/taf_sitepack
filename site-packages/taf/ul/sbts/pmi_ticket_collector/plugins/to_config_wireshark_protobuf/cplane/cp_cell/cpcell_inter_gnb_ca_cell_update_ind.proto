@@ -1,0 +1,36 @@
+syntax = "proto3";
+import "common_types/global_gnb_id.proto";
+import "common/cell_to_report_list_update.proto";
+import "common/reported_Cell_List.proto";
+import "common/gnb_configuration.proto";
+
+package cell_request;
+
+message CpCellInterGnbCaCellUpdateInd
+{
+    common_messages.GlobalGnbId globalNgRanNodeId = 1;
+    oneof optional_cellToReportListUpdate
+    {
+        common_messages.CellToReportListUpdate cellToReportListUpdate = 2;
+    }
+    oneof optional_reportedCellList
+    {
+        common_messages.ReportedCellList reportedCellList = 3;
+    }
+    oneof optional_interGNBCAAllowed
+    {
+        bool interGNBCAAllowed = 4;
+    }
+    oneof optional_gNBConfiguration
+    {
+        common_messages.GNBConfiguration gNBConfiguration = 5;
+    }
+    oneof optional_cellLoadReportingPeriodicity
+    {
+        uint32 cellLoadReportingPeriodicity = 6;
+    }
+    oneof optional_igNBCAXpProtocolVersion
+    {
+        uint32 igNBCAXpProtocolVersion = 7;
+    }
+}

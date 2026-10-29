@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "common_types/common_status.proto";
+import "common_types/admission_cause.proto";
+
+package common_type;
+
+message AdmissionResult
+{
+    Status status = 1;
+    oneof optional_cause
+    {
+        AdmissionCause cause = 2;
+    }
+}

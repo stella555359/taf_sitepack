@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "common_types/MeasEnabled.proto";
+
+package common_type;
+
+message NrMeasCfgIfItem
+{
+    MeasEnabled a3MeasEnabled = 1;
+    oneof optional_a4MeasHigherPrioFreqEnabled
+    {
+        MeasEnabled a4MeasHigherPrioFreqEnabled = 2;
+    }
+    MeasEnabled a5MeasEnabled = 3;
+    uint32 freqBandIndicatorNR = 4;
+    uint32 ssbFrequency = 5;
+    oneof optional_a4PriorityForHigherPrioFreqHo
+    {
+        uint32 a4PriorityForHigherPrioFreqHo = 6;
+    }
+}
+
+message NrMeasCfgIf
+{
+    uint32 nrMeasCfgIfId = 1;
+    common_type.NrMeasCfgIfItem nrMeasCfgIfItem = 2;
+}

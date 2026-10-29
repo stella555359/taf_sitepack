@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package common_messages;
+
+message OverloadProtectionPing
+{
+    uint32 cpUeAppId = 1;
+    uint32 transactionId = 2;
+}

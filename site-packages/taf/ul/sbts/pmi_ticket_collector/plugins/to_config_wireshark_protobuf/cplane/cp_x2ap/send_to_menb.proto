@@ -1,0 +1,23 @@
+syntax = "proto3";
+import "common_types/global_enb_id.proto";
+import "options/protobuf_options.proto";
+
+package cp_x2ap_interface;
+
+message SendToMeNb
+{
+    oneof optional_sgnbUeId
+    {
+        uint32 sgnbUeId = 1 [ (cucpueid_param) = true ];
+    }
+    oneof optional_menbUeId
+    {
+        uint32 menbUeId = 2;
+    }
+    bytes payload = 3;
+    oneof optional_meNBUeX2ApIdExtension
+    {
+        uint32 meNBUeX2ApIdExtension = 4;
+    }
+    common_messages.GlobalEnbId globalEnbId = 9;
+}

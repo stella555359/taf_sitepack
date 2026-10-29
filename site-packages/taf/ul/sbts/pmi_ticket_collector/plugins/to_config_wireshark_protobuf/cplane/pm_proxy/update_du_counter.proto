@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package pm_agent_proxy_request;
+
+message UpdateDuCounter
+{
+    uint32 counter_id = 1;
+    uint32 nrbts_id = 2;
+    uint64 nrdu_id = 3;
+    uint32 value = 4;
+}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "common/nrcgi.proto";
+import "common/cell_availability.proto";
+import "common/cell_configuration.proto";
+
+package common_messages;
+
+message CellReportItem
+{
+    NRCGI nrCGI = 1;
+
+    oneof optional_cellConfiguration
+    {
+        CellConfiguration cellConfiguration = 2;
+    }
+
+    oneof optional_cellAvailability
+    {
+        CellAvailability cellAvailability = 3;
+    }
+}
+
+message ReportedCellList
+{
+    repeated CellReportItem cellReportItem = 1;
+}

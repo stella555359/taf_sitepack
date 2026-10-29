@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "control/control_acknowledge.proto";
+import "control/set_logging_level.proto";
+import "control/log_memory_usage.proto";
+import "control/set_overload_high_threshold.proto";
+
+package control_command;
+
+message ControlCommand
+{
+    oneof command
+    {
+        ControlAcknowledge ack = 1;
+        SetLoggingLevel logging_level = 2;
+        LogMemoryUsage log_memory_usage = 3;
+        SetOverloadHighThreshold overload_high_threshold = 4;
+    }
+}

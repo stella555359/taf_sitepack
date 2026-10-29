@@ -1,0 +1,21 @@
+syntax = "proto3";
+import "common/nrcgi.proto";
+
+package common_messages;
+
+message NRCGIList
+{
+    repeated NRCGI nrCgiList = 1;
+}
+
+message CellToReportListUpdate
+{
+    oneof optional_cellsToAdd
+    {
+        NRCGIList cellsToAdd = 1;
+    }
+    oneof optional_cellsToRemove
+    {
+        NRCGIList cellsToRemove = 2;
+    }
+}

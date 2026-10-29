@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+enum Timer320
+{
+    tmin5 = 0;
+    tmin10 = 1;
+    tmin20 = 2;
+    tmin30 = 3;
+    tmin60 = 4;
+    tmin120 = 5;
+    tmin180 = 6;
+}

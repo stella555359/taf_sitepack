@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package common_messages;
+
+enum Status
+{
+    ok = 0;
+    notok = 1;
+}
+
+message CpIfF1PartialResetResponse
+{
+    uint32 transactionId = 1;
+    Status status = 2;
+}

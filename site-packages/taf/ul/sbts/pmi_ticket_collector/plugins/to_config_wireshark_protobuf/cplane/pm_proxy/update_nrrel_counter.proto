@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+
+package pm_agent_proxy_request;
+
+message UpdateNrRelCounter
+{
+    uint32 counter_id = 1;
+    int64 source_cell_id = 2;
+    common_type.Plmn target_plmn_id = 3;
+    int64 target_cell_id = 4;
+    uint32 target_gnb_id_length = 5;
+    uint32 value = 6;
+}

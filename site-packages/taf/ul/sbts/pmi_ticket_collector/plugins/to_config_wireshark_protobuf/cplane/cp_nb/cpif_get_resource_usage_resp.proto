@@ -1,0 +1,66 @@
+syntax = "proto3";
+import "common_types/global_enb_id.proto";
+
+package cp_nb_message;
+
+message CuUeAssociatedIds
+{
+    oneof optional_crnti
+    {
+        uint32 crnti = 1;
+    };
+    oneof optional_globalEnbId
+    {
+        common_messages.GlobalEnbId globalEnbId = 2;
+    };
+    oneof optional_meNbUeX2ApId
+    {
+        uint32 meNbUeX2ApId = 3;
+    };
+    oneof optional_ueIdUp
+    {
+        uint32 ueIdUp = 4;
+    };
+    oneof optional_gNbDuId
+    {
+        uint32 gNbDuId = 5;
+    };
+    oneof optional_ueIdDu
+    {
+        uint32 ueIdDu = 6;
+    };
+    oneof optional_servedAmfId
+    {
+        uint32 servedAmfId = 7;
+    };
+    oneof optional_amfUeNgApId
+    {
+        uint64 amfUeNgApId = 8;
+    };
+}
+
+message UeMappingList
+{
+    repeated UeMapping ueMappingTable = 1;
+}
+
+message UeMapping
+{
+    uint32 ueIdCu = 1;
+    oneof optional_cuUeAssociatedIds
+    {
+        CuUeAssociatedIds cuUeAssociatedIds = 2;
+    };
+}
+
+message CpUeAppItem
+{
+    uint32 cpUeAppId = 1;
+    uint32 numOfUsers = 2;
+}
+
+message CpIfGetResourceUsageResp
+{
+    repeated CpUeAppItem cpUeAppIdList = 1;
+    UeMappingList ueMapping = 2;
+}

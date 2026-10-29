@@ -1,0 +1,14 @@
+syntax = "proto3";
+import "common_types/e2_ran_function_state.proto";
+
+package cp_nb_message;
+
+message CpNbE2RanFunctionsStateInd
+{
+    message RanFunction
+    {
+        uint32 id = 1;
+        common_type.E2RanFunctionState state = 2;
+    }
+    repeated RanFunction ranFunctionList = 1;
+}

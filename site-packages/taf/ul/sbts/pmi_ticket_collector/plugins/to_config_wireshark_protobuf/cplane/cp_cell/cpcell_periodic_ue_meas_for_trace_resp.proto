@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "common_types/ReportAmount.proto";
+import "common_types/ReportInterval.proto";
+
+package cell_request;
+
+message CpCellPeriodicUeMeasForTraceResp
+{
+
+    message OptionalPeriodicUeMeas
+    {
+        ReportAmount reportAmount = 1;
+        ReportInterval reportInterval = 2;
+    }
+
+    uint32 transactionId = 1;
+    uint32 cuUeId = 2;
+    OptionalPeriodicUeMeas periodicUeMeas = 3;
+}

@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+import "common/nr_cell_identity.proto";
+
+package cp_ue_request;
+message CpUeRecvCellInformation
+{
+    message ServedCell
+    {
+        common_messages.NRCellIdentity nrCellIdentity = 1;
+        oneof optional_fiveGsTac
+        {
+            uint32 fiveGsTac = 2;
+        }
+        bytes measurementTimingConfiguration = 3;
+        bytes sib1 = 4;
+        enum CellDirection
+        {
+            dlOnly = 0;
+            ulOnly = 1;
+        }
+        oneof optional_cellDirection
+        {
+            CellDirection cellDirection = 5;
+        }
+        message OptionalMultiFreqBandIndicatorNR
+        {
+            repeated uint32 value = 1;
+        }
+        OptionalMultiFreqBandIndicatorNR connMultiFreqBandIndicatorNR = 6;
+    }
+
+    repeated ServedCell servedCellList = 1;
+}

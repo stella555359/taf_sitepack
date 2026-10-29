@@ -1,0 +1,18 @@
+syntax = "proto3";
+package cp_if_internal_message;
+
+message AmfConfigurationResp
+{
+    uint32 transactionId = 1;
+
+    message AmfConfigurationResult
+    {
+        uint32 ngTnlId = 1;
+        uint32 servedAmfId = 2;
+    }
+
+    oneof optional_amfConfigurationResult
+    {
+        AmfConfigurationResult amfConfigurationResult = 2;
+    }
+}

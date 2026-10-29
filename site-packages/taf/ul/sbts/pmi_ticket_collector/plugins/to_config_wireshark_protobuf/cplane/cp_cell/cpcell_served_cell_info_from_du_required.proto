@@ -1,0 +1,10 @@
+syntax = "proto3";
+package cell_request;
+import "common/f1_served_cells_info.proto";
+
+message CpCellServedCellInfoFromDu
+{
+    uint64 gnbDuId = 1;
+    repeated common_messages.F1ServedCellInfo servedCells = 2;
+    uint32 transactionId = 3;
+}

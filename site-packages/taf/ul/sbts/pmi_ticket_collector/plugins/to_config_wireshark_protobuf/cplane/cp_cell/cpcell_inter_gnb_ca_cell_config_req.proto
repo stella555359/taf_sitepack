@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "common_types/global_gnb_id.proto";
+
+package cell_request;
+
+message CpCellInterGnbCaCellConfigReq
+{
+    uint32 transactionId = 1;
+    common_messages.GlobalGnbId globalNgRanNodeId = 2;
+}

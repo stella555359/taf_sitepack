@@ -1,0 +1,33 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/Plmn.proto";
+
+package common_type;
+
+message CplaneIpAddress
+{
+    oneof optional_tnlId
+    {
+        uint32 tnlId = 1;
+    }
+    string ipV4Address = 2 [ (ipaddress_param) = true ];
+    string ipV6Address = 3 [ (ipaddress_param) = true ];
+    oneof optional_localTunnelEndpointV4
+    {
+        string localTunnelEndpointV4 = 4 [ (ipaddress_param) = true ];
+    }
+    oneof optional_localTunnelEndpointV6
+    {
+        string localTunnelEndpointV6 = 5 [ (ipaddress_param) = true ];
+    }
+    oneof optional_plmnId
+    {
+        common_type.Plmn plmnId = 6;
+    }
+}
+
+message CplaneIpAddressOfDualStack
+{
+    string ipV4Address = 1 [ (ipaddress_param) = true ];
+    string ipV6Address = 2 [ (ipaddress_param) = true ];
+}

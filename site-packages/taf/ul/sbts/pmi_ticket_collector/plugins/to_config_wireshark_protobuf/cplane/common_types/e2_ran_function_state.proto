@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package common_type;
+
+enum E2RanFunctionState
+{
+    unused = 0;
+    notAdded = 1;
+    added = 2;
+}

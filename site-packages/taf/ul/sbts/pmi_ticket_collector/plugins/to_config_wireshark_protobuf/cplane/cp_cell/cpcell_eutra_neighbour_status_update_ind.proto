@@ -1,0 +1,54 @@
+syntax = "proto3";
+import "common/nr_cell_identity.proto";
+import "common/plmn_identity.proto";
+import "common_types/QOffsetRange.proto";
+
+package cell_request;
+
+message CpCellEutraNeighbourStatusUpdateInd
+{
+    message OptionalCellIndividualOffset
+    {
+        QOffsetRange value = 1;
+    }
+
+    enum Status
+    {
+        pciIdentified = 0;
+        hoSucceeded = 1;
+        hoFailed = 2;
+        pciConfirmed = 3;
+    }
+
+    message OptionalEutraMultibandInfoList
+    {
+        repeated uint32 value = 1;
+    }
+
+    message OptionalSecondaryPlmnIdList
+    {
+        repeated common_messages.PlmnIdentity secondaryPlmnId = 1;
+    }
+
+    common_messages.NRCellIdentity nrCellIdentity = 1;
+    uint32 lcrId = 2;
+    uint32 eNodeBId = 3;
+    oneof optional_secondaryPlmnIdList
+    {
+        OptionalSecondaryPlmnIdList secondaryPlmnIdList = 4;
+    }
+    uint32 earfcnValue = 5;
+    oneof optional_cellIndividualOffset
+    {
+        OptionalCellIndividualOffset cellIndividualOffset = 6;
+    }
+    bool eutranCellBlacklisted = 7;
+    common_messages.PlmnIdentity ecgiPlmn = 8;
+    uint32 physCellId = 9;
+    Status status = 10;
+    oneof optional_eUtraMultibandInfoList
+    {
+        OptionalEutraMultibandInfoList eUtraMultibandInfoList = 11;
+    }
+    uint32 ePSTrackingAreaCode = 12;
+}

@@ -1,0 +1,207 @@
+syntax = "proto3";
+import "common_types/MeasEnabled.proto";
+import "common_types/TimeToTrigger.proto";
+import "common_types/IfhoSsbScs.proto";
+import "common_types/IfhoSsbSmtcDuration.proto";
+import "common_types/IfhoSsbSmtcPeriodicity.proto";
+import "common_types/CellDepType.proto";
+import "common_types/NumberOfTransmittedSsBlocks.proto";
+
+package common_type;
+
+message NrHoIfParams
+{
+    MeasEnabled a3MeasEnabled = 1;
+    oneof optional_a3HysteresisSsbRsrp
+    {
+        uint32 a3HysteresisSsbRsrp = 2;
+    }
+    oneof optional_a3OffsetSsbRsrp
+    {
+        int32 a3OffsetSsbRsrp = 3;
+    }
+    oneof optional_a3TimeToTriggerSsbRsrp
+    {
+        TimeToTrigger a3TimeToTriggerSsbRsrp = 4;
+    }
+    oneof optional_a3HysteresisSsbRsrq
+    {
+        uint32 a3HysteresisSsbRsrq = 5;
+    }
+    oneof optional_a3OffsetSsbRsrq
+    {
+        int32 a3OffsetSsbRsrq = 6;
+    }
+    oneof optional_a3TimeToTriggerSsbRsrq
+    {
+        TimeToTrigger a3TimeToTriggerSsbRsrq = 7;
+    }
+    MeasEnabled a5MeasEnabled = 8;
+    oneof optional_a5HysteresisSsbRsrp
+    {
+        uint32 a5HysteresisSsbRsrp = 9;
+    }
+    oneof optional_a5Threshold1SsbRsrp
+    {
+        uint32 a5Threshold1SsbRsrp = 10;
+    }
+    oneof optional_a5Threshold2SsbRsrp
+    {
+        uint32 a5Threshold2SsbRsrp = 11;
+    }
+    oneof optional_a5TimeToTriggerSsbRsrp
+    {
+        TimeToTrigger a5TimeToTriggerSsbRsrp = 12;
+    }
+    oneof optional_a5HysteresisSsbRsrq
+    {
+        uint32 a5HysteresisSsbRsrq = 13;
+    }
+    oneof optional_a5Threshold1SsbRsrq
+    {
+        uint32 a5Threshold1SsbRsrq = 14;
+    }
+    oneof optional_a5Threshold2SsbRsrq
+    {
+        uint32 a5Threshold2SsbRsrq = 15;
+    }
+    oneof optional_a5TimeToTriggerSsbRsrq
+    {
+        TimeToTrigger a5TimeToTriggerSsbRsrq = 16;
+    }
+    repeated uint32 supportedFreqBands = 17;
+    uint32 ssbFrequency = 18;
+    IfhoSsbScs ifhoSsbScs = 19;
+    IfhoSsbSmtcDuration ifhoSsbSmtcDuration = 20;
+    IfhoSsbSmtcPeriodicity ifhoSsbSmtcPeriodicity = 21;
+    CellDepType cellDepType = 22;
+    oneof optional_a3HysteresisSsbRsrpVoNr
+    {
+        uint32 a3HysteresisSsbRsrpVoNr = 24;
+    }
+    oneof optional_a3HysteresisSsbRsrqVoNr
+    {
+        uint32 a3HysteresisSsbRsrqVoNr = 25;
+    }
+    oneof optional_a3OffsetSsbRsrpVoNr
+    {
+        int32 a3OffsetSsbRsrpVoNr = 26;
+    }
+    oneof optional_a3OffsetSsbRsrqVoNr
+    {
+        int32 a3OffsetSsbRsrqVoNr = 27;
+    }
+    oneof optional_a3TimeToTriggerSsbRsrpVoNr
+    {
+        TimeToTrigger a3TimeToTriggerSsbRsrpVoNr = 28;
+    }
+    oneof optional_a3TimeToTriggerSsbRsrqVoNr
+    {
+        TimeToTrigger a3TimeToTriggerSsbRsrqVoNr = 29;
+    }
+    oneof optional_a5HysteresisSsbRsrpVoNr
+    {
+        uint32 a5HysteresisSsbRsrpVoNr = 30;
+    }
+    oneof optional_a5HysteresisSsbRsrqVoNr
+    {
+        uint32 a5HysteresisSsbRsrqVoNr = 31;
+    }
+    oneof optional_a5Threshold1SsbRsrpVoNr
+    {
+        uint32 a5Threshold1SsbRsrpVoNr = 32;
+    }
+    oneof optional_a5Threshold1SsbRsrqVoNr
+    {
+        uint32 a5Threshold1SsbRsrqVoNr = 33;
+    }
+    oneof optional_a5Threshold2SsbRsrpVoNr
+    {
+        uint32 a5Threshold2SsbRsrpVoNr = 34;
+    }
+    oneof optional_a5Threshold2SsbRsrqVoNr
+    {
+        uint32 a5Threshold2SsbRsrqVoNr = 35;
+    }
+    oneof optional_a5TimeToTriggerSsbRsrpVoNr
+    {
+        TimeToTrigger a5TimeToTriggerSsbRsrpVoNr = 36;
+    }
+    oneof optional_a5TimeToTriggerSsbRsrqVoNr
+    {
+        TimeToTrigger a5TimeToTriggerSsbRsrqVoNr = 37;
+    }
+    bool a1BasedPCellSwitchEnabled = 38;
+    bool a2BasedPCellSwitchEnabled = 39;
+    oneof optional_thresholdPCellSwitchTargetRsrp
+    {
+        uint32 thresholdPCellSwitchTargetRsrp = 40;
+    }
+    oneof optional_thresholdPCellSwitchTargetRsrq
+    {
+        uint32 thresholdPCellSwitchTargetRsrq = 41;
+    }
+    oneof optional_a2BasedPCellSwitchPriority
+    {
+        int32 a2BasedPCellSwitchPriority = 42;
+    }
+    MeasEnabled a4MeasEnDcSteeringEnabled = 43;
+    oneof optional_a4ThresholdEnDcSteeringSsbRsrp
+    {
+        uint32 a4ThresholdEnDcSteeringSsbRsrp = 44;
+    }
+    oneof optional_a4HysteresisEnDcSteeringSsbRsrp
+    {
+        uint32 a4HysteresisEnDcSteeringSsbRsrp = 45;
+    }
+    oneof optional_a4TimeToTriggerEnDcSteeringSsbRsrp
+    {
+        TimeToTrigger a4TimeToTriggerEnDcSteeringSsbRsrp = 46;
+    }
+    oneof optional_a4ThresholdEnDcSteeringSsbRsrq
+    {
+        uint32 a4ThresholdEnDcSteeringSsbRsrq = 47;
+    }
+    oneof optional_a4HysteresisEnDcSteeringSsbRsrq
+    {
+        uint32 a4HysteresisEnDcSteeringSsbRsrq = 48;
+    }
+    oneof optional_a4TimeToTriggerEnDcSteeringSsbRsrq
+    {
+        TimeToTrigger a4TimeToTriggerEnDcSteeringSsbRsrq = 49;
+    }
+    MeasEnabled a4MeasHigherPrioFreqEnabled = 50;
+    oneof optional_a4ThresholdSsbRsrp
+    {
+        uint32 a4ThresholdSsbRsrp = 51;
+    }
+    oneof optional_a4HysteresisSsbRsrp
+    {
+        uint32 a4HysteresisSsbRsrp = 52;
+    }
+    oneof optional_a4TimeToTriggerSsbRsrp
+    {
+        TimeToTrigger a4TimeToTriggerSsbRsrp = 53;
+    }
+    oneof optional_a4ThresholdSsbRsrq
+    {
+        uint32 a4ThresholdSsbRsrq = 54;
+    }
+    oneof optional_a4HysteresisSsbRsrq
+    {
+        uint32 a4HysteresisSsbRsrq = 55;
+    }
+    oneof optional_a4TimeToTriggerSsbRsrq
+    {
+        TimeToTrigger a4TimeToTriggerSsbRsrq = 56;
+    }
+    oneof optional_a4PriorityForHigherPrioFreqHo
+    {
+        uint32 a4PriorityForHigherPrioFreqHo = 57;
+    }
+    NumberOfTransmittedSsBlocks numberOfTransmittedSsBlocks = 58;
+    oneof optional_deriveSSBIndexFromCell
+    {
+        bool deriveSSBIndexFromCell = 59;
+    }
+}

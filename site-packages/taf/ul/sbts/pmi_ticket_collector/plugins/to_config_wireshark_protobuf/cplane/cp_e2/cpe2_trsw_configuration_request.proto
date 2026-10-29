@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "common_types/cplaneIpAddress.proto";
+
+package cp_e2_interface;
+
+message CpE2TransportSoftwareConfigurationRequest
+{
+    uint32 transactionId = 1;
+    common_type.CplaneIpAddress cpE2TrsConfiguration = 2;
+}

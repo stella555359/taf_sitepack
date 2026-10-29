@@ -1,0 +1,7 @@
+syntax = "proto3";
+package cell_request;
+
+message CpCellDuLoadInfo
+{
+    uint64 nrCellIdentity = 1;
+}

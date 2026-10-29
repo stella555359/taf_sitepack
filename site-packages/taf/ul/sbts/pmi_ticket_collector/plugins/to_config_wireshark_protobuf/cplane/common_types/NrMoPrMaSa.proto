@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package common_type;
+
+message NrMoPrMaSaItem
+{
+    uint32 mobilityProfilePriority = 1;
+    string nrMoPrSaDN = 2;
+
+    message NrPlmnDNList
+    {
+        repeated string nrPlmnDNListItem = 3;
+    }
+    oneof optional_nrPlmnDNList
+    {
+        NrPlmnDNList nrPlmnDNList = 4;
+    }
+    oneof optional_rfspIndex
+    {
+        uint32 rfspIndex = 5;
+    }
+    oneof optional_rfspIndexLast
+    {
+        uint32 rfspIndexLast = 6;
+    }
+    message SNSSAIDNList
+    {
+        repeated string sNSSAIDNListItem = 7;
+    }
+    oneof optional_sNSSAIDNList
+    {
+        SNSSAIDNList sNSSAIDNList = 8;
+    }
+}
+
+message NrMoPrMaSa
+{
+    uint32 nrMoPrMaSaId = 1;
+    common_type.NrMoPrMaSaItem nrMoPrMaSaItem = 2;
+}

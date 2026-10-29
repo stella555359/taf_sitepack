@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "common_types/served_cell_information.proto";
+
+package common_messages;
+
+message F1SetupInd
+{
+    uint64 gnbDuId = 1;
+    repeated common_type.ServedCellInformation servedCells = 2;
+}

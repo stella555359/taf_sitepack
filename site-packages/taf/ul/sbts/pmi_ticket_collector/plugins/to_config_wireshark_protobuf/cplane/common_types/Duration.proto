@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+enum Duration
+{
+    sf1 = 0;
+    sf2 = 1;
+    sf3 = 2;
+    sf4 = 3;
+    sf5 = 4;
+}

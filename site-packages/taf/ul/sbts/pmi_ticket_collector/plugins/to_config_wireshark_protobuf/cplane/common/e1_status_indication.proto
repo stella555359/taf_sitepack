@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "common_types/common_status.proto";
+
+package common_messages;
+
+message E1StatusIndication
+{
+    uint32 transactionId = 1;
+    Status status = 2;
+}

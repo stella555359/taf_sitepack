@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+enum RadioLinkFailureCause
+{
+    rlfDlHarq = 0;
+    rlfBsiCsi = 1;
+}

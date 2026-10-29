@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package cp_if_interface;
+
+message CpIfPoolFailureInd
+{
+    enum PoolType
+    {
+        L3_UE = 0;
+    }
+    enum PoolFailureCause
+    {
+        partialCuFailure = 0;
+        poolsLocked = 1;
+        poolsUnlocked = 2;
+    }
+    message FailedPool
+    {
+        uint32 poolId = 1;
+        PoolType poolType = 2;
+    }
+    uint32 transactionId = 1;
+    repeated FailedPool failedPoolList = 2;
+    PoolFailureCause cause = 3;
+}

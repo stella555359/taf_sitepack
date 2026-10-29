@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package common_type;
+
+message GnbDuSystemInformation
+{
+    bytes mibMessage = 1;
+    bytes sib1Message = 2;
+}

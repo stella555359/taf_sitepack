@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package cp_nb_message;
+
+enum BarringStatus
+{
+    barred = 0;
+    notBarred = 1;
+}

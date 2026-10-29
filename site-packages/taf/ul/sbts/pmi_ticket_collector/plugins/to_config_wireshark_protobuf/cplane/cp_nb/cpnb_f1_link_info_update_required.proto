@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package cp_nb_message;
+
+message CpNbF1LinkInfoUpdateRequired
+{
+    uint32 transactionId = 1;
+    uint64 gNBDuId = 2;
+    enum F1cLinkStatus
+    {
+        unavailable = 0;
+        available = 1;
+    }
+    F1cLinkStatus f1cLinkStatus = 3;
+    uint32 cuRRCVersion = 4;
+    uint32 duRRCVersion = 5;
+    string gnbDuName = 6;
+}

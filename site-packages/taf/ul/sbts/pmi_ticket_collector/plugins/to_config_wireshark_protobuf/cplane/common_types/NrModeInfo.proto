@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+import "common_types/NrScs.proto";
+import "common_types/NrNrb.proto";
+
+package common_type;
+
+message NrModeInfo
+{
+    message SupportedSULFreqBandItem
+    {
+        uint32 freqBandIndicatorNr = 1;
+    }
+
+    message FreqBandNrItem
+    {
+        uint32 freqBandIndicatorNr = 1;
+        repeated SupportedSULFreqBandItem supportedSULBandList = 2;
+    }
+
+    message NRFreqInfo
+    {
+        uint32 ngArfcn = 1;
+        repeated FreqBandNrItem freqBandListNr = 2;
+    }
+
+    message TransBandwidth
+    {
+        common_type.NrScs nrScs = 1;
+        common_type.NrNrb nrNrb = 2;
+    }
+
+    message FDDInfo
+    {
+        NRFreqInfo ulEarfcn = 1;
+        NRFreqInfo dlEarfcn = 2;
+        TransBandwidth ulTransBandwidth = 3;
+        TransBandwidth dlTransBandwidth = 4;
+    }
+
+    message TDDInfo
+    {
+        NRFreqInfo earfcn = 1;
+        TransBandwidth transBandwidth = 2;
+    }
+
+    oneof modeInfo
+    {
+        FDDInfo fddInfo = 1;
+        TDDInfo tddInfo = 2;
+    }
+}

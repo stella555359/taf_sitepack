@@ -1,0 +1,39 @@
+syntax = "proto3";
+import "common_types/Plmn.proto";
+
+package cpif_xn_interface;
+
+message CpIfInterGnbResourceNeededInd
+{
+    uint32 transactionId = 1;
+
+    message GnbId
+    {
+        uint32 gnbId = 1;
+        uint32 gnbIdLength = 2;
+    }
+
+    GnbId targetGnbId = 2;
+    GnbId sourceGnbId = 3;
+    common_type.Plmn targetGnbPLMN = 4;
+    common_type.Plmn sourceGnbPLMN = 5;
+
+    message Tai
+    {
+        common_type.Plmn plmnIdentity = 1;
+        bytes tac = 2;
+    }
+
+    message TaiSet
+    {
+        repeated Tai TaiItem = 1;
+    }
+
+    Tai targetTAI = 6;
+    Tai sourceTAI = 7;
+
+    oneof optional_targetTAISet
+    {
+        TaiSet targetTAISet = 8;
+    }
+}

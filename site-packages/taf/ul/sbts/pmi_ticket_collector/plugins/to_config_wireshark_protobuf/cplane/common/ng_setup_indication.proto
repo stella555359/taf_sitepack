@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+import "common_types/global_amf_region_information.proto";
+
+package common_messages;
+
+message NGSetupIndication
+{
+    repeated common_type.GlobalAmfRegionInformation amfRegionInformation = 1;
+}

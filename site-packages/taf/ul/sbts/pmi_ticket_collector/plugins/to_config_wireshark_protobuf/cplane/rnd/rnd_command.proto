@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "rnd/time_forward.proto";
+import "rnd/aloha.proto";
+import "rnd/rnd_acknowledge.proto";
+import "rnd/flush_logger.proto";
+
+package rnd_command;
+
+message RndCommand
+{
+    oneof command
+    {
+        TimeForward time_forward = 1;
+        Aloha aloha = 2;
+        RnDAcknowledge ack = 3;
+        FlushLogger flush_logger = 4;
+    }
+}

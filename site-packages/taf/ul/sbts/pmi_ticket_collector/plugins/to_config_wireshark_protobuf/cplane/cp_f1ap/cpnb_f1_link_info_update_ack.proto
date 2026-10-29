@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package cp_f1ap_interface;
+
+message CpNbF1LinkInfoUpdateAck
+{
+    uint32 transactionId = 1;
+    uint64 gNBDuId = 2;
+    enum Status
+    {
+        ok = 0;
+        notOk = 1;
+    }
+    Status status = 3;
+}

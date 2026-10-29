@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "common_types/ncgi.proto";
+import "common_types/served_cell_information.proto";
+
+package cp_x2ap_interface;
+
+message CpIfEndcUpdateRequest
+{
+    uint32 transactionId = 1;
+    uint64 gnbDuId = 2;
+
+    message EndcNrCellInDu
+    {
+        enum CellOperationType
+        {
+            addCell = 0;
+            modifyCell = 1;
+            deleteCell = 2;
+        }
+
+        CellOperationType cellOperationType = 1;
+        common_type.NCGI nCGI = 2;
+        common_type.ServedCellInformation servedCells = 3;
+    }
+    repeated EndcNrCellInDu endcNrCellInDuList = 3;
+}

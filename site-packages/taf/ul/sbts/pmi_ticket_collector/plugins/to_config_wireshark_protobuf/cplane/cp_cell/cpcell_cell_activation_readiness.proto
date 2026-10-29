@@ -1,0 +1,27 @@
+syntax = "proto3";
+package cell_request;
+
+message CpCellCellActivationReadiness
+{
+    message CellsToActiveContainer
+    {
+        uint64 gnbDuId = 1;
+        repeated uint64 cellIdList = 2;
+    }
+    repeated CellsToActiveContainer gnbDuIdList = 1;
+    uint32 transactionId = 2;
+
+    enum CellsActivationStatus
+    {
+        x2NotConstrained = 0;
+        xnNotConstrained = 1;
+        xnConstrained = 2;
+    }
+    CellsActivationStatus status = 3;
+    enum CpIfSendingService
+    {
+        xnap = 0;
+        f1ap = 1;
+    }
+    CpIfSendingService cpIfSendingService = 4;
+}

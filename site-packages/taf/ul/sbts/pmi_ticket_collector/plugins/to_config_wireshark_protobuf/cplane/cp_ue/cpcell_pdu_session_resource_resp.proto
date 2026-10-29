@@ -1,0 +1,25 @@
+syntax = "proto3";
+import "common_types/common_result.proto";
+import "common_types/pdu_session_resource_resp_cause.proto";
+import "common/cp_cell_pdu_session_admitted_resources.proto";
+import "common/cp_cell_pdu_session_not_admitted_resources.proto";
+import "options/protobuf_options.proto";
+
+package cp_ue_request;
+
+message CpCellPduSessionResourceResp
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    uint64 pCellId = 2;
+    repeated common_messages.PduSessionAdmittedResources pduSessionAdmittedResourcesList = 3;
+    Result result = 4;
+
+    oneof optional_cause
+    {
+        PduSessionResourceRespCause cause = 5;
+    }
+
+    uint32 transactionId = 6;
+
+    repeated common_messages.PduSessionNotAdmittedResources pduSessionNotAdmittedResourcesList = 7;
+}

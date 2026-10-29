@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+import "common/nrcgi.proto";
+
+package cell_request;
+
+message CpCellCellAvblHoInd
+{
+    enum Status
+    {
+        available = 0;
+        unavailable = 1;
+    }
+    message NrCellInfoItem
+    {
+        common_messages.NRCGI nrCGI = 1;
+        Status status = 2;
+    }
+    message NrCellInfoList
+    {
+        repeated NrCellInfoItem nrCellInfoItem = 1;
+    }
+
+    uint64 psCellId = 1;
+    oneof optional_nrCellInfoList
+    {
+        NrCellInfoList nrCellInfoList = 2;
+    }
+}

@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+package cp_ue_request;
+message BearerDeleteResp
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    uint32 srbIdentity = 2;
+}

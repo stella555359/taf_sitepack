@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package common_messages;
+
+message CellBwpItem
+{
+    uint32 bwpProfileId = 1;
+}
+
+message CellBwpList
+{
+    repeated CellBwpItem cellBwpItem = 1;
+}

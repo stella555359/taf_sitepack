@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+import "common_types/PeriodicUeMeasurement.proto";
+
+package cp_ue_request;
+
+message CpCellPeriodicUeMeasForTraceResp
+{
+
+    uint32 transactionId = 1;
+    uint32 cuUeId = 2;
+    oneof optional_periodicUeMeasurement
+    {
+        common_type.PeriodicUeMeasurement periodicUeMeasurement = 3;
+    }
+}

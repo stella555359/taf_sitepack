@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+import "common_types/global_amf_region_information.proto";
+import "common_types/Plmn.proto";
+import "common/snssai.proto";
+import "common_types/sensitive_option.proto";
+import "common/plmn_identity.proto";
+
+package cp_nb_message;
+
+enum XnLinkStatus
+{
+    xnLinkUnavailable = 0;
+    xnLinkAvailable = 1;
+    xnLinkConflicting = 2;
+}
+enum XnLinkLock
+{
+    locked = 0;
+    unlocked = 2;
+}
+enum XnLinkUpdateOperation
+{
+    update = 0;
+    remove = 1;
+    create = 2;
+    none = 3;
+}
+enum GNodeBIdCtrl
+{
+    gNodeBIdCtrlOamControlled = 0;
+    gNodeBIdCtrlGnbControlled = 1;
+}
+enum CPlaneIpAddrCtrl
+{
+    cPlaneIpAddrCtrlOamControlled = 0;
+    cPlaneIpAddrCtrlGnbControlled = 1;
+}
+message SliceSupportList
+{
+    repeated common_messages.SNSSAI sliceSupportList = 1;
+}
+message BroadcastPlmnsItem
+{
+    common_messages.PlmnIdentity plmnIdentity = 1;
+    SliceSupportList sliceSupportList = 2;
+}
+message BroadcastPLMNList
+{
+    repeated BroadcastPlmnsItem broadcastPlmnsList = 1;
+}
+message SupportTAItem
+{
+    bytes tac = 1;
+    BroadcastPLMNList broadcastPLMNList = 2;
+}
+message TAISupportList
+{
+    repeated SupportTAItem tAISupportList = 1;
+}
+message CpNbXnLinkInfoUpdateRequired
+{
+    message NrAdjGnb
+    {
+        uint32 gnbAdjGnbId = 1;
+        repeated common_type.GlobalAmfRegionInformation amfRegionInformation = 2;
+        XnLinkLock administrativeState = 3;
+        common_type.Plmn gnbPlmn = 4;
+        oneof optional_tAISupportList
+        {
+            TAISupportList tAISupportList = 5;
+        };
+        uint32 gNodeBId = 6;
+        uint32 gNbIdLength = 7;
+        GNodeBIdCtrl gNodebIdCtrl = 8;
+        oneof optional_xnLinkRef
+        {
+            uint32 xnLinkRef = 9;
+        }
+        oneof optional_xnLinkRef2
+        {
+            uint32 xnLinkRef2 = 10;
+        }
+        XnLinkUpdateOperation operationType = 11;
+    }
+    message XnLink
+    {
+        uint32 xnLinkId = 1;
+        XnLinkStatus xnLinkStatus = 2;
+        string adjGnbIpAddr = 3 [ (ipaddress_param) = true ];
+        CPlaneIpAddrCtrl cPlaneIpAddrCtrl = 4;
+        XnLinkUpdateOperation operationType = 5;
+        oneof optional_xnTnlId
+        {
+            uint32 xnTnlId = 6;
+        }
+        bool isCplaneInternal = 7;
+    }
+    uint32 transactionId = 1;
+    repeated NrAdjGnb nrAdjGnbList = 2;
+    repeated XnLink xnLinkList = 3;
+}

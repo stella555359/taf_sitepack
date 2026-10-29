@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+enum CaConfigCu
+{
+    dlAndUl = 0;
+    dlOnly = 1;
+}

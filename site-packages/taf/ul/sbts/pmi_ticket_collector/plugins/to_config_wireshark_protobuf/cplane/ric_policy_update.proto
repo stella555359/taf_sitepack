@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package sep_ran_message;
+
+enum Operation
+{
+    EQUAL = 0;
+    GREATER = 1;
+    LESSER = 2;
+}
+
+message ARP
+{
+    uint32 priority_level = 1;
+    Operation prio_level_op = 2;
+}
+
+message QCI
+{
+    uint32 qci = 1;
+    Operation qci_op = 2;
+}
+
+message UeGroupPolicy
+{
+    uint32 ue_group_id = 1;
+    QCI qci = 2;
+    ARP arp = 3;
+    int32 cell_load_offset_precentage = 4; // can be from -100% to 100%
+}
+
+message Policy
+{
+    uint32 policy_id = 1;
+    repeated UeGroupPolicy ue_group_policy = 2;
+}
+
+message RicPolicyUpdate
+{
+    uint32 transactionId = 1;
+    repeated Policy policies = 2;
+}

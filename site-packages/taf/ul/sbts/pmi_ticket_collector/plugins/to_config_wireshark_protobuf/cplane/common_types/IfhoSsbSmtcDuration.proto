@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+enum IfhoSsbSmtcDuration
+{
+    ifhoSsbSmtcDurationSF1 = 0;
+    ifhoSsbSmtcDurationSF2 = 1;
+    ifhoSsbSmtcDurationSF3 = 2;
+    ifhoSsbSmtcDurationSF4 = 3;
+    ifhoSsbSmtcDurationSF5 = 4;
+}

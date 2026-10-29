@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "common_types/MeasEnabled.proto";
+
+package common_type;
+
+message NrMeasCfgIrItem
+{
+    MeasEnabled b2MeashoEnabled = 1;
+    uint32 earfcnValue = 2;
+}
+
+message NrMeasCfgIr
+{
+    uint32 nrMeasCfgIrId = 1;
+    common_type.NrMeasCfgIrItem nrMeasCfgIrItem = 2;
+}

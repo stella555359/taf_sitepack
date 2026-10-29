@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "common/cell_bwp_list.proto";
+
+package common_messages;
+
+message CellConfiguration
+{
+    oneof optional_cellBwpList
+    {
+        common_messages.CellBwpList cellBwpList = 1;
+    }
+
+    oneof optional_weightForSCellSelection
+    {
+        uint32 weightForSCellSelection = 2;
+    }
+}

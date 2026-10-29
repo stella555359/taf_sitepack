@@ -1,0 +1,41 @@
+syntax = "proto3";
+import "common_types/sensitive_option.proto";
+import "common_types/Plmn.proto";
+
+package cp_nb_message;
+
+enum X2LinkState
+{
+    unavailable = 0;
+    available = 1;
+}
+
+enum X2LinkOperation
+{
+    createOrUpdateX2Link = 0;
+    deleteX2Link = 1;
+}
+
+enum X2LinkLock
+{
+    x2linkUnlocked = 0;
+    x2linkLocked = 1;
+}
+
+message CpNbX2LinkInfoUpdateRequired
+{
+    message X2Link
+    {
+        X2LinkState status = 1;
+        string remoteIp = 2 [ (ipaddress_param) = true ];
+        uint32 enbId = 3;
+
+        common_type.Plmn plmn = 4;
+        uint32 lteEnbId = 5;
+        X2LinkOperation operation = 6;
+
+        X2LinkLock x2LinkLock = 7;
+    }
+    uint32 transactionId = 1;
+    repeated X2Link x2LinkList = 2;
+}

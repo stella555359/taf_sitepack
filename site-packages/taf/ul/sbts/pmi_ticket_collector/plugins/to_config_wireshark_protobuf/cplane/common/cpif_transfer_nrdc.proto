@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/global_gnb_id.proto";
+
+package common_messages;
+
+message CpIfTransferNrDc
+{
+    uint32 targetCuUeId = 1 [ (cucpueid_param) = true ];
+    common_messages.GlobalGnbId globalGnbId = 2;
+    bytes encodedXnMessage = 3;
+}

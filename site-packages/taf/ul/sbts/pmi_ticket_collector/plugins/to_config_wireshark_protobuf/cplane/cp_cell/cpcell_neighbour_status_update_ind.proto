@@ -1,0 +1,72 @@
+syntax = "proto3";
+import "common/nr_cell_identity.proto";
+import "common/plmn_identity.proto";
+import "common_types/CellDepType.proto";
+import "common_types/QOffsetRange.proto";
+import "common_types/PlmnSetSa.proto";
+import "common_types/HandoverAllowedSA.proto";
+
+package cell_request;
+
+message CpCellNeighbourStatusUpdateInd
+{
+    message OptionalCellIndividualOffset
+    {
+        QOffsetRange value = 1;
+    }
+    message OptionalNrArfcn
+    {
+        uint32 value = 1;
+    }
+    message OptionalCellDepType
+    {
+        CellDepType value = 1;
+    }
+    enum NrRefType
+    {
+        nrCell = 0;
+        nrAdjNrCell = 1;
+    }
+    enum Status
+    {
+        pciIdentified = 0;
+        hoSucceeded = 1;
+        hoFailed = 2;
+        pciConfirmed = 3;
+    }
+    message OptionalMultifreqBandIndicatorNR
+    {
+        repeated uint32 value = 1;
+    }
+    common_messages.NRCellIdentity nrCellIdentity = 1;
+    uint32 lcrId = 2;
+    uint32 gnbId = 3;
+    uint32 gnbIdLength = 4;
+    common_messages.PlmnIdentity gnbPlmn = 5;
+    oneof optional_cellDepType
+    {
+        OptionalCellDepType cellDepType = 6;
+    }
+    oneof optional_ssbFrequency
+    {
+        OptionalNrArfcn ssbFrequency = 7;
+    }
+    oneof optional_cellIndividualSsbRsrpOffset
+    {
+        OptionalCellIndividualOffset cellIndividualSsbRsrpOffset = 8;
+    }
+    oneof optional_cellIndividualSsbRsrqOffset
+    {
+        OptionalCellIndividualOffset cellIndividualSsbRsrqOffset = 9;
+    }
+    repeated common_messages.PlmnIdentity plmnNsaList = 10;
+    uint32 physCellId = 11;
+    NrRefType nrRefType = 12;
+    Status status = 13;
+    oneof optional_frequencyBandList
+    {
+        OptionalMultifreqBandIndicatorNR frequencyBandList = 14;
+    }
+    repeated common_type.PlmnSetSa plmnSetSaList = 15;
+    HandoverAllowedSA handoverAllowedSA = 17;
+}

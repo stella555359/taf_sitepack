@@ -1,0 +1,21 @@
+{
+    "name": "5G negative counter analysis EDA MNRCA-60316",
+    "description": "Fail on negative Counter values unless counter or unit is defined in exclude lists",
+    "tags": [],
+    "domain": "Counter",
+    "algorithm": "negative-kpi-counter-detector",
+    "trigger": "test_case_collection_ended",
+    "rule": {
+      "counter": {
+        "exclude_counter": ["M8010C67","M51362C1","M51362C2","M51362C3","M8009C0","M51400C1","M40114C0","M40114C1","M40114C2"],
+        "exclude_counter_unit": [
+          "dBm",
+          "dB",
+          "1.0E-1 dBm",
+          "1.0E-1 dB",
+          "0.001 CQI",
+          "dBc"
+        ]
+      }
+    }
+  }

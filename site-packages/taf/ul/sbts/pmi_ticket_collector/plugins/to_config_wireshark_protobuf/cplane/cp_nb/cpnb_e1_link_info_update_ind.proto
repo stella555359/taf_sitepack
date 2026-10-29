@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package cp_nb_message;
+
+message CpNbE1LinkInfoUpdateInd
+{
+    uint32 transactionId = 1;
+    uint32 gNBCuUpId = 2;
+    enum E1cLinkStatus
+    {
+        unavailable = 0;
+        available = 1;
+    }
+    E1cLinkStatus e1cLinkStatus = 3;
+}

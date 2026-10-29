@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package cell_request;
+
+message CpCellDataDistributionRequest
+{
+    message DeployableUnit
+    {
+        uint32 poolId = 1;
+        uint32 nodeAddress = 2;
+        uint32 ipVersion = 3;
+        string ipAddress = 4 [ (ipaddress_param) = true ];
+    }
+
+    uint32 transactionId = 1;
+    uint32 cpnbPoolId = 11;
+    uint32 cpnbNodeAddress = 12;
+    uint32 cpnbIpVersion = 13;
+    string cpnbIpAddress = 14 [ (ipaddress_param) = true ];
+    uint32 cpifPoolId = 21;
+    uint32 cpifNodeAddress = 23;
+    uint32 cpifIpVersion = 24;
+    string cpifIpAddress = 25 [ (ipaddress_param) = true ];
+    repeated DeployableUnit deployableUnitsList = 101;
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package cp_nb_message;
+
+enum Status
+{
+    ok = 0;
+    notok = 1;
+    aborted = 2;
+}

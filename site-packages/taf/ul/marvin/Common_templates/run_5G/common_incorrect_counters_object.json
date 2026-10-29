@@ -1,0 +1,7 @@
+{
+    "name": "Common 5G to check counters from incorrect object",
+    "tags": [],
+    "domain": "Catch-Counter",
+    "algorithm": "idefix-analyzer",
+    "rule": {}
+}

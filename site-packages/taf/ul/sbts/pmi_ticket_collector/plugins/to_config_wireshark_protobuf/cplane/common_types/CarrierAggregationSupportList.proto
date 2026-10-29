@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+enum CarrierAggregationSupportList
+{
+    None = 0;
+    Ca_Fdd_Fr1Tdd_Sa = 200;
+    Ca_Fdd_Fr1Tdd_Nsa = 201;
+    Ca_Fdd_Fdd = 3;
+    Ca_Fr1Tdd_Sa = 400;
+    Ca_Fr1Tdd_Nsa = 401;
+    Ca_Fr1Tdd_Fdd_Sa = 500;
+    Ca_Fr1Tdd_Fdd_Nsa = 501;
+    Ca_Fdd_Any_Sa = 6;
+    Ca_Fr1Tdd_Any_Sa = 7;
+    Ca_Fdd_Fr1Tdd_Sa_WithUl = 210;
+}

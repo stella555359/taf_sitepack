@@ -1,0 +1,42 @@
+syntax = "proto3";
+import "common/cp_cell_pdu_session_resource_to_be_setup_item.proto";
+import "common/cp_cell_pdu_session_resource_to_be_modified_item.proto";
+import "common/cp_cell_pdu_session_resource_to_be_released_item.proto";
+import "options/protobuf_options.proto";
+
+package cell_request;
+
+message CpCellPduSessionResourceReq
+{
+    uint32 cuUeId = 1 [ (cucpueid_param) = true ];
+    uint64 pCellId = 2;
+
+    message PduSessionResourceToBeSetupList
+    {
+        repeated common_messages.PduSessionResourceToBeSetupItem items = 1;
+    }
+
+    message PduSessionResourceToBeModifiedList
+    {
+        repeated common_messages.PduSessionResourceToBeModifiedItem items = 1;
+    }
+
+    message PduSessionResourceToBeReleasedList
+    {
+        repeated common_messages.PduSessionResourceToBeReleasedItem items = 1;
+    }
+
+    oneof pduSessionResources
+    {
+        PduSessionResourceToBeSetupList pduSessionResourceToBeSetupList = 3;
+        PduSessionResourceToBeReleasedList pduSessionResourceToBeReleasedList = 4;
+        PduSessionResourceToBeModifiedList pduSessionResourceToBeModifiedList = 5;
+    }
+
+    oneof optional_selectedPlmn
+    {
+        bytes selectedPlmn = 6 [ (sensitive_param) = true ];
+    }
+
+    uint32 transactionId = 7;
+}

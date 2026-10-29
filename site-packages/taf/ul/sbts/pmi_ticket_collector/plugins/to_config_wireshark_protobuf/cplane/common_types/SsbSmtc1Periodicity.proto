@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+enum SsbSmtc1Periodicity
+{
+    Sf5 = 0;
+    Sf10 = 1;
+    Sf20 = 2;
+    Sf40 = 3;
+    Sf80 = 4;
+    Sf160 = 5;
+}

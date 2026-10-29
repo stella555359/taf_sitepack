@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/UeContextInformation.proto";
+import "common/NrDcPSCellCandidate.proto";
+import "common/nr_cell_identity.proto";
+
+package cell_request;
+
+message CpCellPSCellPreselectionReq
+{
+    uint32 transactionId = 1;
+    uint32 cuUeId = 2 [ (cucpueid_param) = true ];
+    common_messages.NRCellIdentity pCellId = 3;
+    repeated common_messages.NrDcPSCellCandidate nrdcPSCellCandidates = 4;
+    ue_context_information.UeContextInformation ueContextInformation = 5;
+    uint32 gnbDuUeF1apId = 6;
+}

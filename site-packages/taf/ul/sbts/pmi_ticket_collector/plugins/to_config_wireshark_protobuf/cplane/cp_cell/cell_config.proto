@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "cp_cell/cpcell_nidd_delivery_request.proto";
+import "cp_cell/cpcell_data_distribution_request.proto";
+import "cp_cell/cpcell_pool_failure_ind.proto";
+import "options/protobuf_options.proto";
+
+package cell_request;
+
+message CellConfigRequest
+{
+    option (port_numbers) = 30520;
+    oneof request
+    {
+        CpCellNiddDeliveryRequest cpCellNiddDeliveryRequest = 1;
+        CpCellDataDistributionRequest cpCellDataDistributionRequest = 2;
+        CpCellPoolFailureInd cpCellPoolFailureInd = 3;
+    }
+}

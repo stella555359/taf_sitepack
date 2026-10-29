@@ -1,0 +1,16 @@
+{
+    "name": "Run level IDLE TOP counter analysis",
+    "tags": [],
+    "domain": "Top-Counter",
+    "algorithm": "obelix-analyzer",
+    "trigger": "test_run_collection_ended",
+    "rule": {
+        "alpha": 0.05, 
+        "drop_first_and_last": "False",
+        "analysis_type": "idle",
+        "exclude": {
+            "measurement": [],
+            "measurement_counter": []
+        }
+    }
+}

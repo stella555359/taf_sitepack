@@ -1,0 +1,22 @@
+syntax = "proto3";
+import "common_types/global_enb_id.proto";
+
+package cp_ue_request;
+
+message ReceiveFromMeNB
+{
+    uint32 sgnbUeX2apId = 1;
+    bytes payload = 2;
+    oneof optional_globalEnbId
+    {
+        common_messages.GlobalEnbId globalEnbId = 3;
+    }
+    oneof optional_menbUeX2ApId
+    {
+        uint32 menbUeX2ApId = 4;
+    }
+    oneof optional_meNBUeX2ApIdExtension
+    {
+        uint32 meNBUeX2ApIdExtension = 5;
+    }
+}

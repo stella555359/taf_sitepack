@@ -1,0 +1,42 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+package cp_ue_request;
+
+message DeployableUnitsList
+{
+    uint32 poolId = 1;
+    uint32 nodeAddress = 2;
+    uint32 hiUserCuAddress = 3;
+    string uplaneS1IpAddress = 4 [ (ipaddress_param) = true ];
+    string uplaneF1IpAddress = 5 [ (ipaddress_param) = true ];
+    string uplaneX2IpAddress = 6 [ (ipaddress_param) = true ];
+    uint32 numOfBearerGroups = 7;
+    uint32 bearerIndexStart = 8;
+    uint32 bearerIndexEnd = 9;
+    repeated uint32 trswDataBackHaulPduReceiverAddress = 10;
+    repeated uint32 ulF1UPduRecevierAddress = 11;
+    repeated uint32 trswDataX2PduReceiverAddress = 12;
+    repeated uint32 trswDataX2DataFwdPduReceiverAddress = 13;
+}
+
+message CpUeDataDistributionRequest
+{
+    uint32 transactionId = 1;
+    uint32 cpnbPoolId = 11;
+    uint32 cpnbNodeAddress = 12;
+    uint32 cpnbIpVersion = 13;
+    string cpnbIpAddress = 14 [ (ipaddress_param) = true ];
+    uint32 cpifPoolId = 21;
+    uint32 cpifNodeAddress = 22;
+    uint32 cpifIpVersion = 23;
+    string cpifIpAddress = 24 [ (ipaddress_param) = true ];
+    uint32 cpclPoolId = 31;
+    uint32 cpclNodeAddress = 32;
+    uint32 cpclIpVersion = 33;
+    string cpclIpAddress = 34 [ (ipaddress_param) = true ];
+    uint32 cpuePoolId = 41;
+    uint32 cpueNodeAddress = 42;
+    uint32 ueIdRangeIndex = 51;
+    repeated DeployableUnitsList deployableUnitsLists = 61;
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package common_messages;
+
+enum Cause
+{
+    noRadioResourcesAvailableInDuNonHO = 0;
+}
+
+message PduSessionResourceToBeReleasedItem
+{
+    message Optional_Cause
+    {
+        Cause cause = 1;
+    }
+    uint32 pduSessionId = 1;
+    Optional_Cause optional_Cause = 2;
+}

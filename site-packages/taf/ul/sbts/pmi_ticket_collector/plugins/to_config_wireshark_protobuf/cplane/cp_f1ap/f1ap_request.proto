@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+import "cp_f1ap/send_to_du.proto";
+import "cp_if/cpif_nidd_delivery_request.proto";
+import "cp_if/cpue_ue_release_bulk_resp.proto";
+import "cp_if/cpif_data_distribution_request.proto";
+import "common/cpif_f1_partial_reset_req.proto";
+import "cp_f1ap/cpnb_f1_link_info_update_ack.proto";
+import "cp_if/cpif_deployment_complete_ind.proto";
+import "cp_f1ap/cpif_f1_shutdown_req.proto";
+import "cp_if/cpif_nsa_cell_activation_readiness_ind.proto";
+import "cp_if/cpif_trsw_configuration_request.proto";
+import "cp_if/cpif_resource_release_req.proto";
+import "cp_f1ap/cpif_served_cell_info_from_du_confirm.proto";
+import "cp_if_internal/reset_request.proto";
+import "cp_if_internal/reset_response.proto";
+import "cp_if_internal/f1_shutdown_ind.proto";
+import "cp_f1ap/cpif_f1_inter_gnb_ca_xp_setup_request.proto";
+import "cp_f1ap/cpcell_du_resource_clean_up_resp.proto";
+import "sctp/sctp_messages.proto";
+import "sctp_reply/sctp_reply_message.proto";
+import "cp_if/cpif_pool_failure_ind.proto";
+import "cp_if/cpif_cu_links_lock_req.proto";
+import "options/protobuf_options.proto";
+import "cp_if/cpif_cell_activation_readiness_ack.proto";
+
+package cp_f1ap_interface;
+
+message F1apRequest
+{
+    option (port_numbers) = 30539;
+    oneof request
+    {
+        SendToDu sendToDu = 1;
+        cp_if_interface.CpIfNiddDeliveryRequest cpIfNiddDeliveryRequest = 2;
+        cp_if_interface.CpUeUeReleaseBulkResp cpueUeReleaseBulkResp = 3;
+        cp_if_interface.CpIfDataDistributionRequest cpIfDataDistributionRequest = 4;
+        common_messages.CpIfF1PartialResetRequest cpIfF1PartialResetRequest = 5;
+        CpNbF1LinkInfoUpdateAck cpNbF1LinkInfoUpdateAck = 6;
+        cp_if_interface.CpIfDeploymentCompleteInd cpIfDeploymentCompleteInd = 7;
+        CpIfF1ShutdownReq cpIfF1ShutdownReq = 8;
+        cp_if_interface.CpIfNasCellActivationReadinessInd cpIfNasCellActivationReadinessInd = 10;
+        cp_if_interface.CpIfTransportSoftwareConfigurationRequest cpIfTrswConfigurationRequest = 11;
+        cp_if_interface.CpIfResourceReleaseReq cpIfResourceReleaseReq = 13;
+        CpCellServedCellInfoFromDuConfirm cpCellServedCellInfoFromDuConfirm = 14;
+        cp_if_internal_message.ResetRequest resetRequest = 18;
+        CpCellDuResourceCleanUpResp cpCellDuResourceCleanUpResp = 19;
+        cp_if_internal_message.ResetResponse resetResponse = 20;
+        sctp_reply.SCTPReply sctpReply = 21;
+        sctp.F1APCommonEnvelope f1APCommonEnvelope = 22;
+        sctp.F1APCellEnvelope f1APCellEnvelope = 23;
+        sctp.F1APUEEnvelope f1APUEEnvelope = 24;
+        cp_if_internal_message.F1ShutdownInd f1ShutdownInd = 25;
+        cp_if_interface.CpIfPoolFailureInd cpIfPoolFailureInd = 26;
+        sctp.F1UeMappingUpdate f1UeMappingUpdate = 27;
+        cp_if_interface.CpIfCuLinksLockReq cpIfCuLinksLockReq = 28;
+        cp_if_interface.CpCellCellActivationReadinessAck cpCellCellActivationReadinessAck = 29;
+        sctp.F1APXpEnvelope f1APXpEnvelope = 30;
+        CpIfF1IgNBCAXpSetupRequest cpIfF1IgNBCAXpSetupRequest = 31;
+    }
+    uint32 poolId = 15;
+}

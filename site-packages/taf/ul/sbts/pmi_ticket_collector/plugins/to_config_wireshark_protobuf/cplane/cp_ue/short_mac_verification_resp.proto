@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+
+import "common_types/common_status.proto";
+
+package cp_ue_request;
+
+message ShortMacVerificationResp
+{
+    uint32 ueIdCu = 1 [ (cucpueid_param) = true ];
+    Status shortMacVerificationResult = 2;
+}

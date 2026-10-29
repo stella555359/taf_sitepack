@@ -1,0 +1,44 @@
+syntax = "proto3";
+import "cp_nb/cpif_nidd_delivery_response.proto";
+import "cp_nb/cpif_data_distribution_response.proto";
+import "cp_nb/cpif_trsw_configuration_response.proto";
+import "cp_nb/cpif_trsw_configuration_update_response.proto";
+import "cp_if_internal/reset_response.proto";
+import "cp_if_internal/reset_request.proto";
+import "common/e1_status_indication.proto";
+import "cp_cell/ng_ran_update_resp.proto";
+import "cp_if_internal/xn_info_update_req.proto";
+import "cp_if_internal/xn_info_update_resp.proto";
+import "cp_if_internal/cpif_internal_getupueid_resp.proto";
+import "cp_cell/cpif_cell_config_update_response.proto";
+import "cp_nb/cpif_cu_links_lock_resp.proto";
+import "cp_cell/cpcell_cell_supported_ta_list_ind.proto";
+import "cp_cell/cpcell_nglink_status_update_ind.proto";
+import "cp_e2/cpif_link_info_resp.proto";
+import "cp_if_internal/cpif_link_status_update_ind.proto";
+
+package cp_if_internal_message;
+
+message CpIfInternalMessage
+{
+    oneof message
+    {
+        cp_nb_message.CpIfTransportSoftwareConfigurationResponse cpIfTransportSoftwareConfigurationResponse = 1;
+        cp_nb_message.CpIfNiddDeliveryResponse cpIfNiddDeliveryResponse = 2;
+        cp_nb_message.CpIfDataDistributionResponse cpIfDataDistributionResponse = 3;
+        ResetRequest resetRequest = 4;
+        ResetResponse resetResponse = 5;
+        common_messages.E1StatusIndication e1StatusIndication = 6;
+        cell_request.CpIfNgRanUpdateResp cpIfNgRanUpdateResp = 7;
+        XnInfoUpdateReq xnInfoUpdateReq = 8;
+        XnInfoUpdateResp xnInfoUpdateResp = 9;
+        cell_request.CpIfCellConfigUpdateResp cpIfCellConfigUpdateResp = 11;
+        cp_nb_message.CpIfCuLinksLockResp cpIfCuLinksLockResp = 12;
+        cell_request.CpCellCellSupportedTAListInd cellSupportedTAListInd = 13;
+        cell_request.CpCellNgLinkStatusUpdateInd cpCellNgLinkStatusUpdateInd = 16;
+        CpIfInternalGetUpUeIdResp cpIfInternalGetUpUeIdResp = 17;
+        cp_nb_message.CpIfTransportSoftwareConfigurationUpdateResponse cpIfTrswUpdateDeliveryResponse = 18;
+        cp_e2_interface.CpIfLinkInfoResp cpIfLinkInfoResp = 19;
+        CpIfLinkStatusUpdateInd cpIfLinkStatusUpdateInd = 20;
+    }
+}

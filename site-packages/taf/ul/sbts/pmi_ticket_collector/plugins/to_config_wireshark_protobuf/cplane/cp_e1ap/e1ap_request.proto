@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+import "cp_e1ap/cpnb_e1_link_info_update_ack.proto";
+import "cp_if/cpif_deployment_complete_ind.proto";
+import "cp_if/cpif_nidd_delivery_request.proto";
+import "cp_if_internal/reset_request.proto";
+import "cp_if_internal/reset_response.proto";
+import "cp_e1ap/cpue_internal_e1_reset_request.proto";
+import "cp_if/cpif_data_distribution_request.proto";
+import "common/cpif_f1_partial_reset_resp.proto";
+import "cp_if/cpif_pool_failure_ind.proto";
+import "sctp/sctp_messages.proto";
+import "sctp_reply/sctp_reply_message.proto";
+import "cp_if/cpif_cu_links_lock_req.proto";
+import "cp_if_internal/cpif_internal_getupueid_req.proto";
+import "options/protobuf_options.proto";
+
+package cp_e1ap_interface;
+
+message E1apRequest
+{
+    option (port_numbers) = 30531;
+    oneof request
+    {
+        cp_e1ap_interface.CpNbE1LinkInfoUpdateAck cpNbE1LinkInfoUpdateAck = 1;
+        cp_if_interface.CpIfNiddDeliveryRequest cpIfNiddDeliveryRequest = 2;
+        cp_if_interface.CpIfDeploymentCompleteInd cpIfDeploymentCompleteInd = 4;
+        cp_if_internal_message.ResetRequest resetRequest = 9;
+        cp_e1ap_interface.CpUeInternalE1ResetRequest cpUeInternalE1ResetRequest = 10;
+        cp_if_interface.CpIfDataDistributionRequest cpIfDataDistributionRequest = 11;
+        common_messages.CpIfF1PartialResetResponse cpIfF1PartialResetResponse = 14;
+        cp_if_internal_message.ResetResponse resetResponse = 15;
+        cp_if_interface.CpIfPoolFailureInd cpIfPoolFailureInd = 16;
+        sctp_reply.SCTPReply sctpReply = 17;
+        sctp.SCTPE1APUEMapping sctpE1ApUeMapping = 18;
+        cp_if_interface.CpIfCuLinksLockReq cpIfCuLinksLockReq = 19;
+        cp_if_internal_message.CpIfInternalGetUpUeIdReq cpIfInternalGetUpUeIdReq = 20;
+    }
+}

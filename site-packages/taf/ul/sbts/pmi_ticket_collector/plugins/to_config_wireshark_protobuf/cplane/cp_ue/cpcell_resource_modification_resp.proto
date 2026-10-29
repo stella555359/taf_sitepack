@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "common/nrcgi.proto";
+import "common_types/admission_result.proto";
+import "common_types/PcmdServiceParameters.proto";
+import "options/protobuf_options.proto";
+
+package cp_ue_request;
+
+message CpCellResourceModificationResp
+{
+    uint32 cuF1UeId = 1 [ (cucpueid_param) = true ];
+    common_messages.NRCGI psCell = 2;
+    common_type.AdmissionResult result = 3;
+    common_type.PcmdServiceParameters pcmdServiceParameters = 4;
+    uint32 transactionId = 5;
+    uint32 poolId = 6;
+}

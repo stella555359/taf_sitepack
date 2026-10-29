@@ -1,0 +1,20 @@
+syntax = "proto3";
+package cp_if_internal_message;
+
+enum CpIfLinkType
+{
+    x2Link = 0;
+    ngLink = 1;
+}
+
+enum CpIfLinkStatus
+{
+    unavailable = 0;
+    available = 1;
+}
+
+message CpIfLinkStatusUpdateInd
+{
+    CpIfLinkType linkType = 1;
+    CpIfLinkStatus linkStatus = 2;
+}

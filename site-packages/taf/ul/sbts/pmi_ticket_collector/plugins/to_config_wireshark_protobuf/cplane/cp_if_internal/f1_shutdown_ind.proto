@@ -1,0 +1,6 @@
+syntax = "proto3";
+package cp_if_internal_message;
+
+message F1ShutdownInd
+{
+}

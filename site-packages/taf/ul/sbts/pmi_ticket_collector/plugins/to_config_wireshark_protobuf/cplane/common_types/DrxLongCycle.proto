@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+enum DrxLongCycle
+{
+    drxlongcyclems10 = 0;
+    drxlongcyclems20 = 1;
+    drxlongcyclems40 = 3;
+    drxlongcyclems60 = 4;
+    drxlongcyclems70 = 6;
+    drxlongcyclems80 = 7;
+    drxlongcyclems160 = 8;
+    drxlongcyclems320 = 9;
+    drxlongcyclems640 = 10;
+}

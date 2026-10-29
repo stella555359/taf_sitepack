@@ -1,0 +1,37 @@
+syntax = "proto3";
+import "options/protobuf_options.proto";
+import "common_types/admission_result.proto";
+import "common/nrcgi.proto";
+
+package cp_ue_request;
+
+message AllowedPSCellCandidate
+{
+    common_messages.NRCGI id = 1;
+}
+
+message AllowedPSCellCandidates
+{
+    repeated AllowedPSCellCandidate allowedPSCellCandidate = 1;
+}
+
+message AllowedBandCombinationIncludeBandNrInfo
+{
+    uint32 bandCombinationIndex = 1;
+    repeated uint32 featureSetEntryIndex = 2;
+    uint32 pCellBandNr = 3;
+}
+
+message AllowedBandCombinationIncludeBandNrInfoList
+{
+    repeated AllowedBandCombinationIncludeBandNrInfo allowedBandCombinationIncludeBandNrInfo = 1;
+}
+
+message CpCellNrDcMnUeCapabilityChecksResp
+{
+    uint32 transactionId = 1;
+    uint32 cuUeId = 2 [ (cucpueid_param) = true ];
+    common_type.AdmissionResult result = 3;
+    AllowedPSCellCandidates allowedPSCellCandidates = 4;
+    AllowedBandCombinationIncludeBandNrInfoList allowedBandCombinationIncludeBandNrInfoList = 5;
+}

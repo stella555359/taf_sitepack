@@ -1,0 +1,8 @@
+syntax = "proto3";
+package cell_request;
+
+message CpCellResourceCleanUpReq
+{
+    uint32 transactionId = 1;
+    repeated uint64 cellList = 2;
+}

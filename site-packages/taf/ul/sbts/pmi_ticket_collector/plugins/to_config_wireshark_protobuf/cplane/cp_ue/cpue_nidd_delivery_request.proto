@@ -1,0 +1,1811 @@
+syntax = "proto3";
+import "common_types/ActNrDualConnectivity.proto";
+import "common_types/ActVoNrMobilityThresholds.proto";
+import "common_types/ActInterGnbCa.proto";
+import "common_types/Duration.proto";
+import "common_types/SsbSmtc1Periodicity.proto";
+import "common_types/ReorderingTimer.proto";
+import "common_types/FilterCoefficient.proto";
+import "common_types/MeasEnabled.proto";
+import "common_types/NrHoIfParams.proto";
+import "common_types/NrHoIrParams.proto";
+import "common_types/TWaitingRlRecover.proto";
+import "common_types/TimeToTrigger.proto";
+import "common_types/DrxLongCycle.proto";
+import "common_types/QOffsetRange.proto";
+import "common_types/CellDepType.proto";
+import "common_types/ReportAmount.proto";
+import "common_types/ReportInterval.proto";
+import "options/protobuf_options.proto";
+import "common_types/NrMoPrMaNsa.proto";
+import "common_types/NrMoPrNsa.proto";
+import "common_types/NrMoPrSa.proto";
+import "common_types/NrMoPrMaSa.proto";
+import "common_types/NrMoRed.proto";
+import "common_types/NrMeasCfgIf.proto";
+import "common_types/NrMeasCfgIr.proto";
+import "common_types/NrIrfim.proto";
+import "common_types/NrLim.proto";
+import "common/nrcgi.proto";
+import "common_types/GnbCuType.proto";
+import "common_types/IdleMMSteeringAlgo.proto";
+import "common_types/Timer320.proto";
+import "common_types/ChannelBandwidth.proto";
+import "common_types/Plmn.proto";
+import "common_types/CarrierAggregationSupportList.proto";
+import "common/snssai.proto";
+import "common_types/NrScs.proto";
+
+package cp_ue_request;
+message CpUeNiddDeliveryRequest
+{
+    uint32 transactionId = 1;
+
+    message CpCellVmsToMap
+    {
+        message CpCellVm
+        {
+            string cpCellIpAddress = 1 [ (ipaddress_param) = true ];
+
+            message NrCellData
+            {
+                uint64 nrCellIdentity = 1;
+                uint32 physicalCellId = 2;
+                uint32 nrArfcn = 3;
+            }
+
+            message NrCellGroupData
+            {
+                uint32 nrCellGroupId = 1;
+                bool spCellChangeEnabled = 2;
+                repeated NrCellData nrCellDataContainer = 3;
+            }
+
+            message GnbDuData
+            {
+                uint64 gnbDuId = 1;
+                repeated NrCellGroupData nrCellGroupDataContainer = 2;
+                bool actInterNumerologyCa = 3;
+                repeated CarrierAggregationSupportList carrierAggregationSupportList = 4;
+                enum FlexibleCAMode
+                {
+                    BasicCAMode = 0;
+                    MixedCAMode = 1;
+                    ConfigurationIndependent = 2;
+                    NumberCellAmount = 3;
+                }
+                FlexibleCAMode flexibleCAMode = 5;
+                bool actConnectedModeMobilityCA = 6;
+                enum CrntiAllocationOption
+                {
+                    max72cells = 0;
+                    max144cells = 1;
+                }
+                CrntiAllocationOption crntiAllocationOption = 7;
+                common_type.ActInterGnbCa actInterGnbCa = 8;
+            }
+            repeated GnbDuData gnbDuDataContainer = 2;
+        }
+        repeated CpCellVm cpCellVmList = 1;
+    }
+
+    message PciMeasIdToNrCellIdentity
+    {
+        uint32 measId = 1;
+        uint32 phyCellId = 2;
+        uint64 nrCellIdentity = 3;
+    }
+
+    uint32 msgId = 2;
+    TWaitingRlRecover tWaitingRlRecover = 3;
+    bool actUeInitRlf = 4;
+    repeated PciMeasIdToNrCellIdentity pciMeasIdToNrCellIdentitys = 5;
+    bool actDlDataForwardingX2 = 6;
+
+    message CellParams
+    {
+        uint64 nrCellIdentity = 1;
+        uint32 pci = 2;
+        uint32 nrarfcn = 3;
+        oneof optional_sMeasConfigSsbRsrp
+        {
+            uint32 sMeasConfigSsbRsrp = 4;
+        }
+        oneof optional_filterCoeffSsbRsrp
+        {
+            FilterCoefficient filterCoeffSsbRsrp = 5;
+        }
+        oneof optional_filterCoeffSsbRsrq
+        {
+            FilterCoefficient filterCoeffSsbRsrq = 6;
+        }
+        oneof optional_absThreshSsbRsrpConsolidation
+        {
+            uint32 absThreshSsbRsrpConsolidation = 7;
+        }
+        oneof optional_absThreshSsbRsrqConsolidation
+        {
+            uint32 absThreshSsbRsrqConsolidation = 8;
+        }
+        oneof optional_nroSsbToAverage
+        {
+            uint32 nroSsbToAverage = 9;
+        }
+        oneof optional_a3OffsetSsbRsrp
+        {
+            int32 a3OffsetSsbRsrp = 10;
+        }
+        oneof optional_a3OffsetSsbRsrq
+        {
+            int32 a3OffsetSsbRsrq = 11;
+        }
+        oneof optional_a3HysteresisSsbRsrp
+        {
+            uint32 a3HysteresisSsbRsrp = 12;
+        }
+        oneof optional_a3HysteresisSsbRsrq
+        {
+            uint32 a3HysteresisSsbRsrq = 13;
+        }
+        oneof optional_a3TimeToTriggerSsbRsrp
+        {
+            TimeToTrigger a3TimeToTriggerSsbRsrp = 14;
+        }
+        oneof optional_a3TimeToTriggerSsbRsrq
+        {
+            TimeToTrigger a3TimeToTriggerSsbRsrq = 15;
+        }
+        oneof optional_a5Threshold1SsbRsrp
+        {
+            uint32 a5Threshold1SsbRsrp = 16;
+        }
+        oneof optional_a5Threshold1SsbRsrq
+        {
+            uint32 a5Threshold1SsbRsrq = 17;
+        }
+        oneof optional_a5Threshold2SsbRsrp
+        {
+            uint32 a5Threshold2SsbRsrp = 18;
+        }
+        oneof optional_a5Threshold2SsbRsrq
+        {
+            uint32 a5Threshold2SsbRsrq = 19;
+        }
+        oneof optional_a5HysteresisSsbRsrp
+        {
+            uint32 a5HysteresisSsbRsrp = 20;
+        }
+        oneof optional_a5HysteresisSsbRsrq
+        {
+            uint32 a5HysteresisSsbRsrq = 21;
+        }
+
+        MeasEnabled a3MeasEnabled = 25;
+        MeasEnabled a5MeasEnabled = 26;
+        oneof optional_a5TimeToTriggerSsbRsrp
+        {
+            TimeToTrigger a5TimeToTriggerSsbRsrp = 27;
+        }
+        oneof optional_a5TimeToTriggerSsbRsrq
+        {
+            TimeToTrigger a5TimeToTriggerSsbRsrq = 28;
+        }
+        bool actCDrx = 29;
+        message DrxProfile
+        {
+            DrxLongCycle drxLongCycle = 1;
+        }
+        repeated DrxProfile drxProfiles = 30;
+
+        message PlmnInfo
+        {
+            enum PlmnMode
+            {
+                NSA = 0;
+                SA = 1;
+                both = 2;
+            }
+            bytes plmnIdentity = 1 [ (sensitive_param) = true ];
+
+            PlmnMode plmnMode = 4;
+            oneof optional_fiveGsTacForPLMN
+            {
+                uint32 fiveGsTacForPLMN = 5;
+            }
+        }
+        QOffsetRange cellIndividualSsbRsrpOffset = 32;
+        QOffsetRange cellIndividualSsbRsrqOffset = 33;
+        uint32 freqBandIndicatorNR = 34;
+        uint32 extendedTac = 35;
+        oneof optional_a2MeasRedirectEnabled
+        {
+            MeasEnabled a2MeasRedirectEnabled = 36;
+        }
+        message A2MeasRedirectSsbRsrp
+        {
+            oneof optional_a2HysteresisRedirectSsbRsrp
+            {
+                uint32 a2HysteresisRedirectSsbRsrp = 1;
+            }
+            oneof optional_a2ThresholdRedirectSsbRsrp
+            {
+                uint32 a2ThresholdRedirectSsbRsrp = 2;
+            }
+            oneof optional_a2TimeToTriggerRedirectSsbRsrp
+            {
+                TimeToTrigger a2TimeToTriggerRedirectSsbRsrp = 3;
+            }
+        }
+        message A2MeasRedirectSsbRsrq
+        {
+            oneof optional_a2HysteresisRedirectSsbRsrq
+            {
+                uint32 a2HysteresisRedirectSsbRsrq = 1;
+            }
+            oneof optional_a2ThresholdRedirectSsbRsrq
+            {
+                uint32 a2ThresholdRedirectSsbRsrq = 2;
+            }
+            oneof optional_a2TimeToTriggerRedirectSsbRsrq
+            {
+                TimeToTrigger a2TimeToTriggerRedirectSsbRsrq = 3;
+            }
+        }
+        oneof optional_a2MeasRedirectSsbRsrp
+        {
+            A2MeasRedirectSsbRsrp a2MeasRedirectSsbRsrp = 37;
+        }
+        oneof optional_a2MeasRedirectSsbRsrq
+        {
+            A2MeasRedirectSsbRsrq a2MeasRedirectSsbRsrq = 38;
+        }
+        message NrRedrt
+        {
+            enum SubcarrierSpacing
+            {
+                kHz15 = 0;
+                kHz30 = 1;
+                kHz60 = 2;
+                kHz120 = 3;
+                kHz240 = 4;
+                spare3 = 5;
+                spare2 = 6;
+                spare4 = 7;
+            }
+            message Smtc
+            {
+                enum RedirSsbSmtcPeriodicity
+                {
+                    sf5 = 0;
+                    sf10 = 1;
+                    sf20 = 2;
+                    sf40 = 3;
+                    sf80 = 4;
+                    sf160 = 5;
+                }
+
+                uint32 redirSsbSmtcOffset = 1;
+                RedirSsbSmtcPeriodicity redirSsbSmtcPeriodicity = 2;
+                Duration redirSsbDuration = 3;
+            }
+            message RedirFrqNr
+            {
+                uint32 nrFreq = 1;
+                SubcarrierSpacing subcarrierSpacing = 2;
+                Smtc smtc = 3;
+            }
+
+            message RedirFrqEutra
+            {
+                uint32 eutraFreq = 1;
+            }
+
+            uint32 nrRedrtId = 1;
+            uint32 redirPrio = 2;
+            enum RedirRat
+            {
+                RATnr = 0;
+                RATeutra = 1;
+            }
+            RedirRat redirRat = 3;
+            oneof RedirCarrierInfo
+            {
+                RedirFrqNr redirCarrierFreqNr = 4;
+                RedirFrqEutra redirCarrierFreqEutra = 5;
+            }
+            repeated string nrPlmnDNList = 6;
+        }
+        repeated NrRedrt redirectCells = 39;
+        message PciBlackList
+        {
+            uint32 pci = 1;
+            enum Range
+            {
+                n4 = 0;
+                n8 = 1;
+                n12 = 2;
+                n16 = 3;
+                n24 = 4;
+                n32 = 5;
+                n48 = 6;
+                n64 = 7;
+                n84 = 8;
+                n96 = 9;
+                n128 = 10;
+                n168 = 11;
+                n252 = 12;
+                n504 = 13;
+                n1008 = 14;
+                spare1 = 15;
+            }
+            oneof optional_range
+            {
+                Range range = 2;
+            }
+            CellDepType validity = 3;
+        }
+        repeated PciBlackList pciBlackList = 40;
+        message NrCellGroupParams
+        {
+            common_type.NrScs nrScs = 1;
+        }
+        NrCellGroupParams nrCellGroupParams = 42;
+        enum CellTechnology
+        {
+            cellTechnologyFDD = 0;
+            cellTechnologyTDD = 1;
+        }
+        CellTechnology cellTechnology = 45;
+        oneof optional_blockHoTimer
+        {
+            uint32 blockHoTimer = 46;
+        }
+        enum VoiceFBMode
+        {
+            voiceFBModeDisabled = 0;
+            voiceFBModeRedirection = 1;
+        }
+        VoiceFBMode voiceFBMode = 49;
+        MeasEnabled a1MeasHoEnabled = 50;
+        message A1MeasHoSsbRsrp
+        {
+            oneof optional_a1HysteresishoSsbRsrp
+            {
+                uint32 a1HysteresishoSsbRsrp = 1;
+            }
+            oneof optional_a1ThresholdhoSsbRsrp
+            {
+                uint32 a1ThresholdhoSsbRsrp = 2;
+            }
+            oneof optional_a1TimeToTriggerhoSsbRsrp
+            {
+                TimeToTrigger a1TimeToTriggerhoSsbRsrp = 3;
+            }
+        }
+        oneof optional_a1MeasHoSsbRsrp
+        {
+            A1MeasHoSsbRsrp a1MeasHoSsbRsrp = 51;
+        }
+        message A1MeasHoSsbRsrq
+        {
+            oneof optional_a1HysteresishoSsbRsrq
+            {
+                uint32 a1HysteresishoSsbRsrq = 1;
+            }
+            oneof optional_a1ThresholdhoSsbRsrq
+            {
+                uint32 a1ThresholdhoSsbRsrq = 2;
+            }
+            oneof optional_a1TimeToTriggerhoSsbRsrq
+            {
+                TimeToTrigger a1TimeToTriggerhoSsbRsrq = 3;
+            }
+        }
+        oneof optional_a1MeasHoSsbRsrq
+        {
+            A1MeasHoSsbRsrq a1MeasHoSsbRsrq = 52;
+        }
+        MeasEnabled a2MeasHoEnabled = 53;
+        message A2MeasHoSsbRsrp
+        {
+            oneof optional_a2HysteresishoSsbRsrp
+            {
+                uint32 a2HysteresishoSsbRsrp = 1;
+            }
+            oneof optional_a2ThresholdhoSsbRsrp
+            {
+                uint32 a2ThresholdhoSsbRsrp = 2;
+            }
+            oneof optional_a2TimeToTriggerhoSsbRsrp
+            {
+                TimeToTrigger a2TimeToTriggerhoSsbRsrp = 3;
+            }
+        }
+        oneof optional_a2MeasHoSsbRsrp
+        {
+            A2MeasHoSsbRsrp a2MeasHoSsbRsrp = 54;
+        }
+        message A2MeasHoSsbRsrq
+        {
+            oneof optional_a2HysteresishoSsbRsrq
+            {
+                uint32 a2HysteresishoSsbRsrq = 1;
+            }
+            oneof optional_a2ThresholdhoSsbRsrq
+            {
+                uint32 a2ThresholdhoSsbRsrq = 2;
+            }
+            oneof optional_a2TimeToTriggerhoSsbRsrq
+            {
+                TimeToTrigger a2TimeToTriggerhoSsbRsrq = 3;
+            }
+        }
+        oneof optional_a2MeasHoSsbRsrq
+        {
+            A2MeasHoSsbRsrq a2MeasHoSsbRsrq = 55;
+        }
+        ReportAmount reportAmount = 56;
+        ReportInterval reportInterval = 57;
+        bool reportOnLeave = 58;
+        message NrHoIfMap
+        {
+            uint32 nrhoifId = 1;
+            common_type.NrHoIfParams nrHoIfParams = 2;
+        }
+        repeated NrHoIfMap nrHoIfMap = 59;
+        enum LteNrDssMode
+        {
+            none = 0;
+            dssPhase1 = 1;
+            dlCrsTdmUlFdm = 2;
+            dssPhase3 = 3;
+        }
+        LteNrDssMode lteNrDssMode = 60;
+        bool dedicatedSib1 = 61;
+        message PlmnSetNSA
+        {
+            message NrPlmnId
+            {
+                uint32 nrPlmnId = 1;
+            }
+            repeated NrPlmnId nrPlmnIdList = 1;
+        }
+        oneof optional_plmnSetNSA
+        {
+            PlmnSetNSA nrPlmnSet_nsa = 62;
+        }
+        message PlmnSetSA
+        {
+            repeated uint32 nrPlmnIdList = 1;
+            uint32 trackingAreaId = 2;
+        }
+        repeated PlmnSetSA nrPlmnSetSAList = 63;
+        oneof optional_a2MeasReleaseEnabled
+        {
+            MeasEnabled a2MeasReleaseEnabled = 64;
+        }
+        message A2MeasReleaseSsbRsrp
+        {
+            oneof optional_a2HysteresisReleaseSsbRsrp
+            {
+                uint32 a2HysteresisReleaseSsbRsrp = 1;
+            }
+            oneof optional_a2ThresholdReleaseSsbRsrp
+            {
+                uint32 a2ThresholdReleaseSsbRsrp = 2;
+            }
+            oneof optional_a2TimeToTriggerReleaseSsbRsrp
+            {
+                TimeToTrigger a2TimeToTriggerReleaseSsbRsrp = 3;
+            }
+        }
+        oneof optional_a2MeasReleaseSsbRsrp
+        {
+            A2MeasReleaseSsbRsrp a2MeasReleaseSsbRsrp = 65;
+        }
+        message A2MeasReleaseSsbRsrq
+        {
+            oneof optional_a2HysteresisReleaseSsbRsrq
+            {
+                uint32 a2HysteresisReleaseSsbRsrq = 1;
+            }
+            oneof optional_a2ThresholdReleaseSsbRsrq
+            {
+                uint32 a2ThresholdReleaseSsbRsrq = 2;
+            }
+            oneof optional_a2TimeToTriggerReleaseSsbRsrq
+            {
+                TimeToTrigger a2TimeToTriggerReleaseSsbRsrq = 3;
+            }
+        }
+        oneof optional_a2MeasReleaseSsbRsrq
+        {
+            A2MeasReleaseSsbRsrq a2MeasReleaseSsbRsrq = 66;
+        }
+        enum EmergencyFBMode
+        {
+            emergencyFBModeDisabled = 0;
+            emergencyFBModeRedirection = 1;
+        }
+        oneof optional_emergencyFBMode
+        {
+            EmergencyFBMode emergencyFBMode = 67;
+        }
+        message IfhoSsbSmtcOffset
+        {
+            uint32 value = 1;
+        }
+        oneof optional_ifhoSsbSmtcOffset
+        {
+            IfhoSsbSmtcOffset ifhoSsbSmtcOffset = 69;
+        }
+        message NrHoIrIdList
+        {
+            uint32 nrhoirId = 1;
+        }
+        repeated NrHoIrIdList nrHoIrIdList = 70;
+        uint32 nrCellId = 71;
+
+        MeasEnabled a1MeasHoEnabledSA = 73;
+        MeasEnabled a2MeasHoEnabledSA = 74;
+        oneof optional_reportAmountSA
+        {
+            ReportAmount reportAmountSA = 75;
+        }
+        oneof optional_reportIntervalSA
+        {
+            ReportInterval reportIntervalSA = 76;
+        }
+        message A1MeasHoSsbRsrpSA
+        {
+            oneof optional_a1HysteresishoSsbRsrp
+            {
+                uint32 a1HysteresishoSsbRsrp = 1;
+            }
+            oneof optional_a1ThresholdhoSsbRsrp
+            {
+                uint32 a1ThresholdhoSsbRsrp = 2;
+            }
+            oneof optional_a1TimeToTriggerhoSsbRsrp
+            {
+                TimeToTrigger a1TimeToTriggerhoSsbRsrp = 3;
+            }
+            oneof optional_a1HysteresishoSsbRsrpVoNr
+            {
+                uint32 a1HysteresishoSsbRsrpVoNr = 4;
+            }
+            oneof optional_a1ThresholdhoSsbRsrpVoNr
+            {
+                uint32 a1ThresholdhoSsbRsrpVoNr = 5;
+            }
+            oneof optional_a1TimeToTriggerhoSsbRsrpVoNr
+            {
+                TimeToTrigger a1TimeToTriggerhoSsbRsrpVoNr = 6;
+            }
+        }
+        oneof optional_a1MeasHoSsbRsrpSA
+        {
+            A1MeasHoSsbRsrpSA a1MeasHoSsbRsrpSA = 77;
+        }
+        message A1MeasHoSsbRsrqSA
+        {
+            oneof optional_a1HysteresishoSsbRsrq
+            {
+                uint32 a1HysteresishoSsbRsrq = 1;
+            }
+            oneof optional_a1ThresholdhoSsbRsrq
+            {
+                uint32 a1ThresholdhoSsbRsrq = 2;
+            }
+            oneof optional_a1TimeToTriggerhoSsbRsrq
+            {
+                TimeToTrigger a1TimeToTriggerhoSsbRsrq = 3;
+            }
+            oneof optional_a1HysteresishoSsbRsrqVoNr
+            {
+                uint32 a1HysteresishoSsbRsrqVoNr = 4;
+            }
+            oneof optional_a1ThresholdhoSsbRsrqVoNr
+            {
+                uint32 a1ThresholdhoSsbRsrqVoNr = 5;
+            }
+            oneof optional_a1TimeToTriggerhoSsbRsrqVoNr
+            {
+                TimeToTrigger a1TimeToTriggerhoSsbRsrqVoNr = 6;
+            }
+        }
+        oneof optional_a1MeasHoSsbRsrqSA
+        {
+            A1MeasHoSsbRsrqSA a1MeasHoSsbRsrqSA = 78;
+        }
+        message A2MeasHoSsbRsrpSA
+        {
+            oneof optional_a2HysteresishoSsbRsrp
+            {
+                uint32 a2HysteresishoSsbRsrp = 1;
+            }
+            oneof optional_a2ThresholdhoSsbRsrp
+            {
+                uint32 a2ThresholdhoSsbRsrp = 2;
+            }
+            oneof optional_a2TimeToTriggerhoSsbRsrp
+            {
+                TimeToTrigger a2TimeToTriggerhoSsbRsrp = 3;
+            }
+            oneof optional_a2HysteresishoSsbRsrpVoNr
+            {
+                uint32 a2HysteresishoSsbRsrpVoNr = 4;
+            }
+            oneof optional_a2ThresholdhoSsbRsrpVoNr
+            {
+                uint32 a2ThresholdhoSsbRsrpVoNr = 5;
+            }
+            oneof optional_a2TimeToTriggerhoSsbRsrpVoNr
+            {
+                TimeToTrigger a2TimeToTriggerhoSsbRsrpVoNr = 6;
+            }
+        }
+        oneof optional_a2MeasHoSsbRsrpSA
+        {
+            A2MeasHoSsbRsrpSA a2MeasHoSsbRsrpSA = 79;
+        }
+        message A2MeasHoSsbRsrqSA
+        {
+            oneof optional_a2HysteresishoSsbRsrq
+            {
+                uint32 a2HysteresishoSsbRsrq = 1;
+            }
+            oneof optional_a2ThresholdhoSsbRsrq
+            {
+                uint32 a2ThresholdhoSsbRsrq = 2;
+            }
+            oneof optional_a2TimeToTriggerhoSsbRsrq
+            {
+                TimeToTrigger a2TimeToTriggerhoSsbRsrq = 3;
+            }
+            oneof optional_a2HysteresishoSsbRsrqVoNr
+            {
+                uint32 a2HysteresishoSsbRsrqVoNr = 4;
+            }
+            oneof optional_a2ThresholdhoSsbRsrqVoNr
+            {
+                uint32 a2ThresholdhoSsbRsrqVoNr = 5;
+            }
+            oneof optional_a2TimeToTriggerhoSsbRsrqVoNr
+            {
+                TimeToTrigger a2TimeToTriggerhoSsbRsrqVoNr = 6;
+            }
+        }
+        oneof optional_a2MeasHoSsbRsrqSA
+        {
+            A2MeasHoSsbRsrqSA a2MeasHoSsbRsrqSA = 80;
+        }
+        repeated uint32 ranAreaConfigList = 91;
+        bool actVoNR = 92;
+        MeasEnabled a1MeasSCellAddEnabled = 93;
+        oneof optional_nrDefMoPrNsaDN
+        {
+            string nrDefMoPrNsaDN = 96;
+        }
+        oneof optional_nrDefMoPrSaDN
+        {
+            string nrDefMoPrSaDN = 97;
+        }
+        CellDepType cellDepType = 98;
+        message A1MeasSCellAddSsbRsrp
+        {
+            uint32 a1HysteresisSCellAddSsbRsrp = 1;
+            oneof optional_a1ThresholdSCellAddSsbRsrpTDD
+            {
+                uint32 a1ThresholdSCellAddSsbRsrpTDD = 2;
+            }
+            oneof optional_a1ThresholdSCellAddSsbRsrpFDD
+            {
+                uint32 a1ThresholdSCellAddSsbRsrpFDD = 3;
+            }
+            TimeToTrigger a1TimeToTriggerSCellAddSsbRsrp = 4;
+        }
+        oneof optional_a1MeasSCellAddSsbRsrp
+        {
+            A1MeasSCellAddSsbRsrp a1MeasSCellAddSsbRsrp = 99;
+        }
+        message A1MeasSCellAddSsbRsrq
+        {
+            uint32 a1HysteresisSCellAddSsbRsrq = 1;
+            uint32 a1ThresholdSCellAddSsbRsrq = 2;
+            TimeToTrigger a1TimeToTriggerSCellAddSsbRsrq = 3;
+        }
+        oneof optional_a1MeasSCellAddSsbRsrq
+        {
+            A1MeasSCellAddSsbRsrq a1MeasSCellAddSsbRsrq = 100;
+        }
+        bool optA4IntragNBHOSCellAdditionEnabled = 101;
+        bool actEmergencyCall = 102;
+        oneof optional_arpPrioEmergencyCall
+        {
+            uint32 arpPrioEmergencyCall = 103;
+        }
+        bool emergencyCallFails = 104;
+        bool actCDrxVoNR = 105;
+        message DrxProfileOfVoNr
+        {
+            DrxLongCycle drxLongCycleOfVoNr = 3;
+        }
+        repeated DrxProfileOfVoNr drxProfilesOfVoNr = 106;
+        message EmergencyCallRestrictions
+        {
+            bool emergencyCallMrListIgnore = 1;
+            bool emergencyCallPlmnHoAllowed = 2;
+        }
+        oneof optional_emergencyCallRestrictions
+        {
+            EmergencyCallRestrictions emergencyCallRestrictions = 107;
+        }
+        ActVoNrMobilityThresholds actVoNrMobilityThresholds = 108;
+        ActNrDualConnectivity actNrDualConnectivity = 109;
+        common_messages.NRCGI defaultSnCell = 110;
+        ReportAmount reportAmountCA = 112;
+        ReportInterval reportIntervalCA = 113;
+        oneof optional_cellReselectionPriority
+        {
+            uint32 cellReselectionPriority = 114;
+        }
+        enum CellReselectionSubPriority
+        {
+            oDot2 = 0;
+            oDot4 = 1;
+            oDot6 = 2;
+            oDot8 = 3;
+        }
+        oneof optional_cellReselectionSubPriority
+        {
+            CellReselectionSubPriority cellReselectionSubPriority = 115;
+        }
+        oneof optional_nrSysInfoProfileId
+        {
+            uint32 nrSysInfoProfileId = 116;
+        }
+
+        message A2MeasSCellRelSsbRsrp
+        {
+            uint32 a2HysteresisSCellRelSsbRsrp = 1;
+            uint32 a2ThresholdSCellRelSsbRsrp = 2;
+            TimeToTrigger a2TimeToTriggerSCellRelSsbRsrp = 3;
+        }
+
+        message A2MeasSCellRelSsbRsrq
+        {
+            uint32 a2HysteresisSCellRelSsbRsrq = 1;
+            uint32 a2ThresholdSCellRelSsbRsrq = 2;
+            TimeToTrigger a2TimeToTriggerSCellRelSsbRsrq = 3;
+        }
+
+        oneof optional_a2MeasSCellRelSsbRsrp
+        {
+            A2MeasSCellRelSsbRsrp a2MeasSCellRelSsbRsrp = 118;
+        }
+
+        oneof optional_a2MeasSCellRelSsbRsrq
+        {
+            A2MeasSCellRelSsbRsrq a2MeasSCellRelSsbRsrq = 119;
+        }
+
+        MeasEnabled a2MeasSCellRelEnabled = 120;
+
+        oneof optional_a1MeasPCellSwitchEnabled
+        {
+            MeasEnabled a1MeasPCellSwitchEnabled = 121;
+        }
+
+        message A1MeasPCellSwitchSsbRsrp
+        {
+            uint32 threshold = 1;
+            uint32 hysteresis = 2;
+            TimeToTrigger timeToTrigger = 3;
+        }
+        oneof optional_a1MeasPCellSwitchSsbRsrp
+        {
+            A1MeasPCellSwitchSsbRsrp a1MeasPCellSwitchSsbRsrp = 122;
+        }
+
+        message A1MeasPCellSwitchSsbRsrq
+        {
+            uint32 threshold = 1;
+            uint32 hysteresis = 2;
+            TimeToTrigger timeToTrigger = 3;
+        }
+        oneof optional_a1MeasPCellSwitchSsbRsrq
+        {
+            A1MeasPCellSwitchSsbRsrq a1MeasPCellSwitchSsbRsrq = 123;
+        }
+
+        oneof optional_trackingAreaId
+        {
+            uint32 trackingAreaId = 124;
+        }
+
+        oneof optional_a2MeasPCellSwitchEnabled
+        {
+            MeasEnabled a2MeasPCellSwitchEnabled = 125;
+        }
+
+        message A2MeasPCellSwitchSsbRsrp
+        {
+            uint32 threshold = 1;
+            uint32 hysteresis = 2;
+            TimeToTrigger timeToTrigger = 3;
+            int32 offsetSsbRsrp = 4;
+        }
+
+        oneof optional_a2MeasPCellSwitchSsbRsrp
+        {
+            A2MeasPCellSwitchSsbRsrp a2MeasPCellSwitchSsbRsrp = 126;
+        }
+
+        message A2MeasPCellSwitchSsbRsrq
+        {
+            uint32 threshold = 1;
+            uint32 hysteresis = 2;
+            TimeToTrigger timeToTrigger = 3;
+            int32 offsetSsbRsrq = 4;
+        }
+
+        oneof optional_a2MeasPCellSwitchSsbRsrq
+        {
+            A2MeasPCellSwitchSsbRsrq a2MeasPCellSwitchSsbRsrq = 127;
+        }
+
+        oneof optional_idleMMServCellResWeight
+        {
+            uint32 idleMMServCelResWeight = 129;
+        }
+
+        oneof optional_idleMMSteeringAlgo
+        {
+            IdleMMSteeringAlgo idleMMSteeringAlgo = 130;
+        }
+
+        oneof optional_idleMMSteeringPercentageOfUes
+        {
+            uint32 idleMMSteeringPercentageOfUes = 131;
+        }
+
+        oneof optional_idleMMSteeringWRREnabled
+        {
+            bool idleMMSteeringWRREnabled = 132;
+        }
+
+        oneof optional_Timer320
+        {
+            Timer320 timer320 = 133;
+        }
+
+        oneof optional_chBwDl
+        {
+            ChannelBandwidth chBwDl = 134;
+        }
+
+        oneof optional_chBwUl
+        {
+            ChannelBandwidth chBwUl = 135;
+        }
+
+        oneof optional_thresholdPCellSwitchTargetRsrp
+        {
+            uint32 thresholdPCellSwitchTargetRsrp = 136;
+        }
+        oneof optional_thresholdPCellSwitchTargetRsrq
+        {
+            uint32 thresholdPCellSwitchTargetRsrq = 137;
+        }
+        oneof optional_a2BasedPCellSwitchPriority
+        {
+            int32 a2BasedPCellSwitchPriority = 138;
+        }
+
+        bool enforcePrimaryPathOverLte = 139;
+        bool areTwoDedicatedBwpProfilesSupported = 140;
+        bool shouldSkipSsbToMeasureInRrc = 141;
+        oneof optional_maxNumSCellsDlFr1
+        {
+            uint32 maxNumSCellsDlFr1 = 142;
+        }
+        enum ActARPBasedAC
+        {
+            actArpBasedAcOff = 0;
+            actArpBasedAcOn = 1;
+            actArpBasedAcHandover = 2;
+        }
+        ActARPBasedAC actARPBasedAC = 143;
+        oneof optional_idleMMEnDcSteeringPercentageOfUes
+        {
+            uint32 idleMMEnDcSteeringPercentageOfUes = 144;
+        }
+        oneof optional_Timer320endc
+        {
+            Timer320 timer320endc = 145;
+        }
+        oneof optional_idleMMEnDcSteeringWRREnabled
+        {
+            bool idleMMEnDcSteeringWRREnabled = 146;
+        }
+        oneof optional_a4ReportTimerEnDc
+        {
+            uint32 a4ReportTimerEnDc = 147;
+        }
+        oneof optional_idleMMEnDcSteeringSsbFrequency
+        {
+            uint32 idleMMEnDcSteeringSsbFrequency = 148;
+        }
+        bool actNonVoNRGBRService = 149;
+
+        message A4PeriodicMeasControlNSA
+        {
+            uint32 a4Fr1SupervisionTimer = 1;
+            uint32 a4Fr2SupervisionTimer = 2;
+            uint32 a4MeasMaxNumber = 3;
+            uint32 a4RetryTimer = 4;
+        }
+        oneof optional_a4PeriodicMeasControlNSA
+        {
+            A4PeriodicMeasControlNSA a4PeriodicMeasControlNSA = 150;
+        }
+
+        message A4PeriodicMeasControlSA
+        {
+            uint32 a4Fr1SupervisionTimer = 1;
+            uint32 a4Fr2SupervisionTimer = 2;
+            uint32 a4MeasMaxNumber = 3;
+            uint32 a4RetryTimer = 4;
+        }
+        oneof optional_a4PeriodicMeasControlSA
+        {
+            A4PeriodicMeasControlSA a4PeriodicMeasControlSA = 151;
+        }
+        oneof optional_rlfPsccTrigThresholdRsrp
+        {
+            uint32 rlfPsccTrigThresholdRsrp = 152;
+        }
+        enum DrxControl
+        {
+            any = 0;
+            intraNr = 1;
+            intraNrFr2 = 2;
+            intraNrSa = 3;
+            intraNrSaIntraFreq = 4;
+            intraNrSaInterFreq = 5;
+            intraNrNsa = 6;
+            intraNrNsaIntraFreq = 7;
+            intraNrNsaInterFreq = 8;
+            interRatEutra = 9;
+        }
+        message AnrDrxProfile
+        {
+            enum DrxLongCycle
+            {
+                ms80 = 0;
+                ms160 = 1;
+                ms320 = 2;
+                ms640 = 3;
+            }
+            DrxLongCycle drxLongCycle = 1;
+            DrxControl drxControl = 2;
+        }
+        repeated AnrDrxProfile anrDrxProfiles = 153;
+        enum HoDataFwdVoNr
+        {
+            notSupported = 0;
+            directForXn = 1;
+            indirectForNg = 2;
+            directForXnAndIndirectForNg = 3;
+        }
+        HoDataFwdVoNr hoDataFwdVoNr = 154;
+        oneof optional_deriveSSBIndexFromCell
+        {
+            bool deriveSSBIndexFromCell = 155;
+        }
+        oneof optional_ssbSmtc1Duration
+        {
+            Duration ssbSmtc1Duration = 156;
+        }
+        oneof optional_ssbSmtc1Offset
+        {
+            uint32 ssbSmtc1Offset = 157;
+        }
+        oneof optional_ssbSmtc1Periodicity
+        {
+            SsbSmtc1Periodicity ssbSmtc1Periodicity = 158;
+        }
+        MeasEnabled a1MeasHoPrefNrLayerEnabled = 160;
+        message A1MeasHoPrefNrLayerSsbRsrp
+        {
+            oneof optional_a1HysteresishoSsbRsrp
+            {
+                uint32 a1HysteresishoSsbRsrp = 1;
+            }
+            oneof optional_a1ThresholdhoSsbRsrp
+            {
+                uint32 a1ThresholdhoSsbRsrp = 2;
+            }
+            oneof optional_a1TimeToTriggerhoSsbRsrp
+            {
+                TimeToTrigger a1TimeToTriggerhoSsbRsrp = 3;
+            }
+        }
+        oneof optional_a1MeasHoPrefNrLayerSsbRsrp
+        {
+            A1MeasHoPrefNrLayerSsbRsrp a1MeasHoPrefNrLayerSsbRsrp = 161;
+        }
+
+        message A1MeasHoPrefNrLayerSsbRsrq
+        {
+            oneof optional_a1HysteresishoSsbRsrq
+            {
+                uint32 a1HysteresishoSsbRsrq = 1;
+            }
+            oneof optional_a1ThresholdhoSsbRsrq
+            {
+                uint32 a1ThresholdhoSsbRsrq = 2;
+            }
+            oneof optional_a1TimeToTriggerhoSsbRsrq
+            {
+                TimeToTrigger a1TimeToTriggerhoSsbRsrq = 3;
+            }
+        }
+        oneof optional_a1MeasHoPrefNrLayerSsbRsrq
+        {
+            A1MeasHoPrefNrLayerSsbRsrq a1MeasHoPrefNrLayerSsbRsrq = 162;
+        }
+        oneof optional_a4MeasHigherPrioFreqMaxReact
+        {
+            uint32 a4MeasHigherPrioFreqMaxReact = 163;
+        }
+    }
+    repeated CellParams cellsParams = 7;
+
+    message CuFlowControl
+    {
+        uint32 dddsPeriod = 1;
+        uint32 minThFlowCtrl = 2;
+        uint32 maxRLCQueueingDelay = 3;
+        uint32 maxTransferDelay = 4;
+    }
+    oneof optional_cuFlowControl
+    {
+        CuFlowControl cuFlowControl = 8;
+    }
+    bool actIntraFreqIntraGnbMobilityNSA = 9;
+    bool actInactDetNSAUe = 10;
+    uint32 nsaInactivityTimer = 11;
+    uint32 keyRefreshMargin = 12;
+    uint32 timerF1UeProcGuard = 13;
+    uint32 timerX2UeProcGuard = 14;
+    uint32 timerF1ResetRsp = 15;
+    uint32 timerTDCoverall = 16;
+    bytes plmnIdentity = 17 [ (sensitive_param) = true ];
+    uint32 f1NbResetRetryForFault = 19;
+    message CipheringPreferences
+    {
+        uint32 nea0 = 1;
+        uint32 nea1_128 = 2;
+        uint32 nea2_128 = 3;
+        uint32 nea3_128 = 4;
+    }
+    message IntegrityPreferences
+    {
+        uint32 nia0 = 1;
+        uint32 nia1_128 = 2;
+        uint32 nia2_128 = 3;
+        uint32 nia3_128 = 4;
+    }
+    CipheringPreferences cipheringPreferences = 20;
+    IntegrityPreferences integrityPreferences = 21;
+    bool nullFallback = 22;
+    uint32 poolId = 23;
+    bool srb3SupportEnabled = 24;
+    bool actCarrierAggregation = 25;
+    oneof optional_maxNumSCellsUl
+    {
+        uint32 maxNumSCellsUl = 26;
+    }
+    oneof optional_maxNumSCellsDl
+    {
+        uint32 maxNumSCellsDl = 27;
+    }
+    message Srb1PdcpProfile
+    {
+        ReorderingTimer tReordering = 1;
+    }
+    message Srb2PdcpProfile
+    {
+        ReorderingTimer tReordering = 1;
+    }
+    message Srb3PdcpProfile
+    {
+        ReorderingTimer tReordering = 1;
+    }
+    Srb3PdcpProfile srb3PdcpProfile = 28;
+    oneof optional_timerX2DataFwdGuard
+    {
+        uint32 timerX2DataFwdGuard = 29;
+    }
+    bool actUESpecificULResCoordination = 30;
+    bool forceSingleTxModeSupportEnabled = 31;
+    bool singleTXModeSupportEnabled = 32;
+    Srb2PdcpProfile srb2PdcpProfile = 33;
+    Srb1PdcpProfile srb1PdcpProfile = 34;
+    repeated CpCellVmsToMap cpCellVmsToMapList = 35;
+    uint32 gnbIdLength = 36;
+    bool actIntraFreqInterGnbMobilityNSA = 37;
+    bool actIntraFreqHoSA = 38;
+    uint32 timerE1BearerProcGuard = 39;
+    bool actIntraMeNBMobility = 40;
+    uint32 nrBtsId = 41;
+    enum DlBandwidth
+    {
+        prbs32 = 0;
+        prbs64 = 1;
+        prbs128 = 2;
+        prbs256 = 3;
+    }
+    DlBandwidth dlBandwidth = 42;
+    bool actRedirect = 43;
+    enum ProductVariantPlanned
+    {
+        BTS_5gCloud = 0;
+        BTS_5gClassical = 1;
+    }
+    ProductVariantPlanned productVariantPlanned = 44;
+    uint32 timerNGSignalingConnGuard = 45;
+    bool actInterMeNBMobility = 46;
+    bool actMultiDrbNSA = 47;
+    uint32 maxNumOfBearersNSAUE = 48;
+    uint32 timerRRCGuard = 49;
+    bool actMobilityRetryToSecondBestCell = 50;
+    message BandList
+    {
+        uint32 band = 1;
+    }
+    repeated BandList eutraBandList = 51;
+    enum ActivityNotificationLevel
+    {
+        drb = 0;
+        pduSession = 1;
+        ue = 2;
+    }
+    ActivityNotificationLevel nsaActivityNotificationLevel = 52;
+    oneof optional_amfIpAddress
+    {
+        string amfIpAddress = 53 [ (ipaddress_param) = true ];
+    }
+    bool actRanSharing = 54;
+    enum RatType
+    {
+        nr = 0;
+        eutra = 1;
+    }
+    repeated RatType ratTypeList = 55;
+    bool actUeDeltaConfigOptimize = 56;
+    enum Srb1Config
+    {
+        defaultNokia = 0;
+        default3gpp = 1;
+    }
+    Srb1Config srb1Config = 57;
+
+    message TrackingArea
+    {
+        string distName = 1;
+        uint64 trackingAreaId = 2;
+        uint32 trackingAreaCode = 3;
+    }
+    repeated TrackingArea trackingAreas = 58;
+    uint32 timerRejectWait = 59;
+    bool actNormVCFallback = 60;
+    enum RrcReestabTypeSA
+    {
+        deactivated = 0;
+        sameGNB = 1;
+        viaRRCSetup = 2;
+    }
+    RrcReestabTypeSA rrcReestabTypeSA = 61;
+    uint32 timerXnUeProcGuard = 62;
+    bool sgnbRelForNoHandoverEnabled = 63;
+    bool actInterFreqInterGnbMobilityNSA = 64;
+    bool actInterFreqIntraGnbMobilityNSA = 65;
+    uint32 timerHOGuard = 66;
+    uint32 srbInactivityTimerSA = 67;
+    message NRDRB_QCI_ITEM
+    {
+        uint32 nrDrbId = 1;
+        uint32 nrDrbQciId = 2;
+
+        oneof optional_nrPlmnDN
+        {
+            string nrPlmnDn = 3 [ (sensitive_param) = true ];
+        }
+
+        repeated uint32 qciValueList = 4;
+    }
+    repeated NRDRB_QCI_ITEM NRDRB_QCI = 68;
+
+    message NRDRB_5QI_ITEM
+    {
+        repeated uint32 fiveqiValueList = 1;
+        uint32 nrDrb5qiId = 2;
+        uint32 nrDrbId = 3;
+        message SnssaiDNList
+        {
+            repeated string snssaiDNList = 1 [ (sensitive_param) = true ];
+        }
+        oneof optional_snssaiDNList
+        {
+            SnssaiDNList snssaiDNList = 4;
+        }
+        oneof optional_nrPlmnDN
+        {
+            string nrPlmnDn = 5 [ (sensitive_param) = true ];
+        }
+    }
+    repeated NRDRB_5QI_ITEM NRDRB_5QI = 69;
+
+    message NRDRB_ITEM
+    {
+        uint32 nrDrbId = 1;
+        uint32 nrDrbPdcpId = 2;
+
+        message NsaDrbParam
+        {
+            enum DlDataSplitMode
+            {
+                dlOverF1U = 0;
+                dlOverX2U = 1;
+                dlOverF1UX2U = 2;
+            }
+            DlDataSplitMode dlDataSplitMode = 1;
+            bool nsa3xBearerAllowed = 2;
+            enum UlDataPath
+            {
+                ulOverLte = 0;
+                ulOverNr = 1;
+                ulOverLteNrPrimaryPathOverLte = 3;
+                ulOverLteNrPrimaryPathOverNr = 4;
+            }
+            UlDataPath ulDataPath = 3;
+
+            enum UlDataPathForUlSplitNotCapableUe
+            {
+                ulPrimaryPathOverLte = 0;
+                ulPrimaryPathOverNr = 1;
+            }
+            oneof optional_ulDataPathForUlSplitNotCapableUe
+            {
+                UlDataPathForUlSplitNotCapableUe ulDataPathForUlSplitNotCapableUe = 5;
+            }
+
+            enum UlDataSplitThreshold
+            {
+                b0 = 0;
+                b100 = 1;
+                b200 = 2;
+                b400 = 3;
+                b800 = 4;
+                b1600 = 5;
+                b3200 = 6;
+                b6400 = 7;
+                b12800 = 8;
+                b25600 = 9;
+                b51200 = 10;
+                b102400 = 11;
+                b204800 = 12;
+                b409600 = 13;
+                b819200 = 14;
+                spare1 = 15;
+                b1228800 = 16;
+                b1638400 = 17;
+                b2457600 = 18;
+                b3276800 = 19;
+                b4096000 = 20;
+                b4915200 = 21;
+                b5734400 = 22;
+                b6553600 = 23;
+                infinity = 100;
+            }
+            UlDataSplitThreshold ulDataSplitThreshold = 4;
+        }
+        oneof optional_nsaDrbParam
+        {
+            NsaDrbParam nsaDrbParam = 3;
+        }
+
+        message SplitDrbParam
+        {
+            bool actPrioritizeXxAfterInactivity = 1;
+            uint32 dlDataSplitBufferBuildUpThreshold = 2;
+            uint32 dlDataSplitBufferBuildUpThresholdPrioritizeXx = 3;
+            uint32 dlDataSplitGainThreshold = 4;
+            enum DlDataSplitMode
+            {
+                dlOverF1U = 0;
+                dlOverXxU = 1;
+                dlOverF1UXxU = 2;
+            }
+            DlDataSplitMode dlDataSplitMode = 5;
+            enum DlPreferredPath
+            {
+                f1U = 0;
+                xxU = 1;
+            }
+            DlPreferredPath dlPreferredPath = 6;
+            uint32 inactivityThresholdForPrioritizeXx = 7;
+            uint32 inactivityThresholdForRestartPrioritizeXx = 8;
+            enum SplitBearerAllowed
+            {
+                none = 0;
+                scgSplit = 1;
+            }
+            SplitBearerAllowed splitBearerAllowed = 9;
+            uint32 prioritizeXxPeriod = 10;
+            enum UlDataPath
+            {
+                ulOverXx = 0;
+                ulOverF1 = 1;
+                ulOverF1XxPrimaryPathOverXx = 3;
+                ulOverF1XxPrimaryPathOverF1 = 4;
+            }
+            UlDataPath ulDataPath = 11;
+            enum UlDataPathForUlSplitNotCapableUe
+            {
+                ulPrimaryPathOverXx = 0;
+                ulPrimaryPathOverF1 = 1;
+            }
+            UlDataPathForUlSplitNotCapableUe ulDataPathForUlSplitNotCapableUe = 12;
+            enum UlDataSplitThreshold
+            {
+                b0 = 0;
+                b100 = 1;
+                b200 = 2;
+                b400 = 3;
+                b800 = 4;
+                b1600 = 5;
+                b3200 = 6;
+                b6400 = 7;
+                b12800 = 8;
+                b25600 = 9;
+                b51200 = 10;
+                b102400 = 11;
+                b204800 = 12;
+                b409600 = 13;
+                b819200 = 14;
+                b1228800 = 15;
+                b1638400 = 16;
+                b2457600 = 17;
+                b3276800 = 18;
+                b4096000 = 19;
+                b4915200 = 20;
+                b5734400 = 21;
+                b6553600 = 22;
+                infinity = 100;
+            }
+            UlDataSplitThreshold ulDataSplitThreshold = 13;
+        }
+        oneof optional_splitDrbParam
+        {
+            SplitDrbParam splitDrbParam = 4;
+        }
+        enum DiscardTimer
+        {
+            infinity = 0;
+            ms10 = 1;
+            ms20 = 2;
+            ms30 = 3;
+            ms40 = 4;
+            ms50 = 5;
+            ms60 = 6;
+            ms75 = 7;
+            ms100 = 8;
+            ms150 = 9;
+            ms200 = 10;
+            ms250 = 11;
+            ms300 = 12;
+            ms500 = 13;
+            ms750 = 14;
+            ms1500 = 15;
+        }
+        DiscardTimer discardTimer = 5;
+        enum NrDrbRlcMode
+        {
+            RLC_NONE = 0;
+            RLC_UM = 1;
+            RLC_AM = 2;
+        }
+        NrDrbRlcMode nrDrbRlcMode = 6;
+        enum DlFlowControlAlgo
+        {
+            dummy = 0; // keep here is just to fix the proto error for CNI-71773
+            standard3Gpp = 1;
+            none = 10;
+        }
+        DlFlowControlAlgo dlFlowControlAlgo = 7;
+        enum ResType
+        {
+            nonGbr = 0;
+            gbr = 1;
+            nonGbrSignaling = 2;
+        }
+        ResType resType = 8;
+    }
+    repeated NRDRB_ITEM NRDRB = 70;
+
+    message NRDRB_PDCP_ITEM
+    {
+        uint32 nrDrbPdcpId = 1;
+        bool pdcpBufDiscardEnabled = 2;
+        uint32 pdcpBufDiscardThreshold = 3;
+        ReorderingTimer tReorderingDl = 4;
+        ReorderingTimer tReorderingUl = 5;
+        oneof optional_maxCidAllowed
+        {
+            uint32 maxCidAllowed = 6;
+        }
+    }
+    repeated NRDRB_PDCP_ITEM NRDRB_PDCP = 71;
+
+    message NrPLMN
+    {
+        uint32 nrPlmnId = 1;
+        bytes plmnIdentity = 2 [ (sensitive_param) = true ];
+    }
+    repeated NrPLMN nrPLMNs = 72;
+    bool actA2SgnbRelease = 73;
+    ActivityNotificationLevel saActivityNotificationLevel = 74;
+    oneof optional_drbInactivityTimerSA
+    {
+        uint32 drbInactivityTimerSA = 75;
+    }
+    bool actEmergencyFallback = 76;
+    uint32 maxNoCPUEVMs = 77;
+    bool actInterRatHoSA = 78;
+    message NrHoIrMap
+    {
+        uint32 nrHoIrId = 1;
+        common_type.NrHoIrParams nrHoIrParams = 2;
+    }
+    repeated NrHoIrMap nrHoIrMap = 80;
+    bool actInterFreqHoSA = 81;
+    uint32 tNgRelocOverall = 82;
+    uint32 tNgRelocPrep = 83;
+    bool actNgFlexSaMode = 84;
+
+    message SNSSAI_ITEM
+    {
+        uint32 snssaiId = 1;
+        oneof optional_sd
+        {
+            uint32 sd = 2 [ (sensitive_param) = true ];
+        }
+        uint32 sst = 3 [ (sensitive_param) = true ];
+    }
+    repeated SNSSAI_ITEM SNSSAI = 86;
+    bool actBlacklistingEutranCell = 87;
+    bool actMFBIEutra = 88;
+    bool actRrcInactiveState = 89;
+    oneof optional_gnbRoutingId
+    {
+        uint32 gnbRoutingId = 90;
+    }
+    bool actNSAUeBasedAnrNr = 91;
+    bool actTrsSepaNSARanSharing = 92;
+    bool actMeasBasedSCellAddition = 93;
+
+    message NrAnrProfile
+    {
+        oneof optional_ssbFrequency
+        {
+            uint32 ssbFrequency = 1;
+        }
+        int32 anrThresRsrpNbCell = 2;
+        uint32 maxNumAnrNrRelAllowed = 3;
+        enum CellDepMode
+        {
+            nsa = 0;
+            sa = 1;
+            both = 2;
+            automatic = 3;
+            saPlusNsa = 4;
+        }
+        CellDepMode cellDepMode = 4;
+        oneof optional_anrThresRsrqNbCell
+        {
+            int32 anrThresRsrqNbCell = 5;
+        }
+        enum AnrThresholdSelector
+        {
+            rsrp = 0;
+            rsrq = 1;
+            combined = 2;
+        }
+        AnrThresholdSelector anrThresholdSelector = 6;
+    }
+    repeated NrAnrProfile nrAnrProfiles = 94;
+    bool actSPID = 95;
+    bool actMobilityProfile = 96;
+    repeated common_type.NrMoPrMaNsa nrMoPrMaNsa = 97;
+    repeated common_type.NrMoPrNsa nrMoPrNsa = 98;
+    repeated common_type.NrMoPrSa nrMoPrSa = 99;
+    repeated common_type.NrMoPrMaSa nrMoPrMaSa = 100;
+    repeated common_type.NrMoRed nrMoRed = 101;
+    repeated common_type.NrMeasCfgIr nrMeasCfgIr = 102;
+    repeated common_type.NrMeasCfgIf nrMeasCfgIf = 103;
+    uint32 maxNumNrAnrMoiAllowed = 104;
+    bool actCuOvlProt = 105;
+    bool actSAUeBasedAnrNr = 106;
+
+    message CuOvlHa
+    {
+        bool ovlNsaAddRej = 1;
+        bool ovlSaRrcRej = 2;
+        bool ovlNsaErabRej = 3;
+        bool ovlNsaLteHoRej = 4;
+        bool ovlSaPduRej = 5;
+        bool ovlSaMeasDiscard = 6;
+        bool ovlNsaMeasDiscard = 7;
+        bool ovlBeamSwitchRej = 8;
+        bool ovlSaHoRej = 9;
+        bool ovlNRDCAddRej = 10;
+        bool ovlNsaA4TimerDiscard = 11;
+        bool ovlSaA4TimerDiscard = 12;
+    }
+    CuOvlHa cuOvlHa = 107;
+    bool actRFSPIndex = 108;
+    uint32 drbInactivityTimerSA5qi1 = 109;
+    uint32 drbInactivityTimerSA5qi5 = 110;
+    bool actMultiFreqBandIndicatorNr = 111;
+
+    message GnbIdLengthConfig
+    {
+        uint32 priorityIndex = 1;
+        oneof optional_nciStart
+        {
+            uint64 nciStart = 2;
+        }
+        oneof optional_nciEnd
+        {
+            uint64 nciEnd = 3;
+        }
+        oneof optional_plmnId
+        {
+            uint32 plmnId = 4;
+        }
+        uint32 gnbIdLength = 5;
+    }
+    repeated GnbIdLengthConfig gnbIdLengthConfigs = 112;
+    bool actInterRatHoSADlDataForward = 113;
+
+    message NrSysInfoProfile
+    {
+        uint32 nrSysInfoProfileId = 1;
+        repeated NrIrfim nrIrfim = 2;
+        repeated NrLim nrLim = 3;
+    }
+    repeated NrSysInfoProfile nrSysInfoProfiles = 114;
+
+    enum MeasCycleSCell
+    {
+        sf160 = 0;
+        sf256 = 1;
+        sf320 = 2;
+        sf512 = 3;
+        sf640 = 4;
+        sf1024 = 5;
+        sf1280 = 6;
+    }
+
+    MeasCycleSCell measCycleSCell = 115;
+    GnbCuType gnbCuType = 116;
+    bool actRohc = 117;
+    bool actMeasBasedSCellAdditionNSA = 118;
+    bool actHoOptimizationCa = 119;
+    bool actIdleMMSteering = 120;
+
+    message NrCaimp
+    {
+        uint32 nrCaimpID = 1;
+        message PCellConfig
+        {
+            uint32 nrarfcnDl = 1;
+        }
+        PCellConfig pCellConfig = 2;
+        message NrCaims
+        {
+            uint32 nrCaimsID = 1;
+            message SCellConfig
+            {
+                uint32 nrarfcnDl = 1;
+            }
+            repeated SCellConfig sCellConfig = 2;
+        }
+        repeated NrCaims nrCaims = 3;
+    }
+    repeated NrCaimp nrCaimp = 121;
+    bool actLocationReportingSa = 122;
+    bool actInterRatHoFromEutraToSA = 123;
+    bool actUeCapaEnquiryHoCa = 124;
+    oneof optional_timerXnDataFwdGuard
+    {
+        uint32 timerXnDataFwdGuard = 125;
+    }
+    bool actIpThpt = 126;
+    uint32 tNgRelocExecDeltL = 127;
+    uint32 tNgRelocExecDeltN = 128;
+    oneof optional_tNgRelocPrepN
+    {
+        uint32 tNgRelocPrepN = 129;
+    }
+    oneof optional_tNgRelocOverallN
+    {
+        uint32 tNgRelocOverallN = 130;
+    }
+    oneof optional_tNgRelocCancelN
+    {
+        uint32 tNgRelocCancelN = 131;
+    }
+    bool actNrpmqapProfiles = 132;
+    message NrpmqapProfile
+    {
+        message NrPmqapRange
+        {
+            uint32 min = 1;
+            uint32 max = 2;
+        }
+        enum ProfileType
+        {
+            Nsa = 0;
+            Sa = 1;
+            Both = 2;
+        }
+
+        uint32 profileId = 1;
+        ProfileType profileType = 2;
+        repeated NrPmqapRange cfg5qiRange = 3;
+        repeated NrPmqapRange cfgArpRange = 4;
+        common_type.Plmn cfgPlmnId = 5;
+        repeated NrPmqapRange cfgQciRange = 6;
+        common_messages.SNSSAI cfgSliceId = 7;
+    }
+    repeated NrpmqapProfile nrpmqapProfiles = 133;
+    bool actDirectSnTermBearEstSnModNSA = 134;
+    bool actNSAUeBasedInterFreqAnrNr = 135;
+    bool actEnhanceIntraNrIntraFreqAnr = 136;
+    oneof optional_amfPlannedRemovalTimer
+    {
+        uint32 amfPlannedRemovalTimer = 137;
+    }
+    enum ActIntraNrNgHo
+    {
+        disabled = 0;
+        sourceAndTarget = 1;
+        targetOnly = 2;
+        basicTargetOnly = 3;
+    }
+    ActIntraNrNgHo actIntraNrNgHo = 138;
+    bool act3gppBL22R2 = 139;
+    bool actIdlMMEnDcSteering = 140;
+    bool actPeriodicUeSyncReport = 141;
+    bool actOverheatingAssistance = 142;
+    message OverheatingIndicationProhibitTimer
+    {
+        enum Value
+        {
+            s0 = 0;
+            s0dot5 = 1;
+            s1 = 2;
+            s2 = 3;
+            s5 = 4;
+            s10 = 5;
+            s20 = 6;
+            s30 = 7;
+            s60 = 8;
+            s90 = 9;
+            s120 = 10;
+            s300 = 11;
+            s600 = 12;
+        }
+        Value value = 1;
+    }
+    oneof optional_overheatingIndicationProhibitTimer
+    {
+        OverheatingIndicationProhibitTimer overheatingIndicationProhibitTimer = 143;
+    }
+    bool actSaUeBasedAnrEutra = 144;
+    message NrAnrProfileE
+    {
+        message AnrThresholdSelectorEutra
+        {
+            enum Value
+            {
+                RSRP = 0;
+                RSRQ = 1;
+                Combined = 2;
+            }
+            Value value = 1;
+        }
+        AnrThresholdSelectorEutra anrThresholdSelectorEutra = 1;
+        int32 anrThresRsrpEutraNbCell = 5;
+        uint32 maxNumAnrNrrelePerCell = 6;
+        oneof optional_anrThresRsrqEutraNbCell
+        {
+            int32 anrThresRsrqEutraNbCell = 7;
+        }
+        oneof optional_carrierFreq
+        {
+            uint32 carrierFreq = 8;
+        }
+    }
+    repeated NrAnrProfileE nrAnrProfileEs = 145;
+    bool actExtN77Support = 146;
+    bool actSmtcCentering = 147;
+    enum HigherPrioFreqHo
+    {
+        none = 0;
+        sa = 1;
+        nsa = 2;
+        sa_nsa = 3;
+    }
+    HigherPrioFreqHo actHigherPrioFreqHo = 148;
+    message A1HoPrefNrLayer
+    {
+        enum Value
+        {
+            none = 0;
+            sa = 1;
+            nsa = 2;
+            sa_nsa = 3;
+        }
+        Value value = 1;
+    }
+    A1HoPrefNrLayer actA1HoPrefNrLayer = 149;
+    bool actXnSecCapNewMode = 150;
+    bool act3gppBL22R3 = 151;
+    bool actUnsupportedIEsHandling = 152;
+    bool actRrcReleasePreference = 153;
+    message ReleasePreferenceProhibitTimer
+    {
+        enum Value
+        {
+            s0 = 0;
+            s0dot5 = 1;
+            s1 = 2;
+            s2 = 3;
+            s3 = 4;
+            s4 = 5;
+            s5 = 6;
+            s6 = 7;
+            s7 = 8;
+            s8 = 9;
+            s9 = 10;
+            s10 = 11;
+            s20 = 12;
+            s30 = 13;
+            infinity = 14;
+            spare1 = 15;
+        }
+        Value value = 1;
+    }
+    oneof optional_timerReleasePreferenceProhibit
+    {
+        ReleasePreferenceProhibitTimer timerReleasePreferenceProhibit = 154;
+    }
+    string nrBtsDistName = 155;
+    bool actDedicatedAnrDrxProfile = 156;
+    bool actSaHoDeltaMvInterOp = 157;
+    bool actSaIntraFreqAnrDrxProfile = 158;
+    bool actHighestEstNrTputBcSel = 159;
+    bool actSaUeBasedInterFreqAnrNr = 160;
+    enum ActSCellSwapFr1
+    {
+        disable = 0;
+        a6BasedSa = 1;
+    }
+    ActSCellSwapFr1 actSCellSwapFr1 = 161;
+}

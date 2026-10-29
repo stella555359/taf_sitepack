@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package common_messages;
+
+message SelectedBandCombinationInfo
+{
+    uint32 bandCombinationIndex = 1;
+    repeated int32 featureSetEntryIndexList = 5;
+}

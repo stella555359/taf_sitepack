@@ -1,0 +1,32 @@
+syntax = "proto3";
+import "common_types/EUtraMultibandInfoList.proto";
+
+message NrLim
+{
+    uint32 nrLimId = 1;
+    uint32 carrierFreq = 2;
+    message OptionalInteger
+    {
+        uint32 value = 1;
+    }
+    OptionalInteger cellReselectionPriority = 3;
+
+    enum CellReselectionSubPriority
+    {
+        oDot2 = 0;
+        oDot4 = 1;
+        oDot6 = 2;
+        oDot8 = 3;
+    }
+
+    message OptionalCellReselectionSubPriority
+    {
+        CellReselectionSubPriority value = 1;
+    }
+
+    OptionalCellReselectionSubPriority cellReselectionSubPriority = 4;
+    OptionalInteger idleMMEutraCelResWeight = 5;
+
+    common_type.EUtraMultibandInfoList eUtraMultibandInfoList = 6;
+    OptionalInteger idleMMEutraCelResWeightEnDc = 7;
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+import "cp_e1ap/e1_reset.proto";
+
+package cp_e1ap_interface;
+
+message CpUeInternalE1ResetRequest
+{
+    E1Reset reset = 1;
+}

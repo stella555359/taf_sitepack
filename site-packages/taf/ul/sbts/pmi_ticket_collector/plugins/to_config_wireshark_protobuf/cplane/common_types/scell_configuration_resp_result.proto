@@ -1,0 +1,20 @@
+syntax = "proto3";
+import "common_types/common_status.proto";
+
+package common_type;
+
+message SCellConfigurationRespResult
+{
+    Status status = 1;
+
+    enum NokCause
+    {
+        unknown = 0;
+        maxNumOfCaUsersExceeded = 1;
+        noBetterScell = 2;
+    }
+    oneof optional_nokCause
+    {
+        NokCause nokCause = 2;
+    }
+}

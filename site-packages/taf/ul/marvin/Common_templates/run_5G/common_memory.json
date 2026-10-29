@@ -1,0 +1,51 @@
+{
+  "name": "Common 5G BTS and radio run memory analysis",
+  "tags": [],
+  "domain": "Memory",
+  "algorithm": "generic-cpu-and-mem-analyzer",
+  "trigger": "memory_data_available",
+  "rule": {
+    "radio_memory_leak": {
+      "exclude_first_x_mins": 1440,
+      "leak_limit": 15
+    },
+    "bts_memory_leak": {
+      "exclude_first_x_mins": 1440,
+      "leak_limit": 15
+    },
+    "bts_memory_chosen_reference": {
+      "exclude_first_x_mins": 2,
+      "difference_range": {
+        "process": {
+          "overflow": {
+            "fail": 10,
+            "warning": 2.5
+          }
+        },
+        "system": {
+          "overflow": {
+            "fail": 10,
+            "warning": 2.5
+          }
+        }
+      }
+    },
+    "radio_memory_chosen_reference": {
+      "exclude_first_x_mins": 2,
+      "difference_range": {
+        "process": {
+          "overflow": {
+            "fail": 10,
+            "warning": 2.5
+          }
+        },
+        "system": {
+          "overflow": {
+            "fail": 10,
+            "warning": 2.5
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+enum PduSessionResourceRespCause
+{
+    radioResourcesNotAvailable = 0;
+    sliceNotSupported = 1;
+}

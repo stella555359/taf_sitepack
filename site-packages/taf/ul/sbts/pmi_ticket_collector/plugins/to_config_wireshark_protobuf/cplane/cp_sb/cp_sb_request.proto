@@ -1,0 +1,34 @@
+syntax = "proto3";
+import "cp_sb/bearer_setup_req.proto";
+import "cp_sb/ul_pdu_receive_ind.proto";
+import "cp_sb/srb_send_req.proto";
+import "cp_sb/bearer_delete_req.proto";
+import "cp_sb/short_mac_verification_req.proto";
+import "cp_sb/proceed_lock_step_req.proto";
+import "cp_sb/security_activation_req.proto";
+import "cp_sb/security_conf_req.proto";
+import "cp_sb/security_deactivation_req.proto";
+import "cp_sb/bearer_delete_list_req.proto";
+import "cp_sb/bearer_modify_req.proto";
+import "options/protobuf_options.proto";
+
+package cp_sb_request;
+
+message CpSbRequest
+{
+    option (port_numbers) = 30501;
+    oneof request
+    {
+        BearerSetupReq bearerSetupReq = 1;
+        UlPduReceiveInd ulPduReceiveInd = 2;
+        SrbSendReq srbSendReq = 3;
+        BearerDeleteReq bearerDeleteReq = 4;
+        ShortMacVerificationReq shortMacVerificationReq = 5;
+        ProceedLockStepReq proceedLockStepReq = 6;
+        SecurityActivationReq securityActivationReq = 7;
+        SecurityConfReq securityConfReq = 8;
+        BearerDeleteListReq bearerDeleteListReq = 9;
+        SecurityDeactivationReq securityDeactivationReq = 10;
+        BearerModifyReq bearerModifyReq = 11;
+    }
+}
